@@ -5,6 +5,7 @@ import json
 
 def set_api_urls(api_urls, ticker, key):
     api_urls["daily_adjusted_url"] = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&apikey=' + key
+    api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
 
 # get most recent stock price at close
 def get_stock_price(ticker):
@@ -14,7 +15,7 @@ def get_stock_price(ticker):
     day_data = response["Time Series (Daily)"]
     latest_day = next(iter(day_data))
     latest_close_price = day_data[latest_day]["4. close"]
-    print(latest_close_price)
+    print("The stock price of " + ticker + " is " + latest_close_price)
 
 # def get_pe():
 # def get_profit_margin():
@@ -25,8 +26,38 @@ def get_stock_price(ticker):
 # def get_free_cash_flow_growth():
 # def get_free_cash_flow_evaluation():
 
+
+def get_company_overview(ticker):
+    req = requests.get(api_urls["company_overview_url"])
+    response = req.json()
+    overview_dict = {
+        'name' : response["Name"],
+        'description' : response["Description"],
+        'sector' : response["Sector"],
+        'market_capitalization' : response["MarketCapitalization"],
+        'pe_ratio' : response["PERatio"],
+        'dividend_per_share' : response["DividendPerShare"],
+        'dividend_yield' : response["DividendYield"],
+        'profit_margin' : response["ProfitMargin"],
+        'return_on_assets_ttm' : response["ReturnOnAssetsTTM"],
+        'return_on_equity_ttm' : response["ReturnOnEquityTTM"],
+        'analyst_target_price' : response["AnalystTargetPrice"],
+        'week_52_high' : response["52WeekHigh"],
+        'week_52_low' : response["52WeekLow"],
+        'day_50_moving_avg' : response["50DayMovingAverage"],
+        'day_200_moving_avg' : response["200DayMovingAverage"],
+        'shares_outstanding' : response["SharesOutstanding"],
+        'dividend_date' : response["DividendDate"],
+        'exdividend_data' : response["ExDividendDate"]
+    }
+    for key in overview_dict:
+        print(key)
+        print(overview_dict[key])
+
+
 def call_evaluations(ticker):
-    print("call evaluations on " + ticker)
+    # print("call evaluations on " + ticker)
+    get_company_overview(ticker)
     get_stock_price(ticker)
 
 # start
