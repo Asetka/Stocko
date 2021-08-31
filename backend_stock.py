@@ -44,7 +44,6 @@ def get_balance_sheet(ticker):
     annual_reports = response["annualReports"]
     # print(annual_reports)
 
-    # balance_sheet_list = []
     balance_sheet_dict = {}
     total_assests = []
     total_current_assets = []
@@ -57,13 +56,7 @@ def get_balance_sheet(ticker):
         total_liabilities.append(fiscal_report["totalLiabilities"])
         total_current_liabilities.append(fiscal_report["totalCurrentLiabilities"])
         shares_outstanding.append(fiscal_report["commonStockSharesOutstanding"])
-    # balance_sheet_list.append(total_assests)
-    # balance_sheet_list.append(total_current_assets)
-    # balance_sheet_list.append(total_liabilities)
-    # balance_sheet_list.append(total_current_liabilities)
-    # balance_sheet_list.append(shares_outstanding)
-    # print(balance_sheet_list)
-    balance_sheet_dict["total_assests"] = total_assests
+    balance_sheet_dict["total_assets"] = total_assests
     balance_sheet_dict["total_current_assets"] = total_current_assets
     balance_sheet_dict["total_liabilities"] = total_liabilities
     balance_sheet_dict["total_current_liabilities"] = total_current_liabilities
@@ -110,9 +103,9 @@ def get_shares_outstanding(company_overview_dict):
 
 
 def evaluation_processing(ticker):
-    # print("call evaluations on " + ticker)
     company_overview_dict = get_company_overview(ticker)
     balance_sheet_dict = get_balance_sheet(ticker)
+
     stock_price = get_stock_price(ticker)
 
     print("Stock price: " + stock_price)
@@ -121,8 +114,18 @@ def evaluation_processing(ticker):
     profit_margin = get_profit_margin(company_overview_dict)
     print("Profit Margin: " + str(profit_margin))
 
+    total_current_assets_vs_liabilities = int(balance_sheet_dict["total_current_assets"][0]) - int(balance_sheet_dict["total_current_liabilities"][0])
+    print("Total Current Assets vs Liabilities: " + str(total_current_assets_vs_liabilities))
+    total_assets_vs_liabilities = int(balance_sheet_dict["total_assets"][0]) - int(balance_sheet_dict["total_liabilities"][0])
+    print("Total Assets vs Liabilities: " + str(total_assets_vs_liabilities))
+
     shares_outstanding = get_shares_outstanding(company_overview_dict)
     print("Shares Outstanding: " + shares_outstanding)
+    change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
+    print("Change in Shares Outstanding: " + str(change_in_shares_outstanding))
+    
+    
+
 
 def db_postions_processing():
     print("To be developed with Brady")
@@ -159,7 +162,7 @@ print("\nBackend Stock Processed ")
 # profit growth 
 # revenue growth
 # current assets vs liabilities 
-# shares outstanding
+# shares outstanding +
 # cash flow growth
 # cash flow * wanted pe ratio vs current market caps
 
@@ -172,3 +175,5 @@ print("\nBackend Stock Processed ")
 # stock predictor
 
 # NLP for stock analysts and back testing 
+
+# need to check for 5 years of stock history
