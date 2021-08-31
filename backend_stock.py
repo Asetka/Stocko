@@ -7,6 +7,7 @@ def set_api_urls(api_urls, ticker, key):
     api_urls["daily_adjusted_url"] = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&apikey=' + key
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
+    api_urls["balance_sheet_url"] = 'https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=' + ticker + '&apikey=' + key
 
 def get_company_overview(ticker):
     req = requests.get(api_urls["company_overview_url"])
@@ -36,6 +37,40 @@ def get_company_overview(ticker):
     #     print(overview_dict[key])
     return overview_dict
 
+# returns a dictionary of keys with lists of the last 5 years of anual data for the key
+def get_balance_sheet(ticker):
+    req = requests.get(api_urls["balance_sheet_url"])
+    response = req.json()
+    annual_reports = response["annualReports"]
+    # print(annual_reports)
+
+    # balance_sheet_list = []
+    balance_sheet_dict = {}
+    total_assests = []
+    total_current_assets = []
+    total_liabilities = []
+    total_current_liabilities = []
+    shares_outstanding = []
+    for fiscal_report in annual_reports:
+        total_assests.append(fiscal_report["totalAssets"])
+        total_current_assets.append(fiscal_report["totalCurrentAssets"])
+        total_liabilities.append(fiscal_report["totalLiabilities"])
+        total_current_liabilities.append(fiscal_report["totalCurrentLiabilities"])
+        shares_outstanding.append(fiscal_report["commonStockSharesOutstanding"])
+    # balance_sheet_list.append(total_assests)
+    # balance_sheet_list.append(total_current_assets)
+    # balance_sheet_list.append(total_liabilities)
+    # balance_sheet_list.append(total_current_liabilities)
+    # balance_sheet_list.append(shares_outstanding)
+    # print(balance_sheet_list)
+    balance_sheet_dict["total_assests"] = total_assests
+    balance_sheet_dict["total_current_assets"] = total_current_assets
+    balance_sheet_dict["total_liabilities"] = total_liabilities
+    balance_sheet_dict["total_current_liabilities"] = total_current_liabilities
+    balance_sheet_dict["shares_outstanding"] = shares_outstanding
+    # print(balance_sheet_dict)
+    return balance_sheet_dict
+
 # get most recent stock price at close as a STRING
 def get_stock_price(ticker):
     req = requests.get(api_urls["intraday_url"])
@@ -63,7 +98,13 @@ def get_profit_margin(company_overview_dict):
 # def get_profit_growth():
 # def get_revenue_growth():
 # def get_current_assets_vs_liabilities():
-# def get_shares_outstanding():
+
+# returns current shares outstanding as a STRING
+def get_shares_outstanding(company_overview_dict):
+    shares_outstanding = company_overview_dict["shares_outstanding"]
+    return shares_outstanding
+
+# def get_five_year_share_change():
 # def get_free_cash_flow_growth():
 # def get_free_cash_flow_evaluation():
 
@@ -71,12 +112,17 @@ def get_profit_margin(company_overview_dict):
 def evaluation_processing(ticker):
     # print("call evaluations on " + ticker)
     company_overview_dict = get_company_overview(ticker)
+    balance_sheet_dict = get_balance_sheet(ticker)
     stock_price = get_stock_price(ticker)
+
     print("Stock price: " + stock_price)
     pe_ratio = get_pe(company_overview_dict)
     print("PE: " + pe_ratio)
     profit_margin = get_profit_margin(company_overview_dict)
     print("Profit Margin: " + str(profit_margin))
+
+    shares_outstanding = get_shares_outstanding(company_overview_dict)
+    print("Shares Outstanding: " + shares_outstanding)
 
 def db_postions_processing():
     print("To be developed with Brady")
@@ -108,9 +154,9 @@ print("\nBackend Stock Processed ")
     # brady and the front end
 
 # CORNERSTONES
-# pe ratio
-# profit margin
-# profit growth
+# pe ratio +
+# profit margin +
+# profit growth 
 # revenue growth
 # current assets vs liabilities 
 # shares outstanding
