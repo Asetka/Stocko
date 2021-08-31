@@ -98,8 +98,7 @@ def get_cash_flow_statement(ticker):
         capital_expenditures.append(cash_flow_report["capitalExpenditures"])
     cash_flow_dict["operating_cash_flow"] = operating_cash_flow
     cash_flow_dict["capital_expenditures"] = capital_expenditures
-    print(cash_flow_dict)
-    exit()
+    # print(cash_flow_dict)
     return cash_flow_dict
 
 
