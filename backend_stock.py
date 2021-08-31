@@ -5,17 +5,19 @@ import json
 
 def set_api_urls(api_urls, ticker, key):
     api_urls["daily_adjusted_url"] = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&apikey=' + key
+    api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
 
 # get most recent stock price at close
 def get_stock_price(ticker):
-    req = requests.get(api_urls["daily_adjusted_url"])
+    req = requests.get(api_urls["intraday_url"])
     response = req.json()
     # print(response)
-    day_data = response["Time Series (Daily)"]
-    latest_day = next(iter(day_data))
-    latest_close_price = day_data[latest_day]["4. close"]
+    minute_data = response["Time Series (1min)"]
+    latest_minute = next(iter(minute_data))
+    latest_close_price = minute_data[latest_minute]["4. close"]
     print("The stock price of " + ticker + " is " + latest_close_price)
+    return latest_close_price
 
 # def get_pe():
 # def get_profit_margin():
@@ -53,12 +55,13 @@ def get_company_overview(ticker):
     for key in overview_dict:
         print(key)
         print(overview_dict[key])
+    return overview_dict
 
 
 def call_evaluations(ticker):
     # print("call evaluations on " + ticker)
-    get_company_overview(ticker)
-    get_stock_price(ticker)
+    company_overciew_dict = get_company_overview(ticker)
+    stock_price = get_stock_price(ticker)
 
 # start
 print("Backend Stock Processing\n")
