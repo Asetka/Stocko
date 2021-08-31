@@ -8,6 +8,9 @@ def set_api_urls(api_urls, ticker, key):
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
     api_urls["balance_sheet_url"] = 'https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=' + ticker + '&apikey=' + key
+    api_urls["income_statement_url"] = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=' + ticker + '&apikey=' + key
+    api_urls["cash_flow_url"] = 'https://www.alphavantage.co/query?function=CASH_FLOW&symbol=' + ticker + '&apikey=' + key
+
 
 def get_company_overview(ticker):
     req = requests.get(api_urls["company_overview_url"])
@@ -64,6 +67,42 @@ def get_balance_sheet(ticker):
     # print(balance_sheet_dict)
     return balance_sheet_dict
 
+def get_income_statement(ticker):
+    req = requests.get(api_urls["income_statement_url"])
+    response = req.json()
+    annual_reports = response["annualReports"]
+    income_statement_dict = {}
+    gross_profit = []
+    total_revenue = []
+    net_income = []
+    for income_report in annual_reports:
+        gross_profit.append(income_report["grossProfit"])
+        total_revenue.append(income_report["totalRevenue"])
+        net_income.append(income_report["netIncome"])
+    income_statement_dict["gross_profit"] = gross_profit
+    income_statement_dict["total_revenue"] = total_revenue
+    income_statement_dict["net_income"] = net_income
+    # print(income_statement_dict)
+    return income_statement_dict
+
+def get_cash_flow_statement(ticker):
+    # Free Cash Flow = Operating Cash Flow − Capital Expenditures
+    req = requests.get(api_urls["cash_flow_url"])
+    response = req.json()
+    annual_reports = response["annualReports"]
+    cash_flow_dict = {}
+    operating_cash_flow = []
+    capital_expenditures = []
+    for cash_flow_report in annual_reports:
+        operating_cash_flow.append(cash_flow_report["operatingCashflow"])
+        capital_expenditures.append(cash_flow_report["capitalExpenditures"])
+    cash_flow_dict["operating_cash_flow"] = operating_cash_flow
+    cash_flow_dict["capital_expenditures"] = capital_expenditures
+    print(cash_flow_dict)
+    exit()
+    return cash_flow_dict
+
+
 # get most recent stock price at close as a STRING
 def get_stock_price(ticker):
     req = requests.get(api_urls["intraday_url"])
@@ -101,10 +140,12 @@ def get_shares_outstanding(company_overview_dict):
 # def get_free_cash_flow_growth():
 # def get_free_cash_flow_evaluation():
 
-
 def evaluation_processing(ticker):
     company_overview_dict = get_company_overview(ticker)
     balance_sheet_dict = get_balance_sheet(ticker)
+    income_statement_dict = get_income_statement(ticker)
+    cash_flow_dict = get_cash_flow_statement(ticker)
+
 
     stock_price = get_stock_price(ticker)
 
@@ -123,9 +164,6 @@ def evaluation_processing(ticker):
     print("Shares Outstanding: " + shares_outstanding)
     change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
     print("Change in Shares Outstanding: " + str(change_in_shares_outstanding))
-    
-    
-
 
 def db_postions_processing():
     print("To be developed with Brady")
@@ -161,7 +199,7 @@ print("\nBackend Stock Processed ")
 # profit margin +
 # profit growth 
 # revenue growth
-# current assets vs liabilities 
+# current assets vs liabilities +
 # shares outstanding +
 # cash flow growth
 # cash flow * wanted pe ratio vs current market caps
