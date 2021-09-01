@@ -3,6 +3,7 @@
 import requests
 import json
 
+# returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
 def set_api_urls(api_urls, ticker, key):
     api_urls["daily_adjusted_url"] = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&apikey=' + key
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
@@ -11,7 +12,7 @@ def set_api_urls(api_urls, ticker, key):
     api_urls["income_statement_url"] = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=' + ticker + '&apikey=' + key
     api_urls["cash_flow_url"] = 'https://www.alphavantage.co/query?function=CASH_FLOW&symbol=' + ticker + '&apikey=' + key
 
-
+# returns a DICTIONARY of information to be used regarding company overview api request
 def get_company_overview(ticker):
     req = requests.get(api_urls["company_overview_url"])
     response = req.json()
@@ -40,7 +41,8 @@ def get_company_overview(ticker):
     #     print(overview_dict[key])
     return overview_dict
 
-# returns a dictionary of keys with lists of the last 5 years of anual data for the key
+# returns a DICTIONARY of keys -> lists containing 
+# the last 5 years of annual data from the balance sheet api request
 def get_balance_sheet(ticker):
     req = requests.get(api_urls["balance_sheet_url"])
     response = req.json()
@@ -67,6 +69,8 @@ def get_balance_sheet(ticker):
     # print(balance_sheet_dict)
     return balance_sheet_dict
 
+# returns a DICTIONARY of keys -> lists containing 
+# the last 5 years of annual data from the income statement api request
 def get_income_statement(ticker):
     req = requests.get(api_urls["income_statement_url"])
     response = req.json()
@@ -85,6 +89,8 @@ def get_income_statement(ticker):
     # print(income_statement_dict)
     return income_statement_dict
 
+# returns a DICTIONARY of keys -> lists containing 
+# the last 5 years of annual data from the cash flow statement api request
 def get_cash_flow_statement(ticker):
     # Free Cash Flow = Operating Cash Flow − Capital Expenditures
     req = requests.get(api_urls["cash_flow_url"])
@@ -101,92 +107,160 @@ def get_cash_flow_statement(ticker):
     # print(cash_flow_dict)
     return cash_flow_dict
 
+###########################################
 
-# get most recent stock price at close as a STRING
+# returns STRING of most recent intraday close stock price to the most recent minute
 def get_stock_price(ticker):
     req = requests.get(api_urls["intraday_url"])
     response = req.json()
-    # print(response)
     minute_data = response["Time Series (1min)"]
     latest_minute = next(iter(minute_data))
     latest_close_price = minute_data[latest_minute]["4. close"]
-    # print("The stock price of " + ticker + " is " + latest_close_price)
     return latest_close_price
 
-# returns pe ration as a STRING
+# returns STRING of the companies PE Ratio
 def get_pe(company_overview_dict):
     pe_ratio = company_overview_dict["pe_ratio"]
     return pe_ratio
 
-# returns profit margin as a percent as a FLOAT
+# returns FLOAT of the profit margin as a percentage
 def get_profit_margin(company_overview_dict):
     profit_margin = company_overview_dict["profit_margin"]
-    # print(profit_margin)
-    profit_margin = float(profit_margin) * 100
+    profit_margin = float(profit_margin) * 100.0
     return profit_margin
 
+# returns STRING of the profit growth over the last 5 years
+def get_profit_growth(income_statement_dict):
+    profit_growth = int(income_statement_dict["gross_profit"][0]) - int(income_statement_dict["gross_profit"][4])
+    return str(profit_growth)
 
-# def get_profit_growth():
-# def get_revenue_growth():
-# def get_current_assets_vs_liabilities():
+# returns STRING of the revenue growth over the last 5 years
+def get_revenue_growth(income_statement_dict):
+    revenue_growth = int(income_statement_dict["total_revenue"][0]) - int(income_statement_dict["total_revenue"][4])
+    return str(revenue_growth)
 
-# returns current shares outstanding as a STRING
+# returns STRING of current assets vs liabilities
+def get_current_assets_vs_liabilities(balance_sheet_dict):
+    total_current_assets_vs_liabilities = int(balance_sheet_dict["total_current_assets"][0]) - int(balance_sheet_dict["total_current_liabilities"][0])
+    return str(total_current_assets_vs_liabilities)
+
+# returns STRING of total assets vs liabilities
+def get_assets_vs_liabilities(balance_sheet_dict):
+    total_assets_vs_liabilities = int(balance_sheet_dict["total_assets"][0]) - int(balance_sheet_dict["total_liabilities"][0])
+    return str(total_assets_vs_liabilities)
+
+# returns STRING of the current shares outstanding
 def get_shares_outstanding(company_overview_dict):
     shares_outstanding = company_overview_dict["shares_outstanding"]
     return shares_outstanding
 
-# def get_five_year_share_change():
-# def get_free_cash_flow_growth():
-# def get_free_cash_flow_evaluation():
+# returns STRING of the 5 year change in shares outstanding
+def get_five_year_share_change(balance_sheet_dict):
+    change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
+    return str(change_in_shares_outstanding)
 
+# returns STRING of the current years free cash flow
+def get_free_cash_flow_growth(cash_flow_dict):
+    now_fcf = int(cash_flow_dict["operating_cash_flow"][0]) - int(cash_flow_dict["capital_expenditures"][0])
+    then_fcf = int(cash_flow_dict["operating_cash_flow"][4]) - int(cash_flow_dict["capital_expenditures"][4])
+    free_cash_flow_growth = now_fcf - then_fcf
+    return str(free_cash_flow_growth)
+
+# returns STRING of the 5 year change in free cash flow
+def get_free_cash_flow_evaluation(free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe):
+    print("\n\n\n\n")
+    # need to get the 5 yr avg fcf
+
+    
+    desired_market_cap = int(free_cash_flow) * int(desired_pe)
+    print("Desired Market Cap = ", desired_market_cap)
+    desired_share_price = desired_market_cap / int(shares_outstanding)
+    print("Desired Share Price = ", desired_share_price)
+    print()
+    print("Current Market Cap = ", market_cap)
+    # print(int(market_cap)/int(shares_outstanding))
+    print("Current Stock Price = ", stock_price)
+    print()
+    # print("Check FCF/SHARES = ", int(free_cash_flow)/int(shares_outstanding))
+    # print("Stock Price = " + stock_price)
+    exit()
+    return str(free_cash_flow_growth)
+
+# processing of a ticker request from the front end
 def evaluation_processing(ticker):
+    # make the necessary data dictionaries to make a stock recommendation
     company_overview_dict = get_company_overview(ticker)
     balance_sheet_dict = get_balance_sheet(ticker)
     income_statement_dict = get_income_statement(ticker)
     cash_flow_dict = get_cash_flow_statement(ticker)
 
-
+    # set and print stock price
     stock_price = get_stock_price(ticker)
-
     print("Stock price: " + stock_price)
+    # set and print pe ratio
     pe_ratio = get_pe(company_overview_dict)
     print("PE: " + pe_ratio)
+    # set and print profit margin
     profit_margin = get_profit_margin(company_overview_dict)
     print("Profit Margin: " + str(profit_margin))
-
-    total_current_assets_vs_liabilities = int(balance_sheet_dict["total_current_assets"][0]) - int(balance_sheet_dict["total_current_liabilities"][0])
-    print("Total Current Assets vs Liabilities: " + str(total_current_assets_vs_liabilities))
-    total_assets_vs_liabilities = int(balance_sheet_dict["total_assets"][0]) - int(balance_sheet_dict["total_liabilities"][0])
-    print("Total Assets vs Liabilities: " + str(total_assets_vs_liabilities))
-
+    # set and print profit growth
+    profit_growth = get_profit_growth(income_statement_dict)
+    print("Profit Growth: " + profit_growth)
+    # set and print revenue growth
+    revenue_growth = get_revenue_growth(income_statement_dict)
+    print("Revenue Growth: " + revenue_growth)
+    # set and print current assets vs liabilites
+    total_current_assets_vs_liabilities = get_current_assets_vs_liabilities(balance_sheet_dict)
+    print("Total Current Assets vs Liabilities: " + total_current_assets_vs_liabilities)
+    # set and print total assets vs liabilites
+    total_assets_vs_liabilities = get_assets_vs_liabilities(balance_sheet_dict)
+    print("Total Assets vs Liabilities: " + total_assets_vs_liabilities)
+    # set and print shares outstanding
     shares_outstanding = get_shares_outstanding(company_overview_dict)
     print("Shares Outstanding: " + shares_outstanding)
-    change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
-    print("Change in Shares Outstanding: " + str(change_in_shares_outstanding))
+    # set and print change in shares outstanding
+    change_in_shares_outstanding = get_five_year_share_change(balance_sheet_dict)
+    print("Change in Shares Outstanding: " + change_in_shares_outstanding)
+    # set and print free cash flow growth
+    free_cash_flow = get_free_cash_flow_growth(cash_flow_dict)
+    print("Free Cash Flow Growth: " + free_cash_flow)
+    # set and print change in free cash flow
+    desired_pe = 20
+    market_cap = company_overview_dict["market_capitalization"]
+    free_cash_flow_evaluation = get_free_cash_flow_evaluation(free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe)
+    print("Change in Free Cash Flow: " + free_cash_flow_evaluation)
+
+
 
 def db_postions_processing():
     print("To be developed with Brady")
 
-# start
-print("Backend Stock Processing\n")
+if __name__ == "__main__":
+    # start
+    print("\nBackend Stock Processing\n")
 
-# get ticker from user, no error checking yet
-ticker = input("Please enter a stock ticker: ")
-ticker = str(ticker)
-ticker = ticker.upper()
-print(ticker)
+    # get ticker from user
+    # this will need error checking, this will need to be passed from database or from front end
+    ticker = input("Please enter a stock ticker: ")
+    ticker = str(ticker)
+    ticker = ticker.upper()
+    # print(ticker)
 
-# set api urls 
-api_urls = {}
-key = open('./key.txt').read()
-set_api_urls(api_urls, ticker, key)
-# print(api_urls)
+    # set api urls 
+    api_urls = {}
+    key = open('./key.txt').read()
+    set_api_urls(api_urls, ticker, key)
+    # print(api_urls)
 
-# call evaluations
-evaluation_processing(ticker)
+    # call evaluations, this would be from angular front end
+    evaluation_processing(ticker)
 
-# end
-print("\nBackend Stock Processed ")
+    # call db process, this would be from the positions db
+    print()
+    db_postions_processing()
+
+    # end
+    print("\nBackend Stock Processed ")
 
 
 # notes 
