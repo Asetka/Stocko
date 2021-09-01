@@ -166,13 +166,19 @@ def get_free_cash_flow_growth(cash_flow_dict):
     free_cash_flow_growth = now_fcf - then_fcf
     return str(free_cash_flow_growth)
 
-# returns STRING of the 5 year change in free cash flow
-def get_free_cash_flow_evaluation(free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe):
-    print("\n\n\n\n")
-    # need to get the 5 yr avg fcf
+# returns int for 5 avg fcf 
+def get_avg_fcf(cash_flow_dict):
+    avg_fcf = 0
+    for i in range(5):
+        avg_fcf = avg_fcf + int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i])
+    return avg_fcf/5
 
-    
-    desired_market_cap = int(free_cash_flow) * int(desired_pe)
+# returns STRING of the 5 year change in free cash flow
+def get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe):
+    print("\n\n")
+    # need to get the 5 yr avg fcf
+    avg_fcf = get_avg_fcf(cash_flow_dict)
+    desired_market_cap = avg_fcf * int(desired_pe)
     print("Desired Market Cap = ", desired_market_cap)
     desired_share_price = desired_market_cap / int(shares_outstanding)
     print("Desired Share Price = ", desired_share_price)
@@ -184,7 +190,7 @@ def get_free_cash_flow_evaluation(free_cash_flow, shares_outstanding, stock_pric
     # print("Check FCF/SHARES = ", int(free_cash_flow)/int(shares_outstanding))
     # print("Stock Price = " + stock_price)
     exit()
-    return str(free_cash_flow_growth)
+    return -1
 
 # processing of a ticker request from the front end
 def evaluation_processing(ticker):
@@ -227,7 +233,7 @@ def evaluation_processing(ticker):
     # set and print change in free cash flow
     desired_pe = 20
     market_cap = company_overview_dict["market_capitalization"]
-    free_cash_flow_evaluation = get_free_cash_flow_evaluation(free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe)
+    free_cash_flow_evaluation = get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe)
     print("Change in Free Cash Flow: " + free_cash_flow_evaluation)
 
 
@@ -270,11 +276,11 @@ if __name__ == "__main__":
 # CORNERSTONES
 # pe ratio +
 # profit margin +
-# profit growth 
-# revenue growth
+# profit growth +
+# revenue growth +
 # current assets vs liabilities +
 # shares outstanding +
-# cash flow growth
+# cash flow growth +
 # cash flow * wanted pe ratio vs current market caps
 
 
