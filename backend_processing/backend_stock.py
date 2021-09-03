@@ -170,7 +170,9 @@ def get_free_cash_flow_growth(cash_flow_dict):
 def get_avg_fcf(cash_flow_dict):
     avg_fcf = 0
     for i in range(5):
+        print(int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i]))
         avg_fcf = avg_fcf + int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i])
+    print(avg_fcf/5)
     return avg_fcf/5
 
 # returns STRING of the 5 year change in free cash flow
@@ -178,6 +180,8 @@ def get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstan
     print("\n\n")
     # need to get the 5 yr avg fcf
     avg_fcf = get_avg_fcf(cash_flow_dict)
+    print()
+    print(avg_fcf)
     desired_market_cap = avg_fcf * int(desired_pe)
     print("Desired Market Cap = ", desired_market_cap)
     desired_share_price = desired_market_cap / int(shares_outstanding)
