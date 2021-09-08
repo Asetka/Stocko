@@ -5,12 +5,14 @@ import json
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
 def set_api_urls(api_urls, ticker, key):
-    api_urls["daily_adjusted_url"] = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&apikey=' + key
+    # api_urls["daily_adjusted_url"] = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&apikey=' + key
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
     api_urls["balance_sheet_url"] = 'https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=' + ticker + '&apikey=' + key
     api_urls["income_statement_url"] = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=' + ticker + '&apikey=' + key
     api_urls["cash_flow_url"] = 'https://www.alphavantage.co/query?function=CASH_FLOW&symbol=' + ticker + '&apikey=' + key
+
+###########################################
 
 # returns a DICTIONARY of information to be used regarding company overview api request
 def get_company_overview(ticker):
@@ -39,6 +41,7 @@ def get_company_overview(ticker):
     # for key in overview_dict:
     #     print(key)
     #     print(overview_dict[key])
+    # print(overview_dict)
     return overview_dict
 
 # returns a DICTIONARY of keys -> lists containing 
@@ -48,7 +51,6 @@ def get_balance_sheet(ticker):
     response = req.json()
     annual_reports = response["annualReports"]
     # print(annual_reports)
-
     balance_sheet_dict = {}
     total_assests = []
     total_current_assets = []
@@ -157,6 +159,11 @@ def get_shares_outstanding(company_overview_dict):
 # returns STRING of the 5 year change in shares outstanding
 def get_five_year_share_change(balance_sheet_dict):
     change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
+    print()
+    print(balance_sheet_dict["shares_outstanding"][0])
+    print(balance_sheet_dict["shares_outstanding"][4])
+    print("CHANGE" + str(change_in_shares_outstanding))
+    print()
     return str(change_in_shares_outstanding)
 
 # returns STRING of the current years free cash flow
@@ -170,9 +177,9 @@ def get_free_cash_flow_growth(cash_flow_dict):
 def get_avg_fcf(cash_flow_dict):
     avg_fcf = 0
     for i in range(5):
-        print(int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i]))
+        # print(int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i]))
         avg_fcf = avg_fcf + int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i])
-    print(avg_fcf/5)
+    # print(avg_fcf/5)
     return avg_fcf/5
 
 # returns STRING of the 5 year change in free cash flow
@@ -181,7 +188,7 @@ def get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstan
     # need to get the 5 yr avg fcf
     avg_fcf = get_avg_fcf(cash_flow_dict)
     print()
-    print(avg_fcf)
+    # print(avg_fcf)
     desired_market_cap = avg_fcf * int(desired_pe)
     print("Desired Market Cap = ", desired_market_cap)
     desired_share_price = desired_market_cap / int(shares_outstanding)
@@ -193,8 +200,13 @@ def get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstan
     print()
     # print("Check FCF/SHARES = ", int(free_cash_flow)/int(shares_outstanding))
     # print("Stock Price = " + stock_price)
-    exit()
-    return -1
+    # exit()
+    return str(desired_market_cap), str(desired_share_price)
+
+def print_evaluations(evaluation_metrics):
+    print("hello evaluations")
+    for evaluation in evaluation_metrics:
+        print(evaluation)
 
 # processing of a ticker request from the front end
 def evaluation_processing(ticker):
@@ -235,13 +247,18 @@ def evaluation_processing(ticker):
     free_cash_flow = get_free_cash_flow_growth(cash_flow_dict)
     print("Free Cash Flow Growth: " + free_cash_flow)
     # set and print change in free cash flow
-    desired_pe = 20
+    desired_pe = 5
     market_cap = company_overview_dict["market_capitalization"]
-    free_cash_flow_evaluation = get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe)
-    print("Change in Free Cash Flow: " + free_cash_flow_evaluation)
+    fcf_cap_evaluation, fcf_price_evaluation = get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe)
+    print("Change in Free Cash Flow: " + fcf_cap_evaluation, )
+    evaluation_metrics = [stock_price, pe_ratio, profit_margin, profit_growth, revenue_growth, 
+                            total_current_assets_vs_liabilities, total_assets_vs_liabilities, 
+                            shares_outstanding, change_in_shares_outstanding, free_cash_flow,
+                            fcf_cap_evaluation, fcf_price_evaluation]
+    print_evaluations(evaluation_metrics) 
 
 
-
+# used to interface with the postions db
 def db_postions_processing():
     print("To be developed with Brady")
 
@@ -250,7 +267,7 @@ if __name__ == "__main__":
     print("\nBackend Stock Processing\n")
 
     # get ticker from user
-    # this will need error checking, this will need to be passed from database or from front end
+    # this will need error checking, this will need to be passed from database or from front end ???
     ticker = input("Please enter a stock ticker: ")
     ticker = str(ticker)
     ticker = ticker.upper()
@@ -262,10 +279,10 @@ if __name__ == "__main__":
     set_api_urls(api_urls, ticker, key)
     # print(api_urls)
 
-    # call evaluations, this would be from angular front end
+    # call evaluations, this would be from angular front end. implemented with flask api
     evaluation_processing(ticker)
 
-    # call db process, this would be from the positions db
+    # call db process, this would be from the positions db, place holder
     print()
     db_postions_processing()
 
@@ -278,23 +295,22 @@ if __name__ == "__main__":
     # brady and the front end
 
 # CORNERSTONES
-# pe ratio +
-# profit margin +
-# profit growth +
-# revenue growth +
-# current assets vs liabilities +
-# shares outstanding +
-# cash flow growth +
-# cash flow * wanted pe ratio vs current market caps
+    # pe ratio +
+    # profit margin +
+    # profit growth +
+    # revenue growth +
+    # current assets vs liabilities +
+    # shares outstanding +
+    # cash flow growth +
+    # cash flow * wanted pe ratio vs current market caps +
 
+# functionalities 
+    # comparing intrinsic value vs the actual value 
 
+    # back testing TBD Method ------
 
-# comparing intrinsic value vs the actual value 
+    # stock predictor ------
 
-# back testing TBD Method
+    # NLP for stock analysts and back testing -------
 
-# stock predictor
-
-# NLP for stock analysts and back testing 
-
-# need to check for 5 years of stock history
+    # need to check for 5 years of stock history --------
