@@ -1,7 +1,11 @@
 # Backend Stock Processing
 
 import requests
-import json
+from company_overview import get_company_overview
+from balance_sheet import get_balance_sheet
+from income_statement import get_income_statement
+from cash_flow_statement import get_cash_flow_statement
+# import json
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
 def set_api_urls(api_urls, ticker, key):
@@ -13,102 +17,6 @@ def set_api_urls(api_urls, ticker, key):
     api_urls["cash_flow_url"] = 'https://www.alphavantage.co/query?function=CASH_FLOW&symbol=' + ticker + '&apikey=' + key
 
 ###########################################
-
-# returns a DICTIONARY of information to be used regarding company overview api request
-def get_company_overview(ticker):
-    req = requests.get(api_urls["company_overview_url"])
-    response = req.json()
-    overview_dict = {
-        'name' : response["Name"],
-        'description' : response["Description"],
-        'sector' : response["Sector"],
-        'market_capitalization' : response["MarketCapitalization"],
-        'pe_ratio' : response["PERatio"],
-        'dividend_per_share' : response["DividendPerShare"],
-        'dividend_yield' : response["DividendYield"],
-        'profit_margin' : response["ProfitMargin"],
-        'return_on_assets_ttm' : response["ReturnOnAssetsTTM"],
-        'return_on_equity_ttm' : response["ReturnOnEquityTTM"],
-        'analyst_target_price' : response["AnalystTargetPrice"],
-        'week_52_high' : response["52WeekHigh"],
-        'week_52_low' : response["52WeekLow"],
-        'day_50_moving_avg' : response["50DayMovingAverage"],
-        'day_200_moving_avg' : response["200DayMovingAverage"],
-        'shares_outstanding' : response["SharesOutstanding"],
-        'dividend_date' : response["DividendDate"],
-        'exdividend_data' : response["ExDividendDate"]
-    }
-    # for key in overview_dict:
-    #     print(key)
-    #     print(overview_dict[key])
-    # print(overview_dict)
-    return overview_dict
-
-# returns a DICTIONARY of keys -> lists containing 
-# the last 5 years of annual data from the balance sheet api request
-def get_balance_sheet(ticker):
-    req = requests.get(api_urls["balance_sheet_url"])
-    response = req.json()
-    annual_reports = response["annualReports"]
-    # print(annual_reports)
-    balance_sheet_dict = {}
-    total_assests = []
-    total_current_assets = []
-    total_liabilities = []
-    total_current_liabilities = []
-    shares_outstanding = []
-    for fiscal_report in annual_reports:
-        total_assests.append(fiscal_report["totalAssets"])
-        total_current_assets.append(fiscal_report["totalCurrentAssets"])
-        total_liabilities.append(fiscal_report["totalLiabilities"])
-        total_current_liabilities.append(fiscal_report["totalCurrentLiabilities"])
-        shares_outstanding.append(fiscal_report["commonStockSharesOutstanding"])
-    balance_sheet_dict["total_assets"] = total_assests
-    balance_sheet_dict["total_current_assets"] = total_current_assets
-    balance_sheet_dict["total_liabilities"] = total_liabilities
-    balance_sheet_dict["total_current_liabilities"] = total_current_liabilities
-    balance_sheet_dict["shares_outstanding"] = shares_outstanding
-    # print(balance_sheet_dict)
-    return balance_sheet_dict
-
-# returns a DICTIONARY of keys -> lists containing 
-# the last 5 years of annual data from the income statement api request
-def get_income_statement(ticker):
-    req = requests.get(api_urls["income_statement_url"])
-    response = req.json()
-    annual_reports = response["annualReports"]
-    income_statement_dict = {}
-    gross_profit = []
-    total_revenue = []
-    net_income = []
-    for income_report in annual_reports:
-        gross_profit.append(income_report["grossProfit"])
-        total_revenue.append(income_report["totalRevenue"])
-        net_income.append(income_report["netIncome"])
-    income_statement_dict["gross_profit"] = gross_profit
-    income_statement_dict["total_revenue"] = total_revenue
-    income_statement_dict["net_income"] = net_income
-    # print(income_statement_dict)
-    return income_statement_dict
-
-# returns a DICTIONARY of keys -> lists containing 
-# the last 5 years of annual data from the cash flow statement api request
-def get_cash_flow_statement(ticker):
-    # Free Cash Flow = Operating Cash Flow − Capital Expenditures
-    req = requests.get(api_urls["cash_flow_url"])
-    response = req.json()
-    annual_reports = response["annualReports"]
-    cash_flow_dict = {}
-    operating_cash_flow = []
-    capital_expenditures = []
-    for cash_flow_report in annual_reports:
-        operating_cash_flow.append(cash_flow_report["operatingCashflow"])
-        capital_expenditures.append(cash_flow_report["capitalExpenditures"])
-    cash_flow_dict["operating_cash_flow"] = operating_cash_flow
-    cash_flow_dict["capital_expenditures"] = capital_expenditures
-    # print(cash_flow_dict)
-    return cash_flow_dict
-
 ###########################################
 
 # returns STRING of most recent intraday close stock price to the most recent minute
@@ -208,13 +116,19 @@ def print_evaluations(evaluation_metrics):
     for evaluation in evaluation_metrics:
         print(evaluation)
 
+
 # processing of a ticker request from the front end
-def evaluation_processing(ticker):
+def evaluation_processing(ticker, api_urls):
     # make the necessary data dictionaries to make a stock recommendation
-    company_overview_dict = get_company_overview(ticker)
-    balance_sheet_dict = get_balance_sheet(ticker)
-    income_statement_dict = get_income_statement(ticker)
-    cash_flow_dict = get_cash_flow_statement(ticker)
+    company_overview_dict = get_company_overview(ticker, api_urls)
+    print(company_overview_dict)
+    balance_sheet_dict = get_balance_sheet(ticker, api_urls)
+    print(balance_sheet_dict)
+    income_statement_dict = get_income_statement(ticker, api_urls)
+    print(income_statement_dict)
+    cash_flow_dict = get_cash_flow_statement(ticker, api_urls)
+    print(cash_flow_dict)
+    exit()
 
     # set and print stock price
     stock_price = get_stock_price(ticker)
@@ -261,6 +175,8 @@ def evaluation_processing(ticker):
 # used to interface with the postions db
 def db_postions_processing():
     print("To be developed with Brady")
+    # print(get_stock_price(ticker))
+    # exit()
 
 if __name__ == "__main__":
     # start
@@ -271,7 +187,6 @@ if __name__ == "__main__":
     ticker = input("Please enter a stock ticker: ")
     ticker = str(ticker)
     ticker = ticker.upper()
-    # print(ticker)
 
     # set api urls 
     api_urls = {}
@@ -280,31 +195,24 @@ if __name__ == "__main__":
     # print(api_urls)
 
     # call evaluations, this would be from angular front end. implemented with flask api
-    evaluation_processing(ticker)
+    evaluation_processing(ticker, api_urls)
 
     # call db process, this would be from the positions db, place holder
     print()
     db_postions_processing()
 
+
+
     # end
     print("\nBackend Stock Processed ")
-
 
 # notes 
 # how to interface with multiple interfaces
     # brady and the front end
 
-# CORNERSTONES
-    # pe ratio +
-    # profit margin +
-    # profit growth +
-    # revenue growth +
-    # current assets vs liabilities +
-    # shares outstanding +
-    # cash flow growth +
-    # cash flow * wanted pe ratio vs current market caps +
 
 # functionalities 
+
     # comparing intrinsic value vs the actual value 
 
     # back testing TBD Method ------
@@ -314,3 +222,7 @@ if __name__ == "__main__":
     # NLP for stock analysts and back testing -------
 
     # need to check for 5 years of stock history --------
+
+    # get graph information
+
+    # print financials
