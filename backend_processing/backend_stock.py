@@ -21,12 +21,6 @@ def set_api_urls(api_urls, ticker, key):
 ###########################################
 ###########################################
 
-
-# returns STRING of the revenue growth over the last 5 years
-def get_revenue_growth(income_statement_dict):
-    revenue_growth = int(income_statement_dict["total_revenue"][0]) - int(income_statement_dict["total_revenue"][4])
-    return str(revenue_growth)
-
 # returns STRING of current assets vs liabilities
 def get_current_assets_vs_liabilities(balance_sheet_dict):
     total_current_assets_vs_liabilities = int(balance_sheet_dict["total_current_assets"][0]) - int(balance_sheet_dict["total_current_liabilities"][0])
