@@ -21,16 +21,6 @@ def set_api_urls(api_urls, ticker, key):
 ###########################################
 ###########################################
 
-# returns STRING of current assets vs liabilities
-def get_current_assets_vs_liabilities(balance_sheet_dict):
-    total_current_assets_vs_liabilities = int(balance_sheet_dict["total_current_assets"][0]) - int(balance_sheet_dict["total_current_liabilities"][0])
-    return str(total_current_assets_vs_liabilities)
-
-# returns STRING of total assets vs liabilities
-def get_assets_vs_liabilities(balance_sheet_dict):
-    total_assets_vs_liabilities = int(balance_sheet_dict["total_assets"][0]) - int(balance_sheet_dict["total_liabilities"][0])
-    return str(total_assets_vs_liabilities)
-
 # returns STRING of the current shares outstanding
 def get_shares_outstanding(company_overview_dict):
     shares_outstanding = company_overview_dict["shares_outstanding"]
