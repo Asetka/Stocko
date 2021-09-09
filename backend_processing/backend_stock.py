@@ -5,6 +5,7 @@ from company_overview import get_company_overview
 from balance_sheet import get_balance_sheet
 from income_statement import get_income_statement
 from cash_flow_statement import get_cash_flow_statement
+from stock_price import get_stock_price
 # import json
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
@@ -18,15 +19,6 @@ def set_api_urls(api_urls, ticker, key):
 
 ###########################################
 ###########################################
-
-# returns STRING of most recent intraday close stock price to the most recent minute
-def get_stock_price(ticker):
-    req = requests.get(api_urls["intraday_url"])
-    response = req.json()
-    minute_data = response["Time Series (1min)"]
-    latest_minute = next(iter(minute_data))
-    latest_close_price = minute_data[latest_minute]["4. close"]
-    return latest_close_price
 
 # returns STRING of the companies PE Ratio
 def get_pe(company_overview_dict):
@@ -121,18 +113,20 @@ def print_evaluations(evaluation_metrics):
 def evaluation_processing(ticker, api_urls):
     # make the necessary data dictionaries to make a stock recommendation
     company_overview_dict = get_company_overview(ticker, api_urls)
-    print(company_overview_dict)
+    # print(company_overview_dict)
     balance_sheet_dict = get_balance_sheet(ticker, api_urls)
-    print(balance_sheet_dict)
+    # print(balance_sheet_dict)
     income_statement_dict = get_income_statement(ticker, api_urls)
-    print(income_statement_dict)
+    # print(income_statement_dict)
     cash_flow_dict = get_cash_flow_statement(ticker, api_urls)
-    print(cash_flow_dict)
-    exit()
+    # print(cash_flow_dict)
 
     # set and print stock price
-    stock_price = get_stock_price(ticker)
+    stock_price = get_stock_price(ticker, api_urls)
     print("Stock price: " + stock_price)
+
+    exit()
+
     # set and print pe ratio
     pe_ratio = get_pe(company_overview_dict)
     print("PE: " + pe_ratio)
