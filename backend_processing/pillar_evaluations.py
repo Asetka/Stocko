@@ -44,7 +44,9 @@ def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_sta
     pillars["revenue_growth"] = get_revenue_growth(income_statement_dict)
     pillars["current_assets_vs_liabilities"] = get_current_assets_vs_liabilities(balance_sheet_dict)
     pillars["total_assets_vs_liabilities"] = get_total_assets_vs_liabilities(balance_sheet_dict)
-
+    # change in shares outstanding
+    # fcf growth
+    # fcf evaluation
 
 
     return pillars

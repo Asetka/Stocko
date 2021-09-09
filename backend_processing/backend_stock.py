@@ -70,11 +70,6 @@ def get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstan
     # exit()
     return str(desired_market_cap), str(desired_share_price)
 
-def print_evaluations(evaluation_metrics):
-    print("hello evaluations")
-    for evaluation in evaluation_metrics:
-        print(evaluation)
-
 
 # processing of a ticker request from the front end
 def evaluation_processing(ticker, api_urls):
@@ -90,37 +85,16 @@ def evaluation_processing(ticker, api_urls):
 
     # set and print stock price
     stock_price = get_stock_price(ticker, api_urls)
-    print("Stock Price: " + stock_price)
+    print("Stock Price: " + stock_price, end = '\n\n')
 
     # set and print current shares outstanding 
     shares_outstanding = get_shares_outstanding(company_overview_dict)
-    print("Shares Outstanding: " + shares_outstanding) 
+    print("Shares Outstanding: " + shares_outstanding, end = '\n\n') 
 
     pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
-    print(pillars)
+    print(pillars, end = '\n\n')
     exit()
 
-    # set and print pe ratio
-    pe_ratio = get_pe(company_overview_dict)
-    print("PE: " + pe_ratio)
-    # set and print profit margin
-    profit_margin = get_profit_margin(company_overview_dict)
-    print("Profit Margin: " + str(profit_margin))
-    # set and print profit growth
-    profit_growth = get_profit_growth(income_statement_dict)
-    print("Profit Growth: " + profit_growth)
-    # set and print revenue growth
-    revenue_growth = get_revenue_growth(income_statement_dict)
-    print("Revenue Growth: " + revenue_growth)
-    # set and print current assets vs liabilites
-    total_current_assets_vs_liabilities = get_current_assets_vs_liabilities(balance_sheet_dict)
-    print("Total Current Assets vs Liabilities: " + total_current_assets_vs_liabilities)
-    # set and print total assets vs liabilites
-    total_assets_vs_liabilities = get_assets_vs_liabilities(balance_sheet_dict)
-    print("Total Assets vs Liabilities: " + total_assets_vs_liabilities)
-    # set and print shares outstanding
-    shares_outstanding = get_shares_outstanding(company_overview_dict)
-    print("Shares Outstanding: " + shares_outstanding)
     # set and print change in shares outstanding
     change_in_shares_outstanding = get_five_year_share_change(balance_sheet_dict)
     print("Change in Shares Outstanding: " + change_in_shares_outstanding)
@@ -131,13 +105,7 @@ def evaluation_processing(ticker, api_urls):
     desired_pe = 5
     market_cap = company_overview_dict["market_capitalization"]
     fcf_cap_evaluation, fcf_price_evaluation = get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe)
-    print("Change in Free Cash Flow: " + fcf_cap_evaluation, )
-    evaluation_metrics = [stock_price, pe_ratio, profit_margin, profit_growth, revenue_growth, 
-                            total_current_assets_vs_liabilities, total_assets_vs_liabilities, 
-                            shares_outstanding, change_in_shares_outstanding, free_cash_flow,
-                            fcf_cap_evaluation, fcf_price_evaluation]
-    print_evaluations(evaluation_metrics) 
-
+    print("Change in Free Cash Flow: " + fcf_cap_evaluation)
 
 # used to interface with the postions db
 def db_postions_processing():
