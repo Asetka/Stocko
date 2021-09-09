@@ -6,6 +6,7 @@ from balance_sheet import get_balance_sheet
 from income_statement import get_income_statement
 from cash_flow_statement import get_cash_flow_statement
 from stock_price import get_stock_price
+from pillar_evaluations import get_pillar_evaluations
 # import json
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
@@ -20,21 +21,6 @@ def set_api_urls(api_urls, ticker, key):
 ###########################################
 ###########################################
 
-# returns STRING of the companies PE Ratio
-def get_pe(company_overview_dict):
-    pe_ratio = company_overview_dict["pe_ratio"]
-    return pe_ratio
-
-# returns STRING of the profit margin as a percentage
-def get_profit_margin(company_overview_dict):
-    profit_margin = company_overview_dict["profit_margin"]
-    profit_margin = float(profit_margin) * 100.0
-    return str(profit_margin)
-
-# returns STRING of the profit growth over the last 5 years
-def get_profit_growth(income_statement_dict):
-    profit_growth = int(income_statement_dict["gross_profit"][0]) - int(income_statement_dict["gross_profit"][4])
-    return str(profit_growth)
 
 # returns STRING of the revenue growth over the last 5 years
 def get_revenue_growth(income_statement_dict):
@@ -125,6 +111,8 @@ def evaluation_processing(ticker, api_urls):
     stock_price = get_stock_price(ticker, api_urls)
     print("Stock price: " + stock_price)
 
+    pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
+    print(pillars)
     exit()
 
     # set and print pe ratio
