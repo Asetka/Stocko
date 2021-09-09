@@ -7,6 +7,8 @@ from income_statement import get_income_statement
 from cash_flow_statement import get_cash_flow_statement
 from stock_price import get_stock_price
 from pillar_evaluations import get_pillar_evaluations
+from shares import get_shares_outstanding
+
 # import json
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
@@ -20,11 +22,6 @@ def set_api_urls(api_urls, ticker, key):
 
 ###########################################
 ###########################################
-
-# returns STRING of the current shares outstanding
-def get_shares_outstanding(company_overview_dict):
-    shares_outstanding = company_overview_dict["shares_outstanding"]
-    return shares_outstanding
 
 # returns STRING of the 5 year change in shares outstanding
 def get_five_year_share_change(balance_sheet_dict):
@@ -93,7 +90,11 @@ def evaluation_processing(ticker, api_urls):
 
     # set and print stock price
     stock_price = get_stock_price(ticker, api_urls)
-    print("Stock price: " + stock_price)
+    print("Stock Price: " + stock_price)
+
+    # set and print current shares outstanding 
+    shares_outstanding = get_shares_outstanding(company_overview_dict)
+    print("Shares Outstanding: " + shares_outstanding) 
 
     pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
     print(pillars)
