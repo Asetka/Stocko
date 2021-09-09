@@ -125,11 +125,11 @@ def get_pe(company_overview_dict):
     pe_ratio = company_overview_dict["pe_ratio"]
     return pe_ratio
 
-# returns FLOAT of the profit margin as a percentage
+# returns STRING of the profit margin as a percentage
 def get_profit_margin(company_overview_dict):
     profit_margin = company_overview_dict["profit_margin"]
     profit_margin = float(profit_margin) * 100.0
-    return profit_margin
+    return str(profit_margin)
 
 # returns STRING of the profit growth over the last 5 years
 def get_profit_growth(income_statement_dict):
