@@ -9,8 +9,6 @@ from stock_price import get_stock_price
 from pillar_evaluations import get_pillar_evaluations
 from shares import get_shares_outstanding
 
-# import json
-
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
 def set_api_urls(api_urls, ticker, key):
     # api_urls["daily_adjusted_url"] = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + ticker + '&apikey=' + key
@@ -33,21 +31,6 @@ def get_five_year_share_change(balance_sheet_dict):
     print()
     return str(change_in_shares_outstanding)
 
-# returns STRING of the current years free cash flow
-def get_free_cash_flow_growth(cash_flow_dict):
-    now_fcf = int(cash_flow_dict["operating_cash_flow"][0]) - int(cash_flow_dict["capital_expenditures"][0])
-    then_fcf = int(cash_flow_dict["operating_cash_flow"][4]) - int(cash_flow_dict["capital_expenditures"][4])
-    free_cash_flow_growth = now_fcf - then_fcf
-    return str(free_cash_flow_growth)
-
-# returns int for 5 avg fcf 
-def get_avg_fcf(cash_flow_dict):
-    avg_fcf = 0
-    for i in range(5):
-        # print(int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i]))
-        avg_fcf = avg_fcf + int(cash_flow_dict["operating_cash_flow"][i]) - int(cash_flow_dict["capital_expenditures"][i])
-    # print(avg_fcf/5)
-    return avg_fcf/5
 
 # returns STRING of the 5 year change in free cash flow
 def get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe):
@@ -136,28 +119,9 @@ if __name__ == "__main__":
     print()
     db_postions_processing()
 
-
-
     # end
     print("\nBackend Stock Processed ")
 
-# notes 
-# how to interface with multiple interfaces
-    # brady and the front end
+    exit(1)
 
 
-# functionalities 
-
-    # comparing intrinsic value vs the actual value 
-
-    # back testing TBD Method ------
-
-    # stock predictor ------
-
-    # NLP for stock analysts and back testing -------
-
-    # need to check for 5 years of stock history --------
-
-    # get graph information
-
-    # print financials
