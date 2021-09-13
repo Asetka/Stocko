@@ -4,6 +4,7 @@ from pymongo import collection
 CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 DB = CLIENT.test
 USER_COLLECTION = DB.get_collection('dev-users')
+PRICE_COLLECTION = DB.get_collection('dev-prices')
 # db.create_collection('users')
 
 def add_user(username):
@@ -47,10 +48,15 @@ def edit_positions(username, ticker, avg_price, qty):
             return 1
     return 0
 
+def add_ticker(ticker):
+    PRICE_COLLECTION.insert_one({'ticker': ticker, 'price': 0})
+
+def change_price(ticker, price):
+    PRICE_COLLECTION.find_one_and_update({'ticker': ticker}, {'ticker': ticker, 'price': price})
+
+
 def main():
     pass      
-
-
 
 
 if __name__ == '__main__': 
