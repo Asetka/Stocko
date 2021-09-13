@@ -1,0 +1,55 @@
+This document is used to track and document stand ups.
+
+Week 4:
+    (Date):
+        Alex Davis:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Andrew Setka:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Brendan Lucich:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Brady Mack:        
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+    (Date):
+        Alex Davis:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Andrew Setka:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Brendan Lucich:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Brady Mack:        
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+    (Date):
+        Alex Davis:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Andrew Setka:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Brendan Lucich:
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+        Brady Mack:        
+            What I did yesterday:
+            What I will do today:
+            Blockers:
+
