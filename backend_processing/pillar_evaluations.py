@@ -47,6 +47,14 @@ def get_fcf_growth(cash_flow_dict):
 
 def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict):
     pillars = {}
+
+    # STOCKO-74
+    years_of_history = len(balance_sheet_dict["reportedCurrency"])
+    if years_of_history != 5:
+        pillars["years_of_history_error"] = True
+        return pillars
+
+    pillars["years_of_history_error"] = False
     pillars["pe_ratio"] = get_pe(company_overview_dict)
     pillars["profit_margin"] = get_profit_margin(company_overview_dict)
     pillars["profit_growth"] = get_profit_growth(income_statement_dict)
@@ -60,5 +68,5 @@ def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_sta
     desired_price, desired_marketcap = get_fcf_evaluation(cash_flow_dict, company_overview_dict)
     pillars["fcf_desired_price"] = desired_price
     pillars["fcf_desired_marketcap"] = desired_marketcap
-    
+
     return pillars
