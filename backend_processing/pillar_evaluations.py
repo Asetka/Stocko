@@ -57,9 +57,8 @@ def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_sta
     # fcf growth STOCKO-60
     pillars["fcf_growth"] = get_fcf_growth(cash_flow_dict)
     # fcf evaluation STOCKO-61 STOCKO-39
-    desired_price, desired_marketcap = get_fcf_evaluation(cash_flow_dict)
+    desired_price, desired_marketcap = get_fcf_evaluation(cash_flow_dict, company_overview_dict)
     pillars["fcf_desired_price"] = desired_price
     pillars["fcf_desired_marketcap"] = desired_marketcap
-
-
+    
     return pillars

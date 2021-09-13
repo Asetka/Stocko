@@ -81,14 +81,6 @@ def evaluation_processing(ticker, api_urls):
     # set and print change in shares outstanding
     change_in_shares_outstanding = get_five_year_share_change(balance_sheet_dict)
     print("Change in Shares Outstanding: " + change_in_shares_outstanding)
-    # set and print free cash flow growth
-    free_cash_flow = get_free_cash_flow_growth(cash_flow_dict)
-    print("Free Cash Flow Growth: " + free_cash_flow)
-    # set and print change in free cash flow
-    desired_pe = 5
-    market_cap = company_overview_dict["market_capitalization"]
-    fcf_cap_evaluation, fcf_price_evaluation = get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe)
-    print("Change in Free Cash Flow: " + fcf_cap_evaluation)
 
 # used to interface with the postions db
 def db_postions_processing():
