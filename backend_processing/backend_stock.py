@@ -22,36 +22,14 @@ def set_api_urls(api_urls, ticker, key):
 ###########################################
 
 # returns STRING of the 5 year change in shares outstanding
-def get_five_year_share_change(balance_sheet_dict):
-    change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
-    print()
-    print(balance_sheet_dict["shares_outstanding"][0])
-    print(balance_sheet_dict["shares_outstanding"][4])
-    print("CHANGE" + str(change_in_shares_outstanding))
-    print()
-    return str(change_in_shares_outstanding)
-
-
-# returns STRING of the 5 year change in free cash flow
-def get_free_cash_flow_evaluation(cash_flow_dict, free_cash_flow, shares_outstanding, stock_price, market_cap, desired_pe):
-    print("\n\n")
-    # need to get the 5 yr avg fcf
-    avg_fcf = get_avg_fcf(cash_flow_dict)
-    print()
-    # print(avg_fcf)
-    desired_market_cap = avg_fcf * int(desired_pe)
-    print("Desired Market Cap = ", desired_market_cap)
-    desired_share_price = desired_market_cap / int(shares_outstanding)
-    print("Desired Share Price = ", desired_share_price)
-    print()
-    print("Current Market Cap = ", market_cap)
-    # print(int(market_cap)/int(shares_outstanding))
-    print("Current Stock Price = ", stock_price)
-    print()
-    # print("Check FCF/SHARES = ", int(free_cash_flow)/int(shares_outstanding))
-    # print("Stock Price = " + stock_price)
-    # exit()
-    return str(desired_market_cap), str(desired_share_price)
+# def get_five_year_share_change(balance_sheet_dict):
+#     change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
+#     print()
+#     print(balance_sheet_dict["shares_outstanding"][0])
+#     print(balance_sheet_dict["shares_outstanding"][4])
+#     print("CHANGE" + str(change_in_shares_outstanding))
+#     print()
+#     return str(change_in_shares_outstanding)
 
 
 # processing of a ticker request from the front end
@@ -76,15 +54,15 @@ def evaluation_processing(ticker, api_urls):
 
     pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
     print(pillars, end = '\n\n')
-    exit()
+    # exit()
 
     # set and print change in shares outstanding
-    change_in_shares_outstanding = get_five_year_share_change(balance_sheet_dict)
-    print("Change in Shares Outstanding: " + change_in_shares_outstanding)
+    # change_in_shares_outstanding = get_five_year_share_change(balance_sheet_dict)
+    # print("Change in Shares Outstanding: " + change_in_shares_outstanding)
 
 # used to interface with the postions db
 def db_postions_processing():
-    print("To be developed with Brady")
+    print("DB Positions Processing To Be Developed With Brady")
     # print(get_stock_price(ticker))
     # exit()
 
