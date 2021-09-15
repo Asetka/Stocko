@@ -1,5 +1,7 @@
 # pillar evaluations
 
+from fcf_evaluation import get_fcf_evaluation
+
 # returns STRING of the companies PE Ratio
 def get_pe(company_overview_dict):
     pe_ratio = company_overview_dict["pe_ratio"]
@@ -35,18 +37,36 @@ def get_total_assets_vs_liabilities(balance_sheet_dict):
     total_assets_vs_liabilities = int(balance_sheet_dict["totalAssets"][0]) - int(balance_sheet_dict["totalLiabilities"][0])
     return str(total_assets_vs_liabilities)
 
+# returns STRING of the fcf growth as a PERCENTAGE over the last 5 years
+def get_fcf_growth(cash_flow_dict):
+    current_fcf = int(cash_flow_dict["operatingCashflow"][0]) - int(cash_flow_dict["capitalExpenditures"][0])
+    previous_fcf = int(cash_flow_dict["operatingCashflow"][4]) - int(cash_flow_dict["capitalExpenditures"][4])
+    fcf_growth = 100 * (current_fcf - previous_fcf) / previous_fcf
+    return str(fcf_growth)
+
 
 def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict):
     pillars = {}
+
+    # STOCKO-74
+    years_of_history = len(balance_sheet_dict["reportedCurrency"])
+    if years_of_history != 5:
+        pillars["years_of_history_error"] = True
+        return pillars
+
+    pillars["years_of_history_error"] = False
     pillars["pe_ratio"] = get_pe(company_overview_dict)
     pillars["profit_margin"] = get_profit_margin(company_overview_dict)
     pillars["profit_growth"] = get_profit_growth(income_statement_dict)
     pillars["revenue_growth"] = get_revenue_growth(income_statement_dict)
     pillars["current_assets_vs_liabilities"] = get_current_assets_vs_liabilities(balance_sheet_dict)
     pillars["total_assets_vs_liabilities"] = get_total_assets_vs_liabilities(balance_sheet_dict)
-    # change in shares outstanding
-    # fcf growth
-    # fcf evaluation
-
+    # change in shares outstanding STOCKO-58 STOCKO-40
+    # fcf growth STOCKO-60
+    pillars["fcf_growth"] = get_fcf_growth(cash_flow_dict)
+    # fcf evaluation STOCKO-61 STOCKO-39
+    desired_price, desired_marketcap = get_fcf_evaluation(cash_flow_dict, company_overview_dict)
+    pillars["fcf_desired_price"] = desired_price
+    pillars["fcf_desired_marketcap"] = desired_marketcap
 
     return pillars
