@@ -1,7 +1,7 @@
 {
   "name": "stocko-app",
   "version": "0.0.0",
-  "homepage": "https://asetka.github.io/Stocko/Stocko",
+  "homepage": "https://asetka.github.io/Stocko/wiki",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
