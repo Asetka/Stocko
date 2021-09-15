@@ -5,5 +5,5 @@
   </ng-container>
 
   <ng-template #loggedOut>
-    <button (click)="auth.loginWithRedirect({appState: { target: '/Stocko' }})">Log in</button>
+    <button (click)="auth.loginWithRedirect({redirect_uri: 'https://asetka.github.io/Stocko/'})">Log in</button>
   </ng-template>
