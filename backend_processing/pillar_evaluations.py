@@ -44,6 +44,16 @@ def get_fcf_growth(cash_flow_dict):
     fcf_growth = 100 * (current_fcf - previous_fcf) / previous_fcf
     return str(fcf_growth)
 
+# returns STRING of the ev to ebitda ratio 
+def get_ev_ebitda_ratio(company_overview_dict):
+    ev_ebitda_ratio = company_overview_dict["ev_to_ebitda"]
+    return str(ev_ebitda_ratio)
+
+# returns STRING of the price to book ratio 
+def get_price_to_book_ratio(company_overview_dict):
+    price_to_book_ratio = company_overview_dict["price_to_book_ratio"]
+    return str(price_to_book_ratio)
+
 
 def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict):
     pillars = {}
@@ -68,5 +78,8 @@ def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_sta
     desired_price, desired_marketcap = get_fcf_evaluation(cash_flow_dict, company_overview_dict)
     pillars["fcf_desired_price"] = desired_price
     pillars["fcf_desired_marketcap"] = desired_marketcap
+    pillars["ev_ebitda_ratio"] = get_ev_ebitda_ratio(company_overview_dict)
+    pillars["price_to_book_ratio"] = get_price_to_book_ratio(company_overview_dict)
+
 
     return pillars

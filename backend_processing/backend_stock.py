@@ -53,12 +53,9 @@ def evaluation_processing(ticker, api_urls):
     print("Shares Outstanding: " + shares_outstanding, end = '\n\n') 
 
     pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
-    print(pillars, end = '\n\n')
-    # exit()
-
-    # set and print change in shares outstanding
-    # change_in_shares_outstanding = get_five_year_share_change(balance_sheet_dict)
-    # print("Change in Shares Outstanding: " + change_in_shares_outstanding)
+    # print(pillars, end = '\n\n')
+    for pillar in pillars:
+        print(pillar, '\t', pillars[pillar])
 
 # used to interface with the postions db
 def db_postions_processing():
@@ -90,7 +87,7 @@ if __name__ == "__main__":
     db_postions_processing()
 
     # end
-    print("\nBackend Stock Processed ")
+    print("\nBackend Stock Processed\n")
 
     exit(1)
 
