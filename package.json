@@ -1,7 +1,7 @@
 {
   "name": "stocko-app",
   "version": "0.0.0",
-  "homepage": "http://stocko.xyz/",
+  "homepage": "http://stocko.xyz",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
