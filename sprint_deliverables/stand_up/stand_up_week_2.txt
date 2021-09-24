@@ -1,55 +1,55 @@
 This document is used to track and document stand ups.
 
 Week 2:
+    Sept. 21, 2021:
+        Alex Davis:
+            What’s been done: Worked on getting navbars set up.  
+            What will be done: Build routing out for the wiki side.  
+            What’s been hard: 404 on refresh while on the github. 
+        Andrew Setka:
+            What’s been done: Troubleshooting issues with the login button redirecting to the root of the url instead of the /
+            What will be done: Buying a domain to act as workaround for github pages
+            What’s been hard: Understanding the purpose of a redirect url in Auth0 js if it doesn’t actually redirect
+        Brendan Lucich:
+            What’s been done:  Worked with finance graduate students to refine pillar calculations. 
+            What will be done: Prepare backend processin g to be connect to the front end and the database. 
+            What’s been hard:  Issues with the Alpha Advantage Shares Outstanding, this feature will be pushed to Sprint 2
+        Brady Mack:        
+            What’s been done: Worked on code to pull prices ofr active tickers
+            What will be done: Begin documenting signatures for functions in DB wrapper. 
+            What’s been hard: Figuring out what the best way to pass data from my functions is (for ease of use for the other developers)
     Sept. 22, 2021:
         Alex Davis:
-            What I did yesterday: Worked on getting navbars set up.  
-            What I will do today: Build routing out for the wiki side.  
-            Blockers: 404 on refresh while on the github. 
+            What’s been done: Built routing for the wiki side of the project.  
+            What will be done: Filling out content for the wiki.  
+            What’s been hard: None
         Andrew Setka:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What’s been done: Bought a domain to act as custom domain for github pages to act as workaround and to look more official.
+            What will be done: Create an ssl certificate for site so we can have https for it
+            What’s been hard: Nothing too tough about today. Just had to wait a while for ICANN and the site we purchased the domain from to actually launch from our new url.
         Brendan Lucich:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What’s been done: Bootstrapped and tested a mock flask api locally. 
+            What will be done: Work on wiki Documents and Front End Design Sketches. 
+            What’s been hard: One off bugs with various tickers
         Brady Mack:        
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What’s been done: Started to document and standardize function calls and returns for DB wrapper
+            What will be done: Determine what common objects should be made for ease of use with DB code. 
+            What’s been hard: Interviews have been taking all of my time. 
     Sept. 23, 2021:
         Alex Davis:
-            What I did yesterday: Built routing for the wiki side of the project.  
-            What I will do today: Filling out content for the wiki.  
-            Blockers: None
+            What’s been done: Filled out content for the wiki. 
+            What will be done: Finalize the wiki and submit it. 
+            What’s been hard: None
         Andrew Setka:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What’s been done: Created an ssl certificate and enforced https on the site.
+            What will be done: Will work on the login button this weekend and on sending data from that login to our DB to store user specific positions
+            What’s been hard: Having a normal sleep schedule while sick 
         Brendan Lucich:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What’s been done: Ticker Bug fixing and Sketches for front end. 
+            What will be done: Set up Flask API to connect DB and backend processing to the front end.  
+            What’s been hard:
         Brady Mack:        
-            What I did yesterday:
-            What I will do today:
-            Blockers:
-    Sept. 24, 2021:
-        Alex Davis:
-            What I did yesterday: 
-            What I will do today:
-            Blockers: None
-        Andrew Setka:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
-        Brendan Lucich:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
-        Brady Mack:        
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What’s been done: Began structuring common object to use within DB wrapper to represent data. 
+            What will be done: Implement objects that I mapped out for DB wrapper. 
+            What’s been hard: Figuting out a consistent way to create objects that have continuity. 
 
