@@ -1,11 +1,11 @@
 This document is used to track and document stand ups.
 
 Week 2:
-    (Date):
+    Sept. 22, 2021:
         Alex Davis:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What I did yesterday: Worked on getting navbars set up.  
+            What I will do today: Build routing out for the wiki side.  
+            Blockers: 404 on refresh while on the github. 
         Andrew Setka:
             What I did yesterday:
             What I will do today:
@@ -18,11 +18,11 @@ Week 2:
             What I did yesterday:
             What I will do today:
             Blockers:
-    (Date):
+    Sept. 23, 2021:
         Alex Davis:
-            What I did yesterday:
-            What I will do today:
-            Blockers:
+            What I did yesterday: Built routing for the wiki side of the project.  
+            What I will do today: Filling out content for the wiki.  
+            Blockers: None
         Andrew Setka:
             What I did yesterday:
             What I will do today:
@@ -35,11 +35,11 @@ Week 2:
             What I did yesterday:
             What I will do today:
             Blockers:
-    (Date):
+    Sept. 24, 2021:
         Alex Davis:
-            What I did yesterday:
+            What I did yesterday: 
             What I will do today:
-            Blockers:
+            Blockers: None
         Andrew Setka:
             What I did yesterday:
             What I will do today:
