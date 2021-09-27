@@ -1,14 +1,21 @@
 from flask import Flask
 from flask_cors import CORS
 import time
+from backend_processing.backend_stock import my_main
+
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/stock-evaluation')
-def get_stock_evaluation():
-    print("GET")
-    response = {'req': "you want a stock evaluation, req should be from frontend"}
+@app.route('/stock-evaluation/<ticker>')
+def get_stock_evaluation(ticker):
+    print("GET EVALUTAIONS")
+    print(ticker)
+    response = my_main(ticker)
+    # response = {
+    #     'ticker': ticker,
+    #     'req': "you want a stock evaluation, req should be from frontend"
+    # }
     return response
 
 @app.route('/personal-portfolio')

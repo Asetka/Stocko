@@ -1,6 +1,6 @@
 # pillar evaluations
 
-from fcf_evaluation import get_fcf_evaluation
+from .fcf_evaluation import get_fcf_evaluation
 
 # returns STRING of the companies PE Ratio
 def get_pe(company_overview_dict):

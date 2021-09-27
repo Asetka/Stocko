@@ -1,13 +1,14 @@
 # Backend Stock Processing
 
 import requests
-from company_overview import get_company_overview
-from balance_sheet import get_balance_sheet
-from income_statement import get_income_statement
-from cash_flow_statement import get_cash_flow_statement
-from stock_price import get_stock_price
-from pillar_evaluations import get_pillar_evaluations
-from shares import get_shares_outstanding
+import os
+from .company_overview import get_company_overview
+from .balance_sheet import get_balance_sheet
+from .income_statement import get_income_statement
+from .cash_flow_statement import get_cash_flow_statement
+from .stock_price import get_stock_price
+from .pillar_evaluations import get_pillar_evaluations
+from .shares import get_shares_outstanding
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
 def set_api_urls(api_urls, ticker, key):
@@ -59,6 +60,7 @@ def evaluation_processing(ticker, api_urls):
     # print(pillars, end = '\n\n')
     for pillar in pillars:
         print(pillar, '\t', pillars[pillar])
+    return pillars
 
 # used to interface with the postions db
 def db_postions_processing():
@@ -66,24 +68,25 @@ def db_postions_processing():
     # print(get_stock_price(ticker))
     # exit()
 
-if __name__ == "__main__":
+def my_main(ticker):
     # start
     print("\nBackend Stock Processing\n")
 
     # get ticker from user
     # this will need error checking, this will need to be passed from database or from front end ???
-    ticker = input("Please enter a stock ticker: ")
-    ticker = str(ticker)
-    ticker = ticker.upper()
+    # ticker = input("Please enter a stock ticker: ")
+    # ticker = str(ticker)
+    # ticker = ticker.upper()
 
     # set api urls 
     api_urls = {}
-    key = open('./key.txt').read()
+    # print(os.getcwd())
+    key = open(os.getcwd() + '/backend_processing/key.txt').read()
     set_api_urls(api_urls, ticker, key)
     # print(api_urls)
 
     # call evaluations, this would be from angular front end. implemented with flask api
-    evaluation_processing(ticker, api_urls)
+    pillars = evaluation_processing(ticker, api_urls)
 
     # call db process, this would be from the positions db, place holder
     print()
@@ -92,6 +95,35 @@ if __name__ == "__main__":
     # end
     print("\nBackend Stock Processed\n")
 
-    exit(1)
+    return pillars
+
+
+# if __name__ == "__main__":
+#     # start
+#     print("\nBackend Stock Processing\n")
+
+#     # get ticker from user
+#     # this will need error checking, this will need to be passed from database or from front end ???
+#     ticker = input("Please enter a stock ticker: ")
+#     ticker = str(ticker)
+#     ticker = ticker.upper()
+
+#     # set api urls 
+#     api_urls = {}
+#     key = open('./key.txt').read()
+#     set_api_urls(api_urls, ticker, key)
+#     # print(api_urls)
+
+#     # call evaluations, this would be from angular front end. implemented with flask api
+#     evaluation_processing(ticker, api_urls)
+
+#     # call db process, this would be from the positions db, place holder
+#     print()
+#     db_postions_processing()
+
+#     # end
+#     print("\nBackend Stock Processed\n")
+
+#     exit(1)
 
 

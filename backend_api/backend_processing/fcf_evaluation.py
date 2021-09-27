@@ -1,6 +1,6 @@
 # used for fcf share price evaluation
 
-from shares import get_shares_outstanding
+from .shares import get_shares_outstanding
 
 # returns avg fcf for the last 5 years
 def get_avg_fcf(cash_flow_dict):
@@ -18,7 +18,8 @@ def get_fcf_evaluation(cash_flow_dict, company_overview_dict):
     avg_fcf = get_avg_fcf(cash_flow_dict)
     # print(avg_fcf)
 
-    desired_pe = input("What is your PE for this company: ")
+    # desired_pe = input("What is your PE for this company: ")
+    desired_pe = 20
     print()
     # print(desired_pe)
 
