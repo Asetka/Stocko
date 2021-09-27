@@ -16,7 +16,8 @@
     * Once this is done to check that angular was installed run ```ng v```
     * Here is the link to Angular's setup page incase something goes wrong.  https://angular.io/guide/setup-local
 
-
+* Other installations.
+    * Run ```npm install bootstrap```
 ## Running the Angular Application
 * To run the the angular application you will need to clone or download our repository from https://github.com/Asetka/Stocko 
 * Once you have it downloaded to your machine open your terminal and navigate to the directory.  
