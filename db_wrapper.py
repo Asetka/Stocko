@@ -1,4 +1,5 @@
 import pymongo
+import yfinance as yf
 from pymongo import collection
 
 CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -55,9 +56,36 @@ def change_price(ticker, price):
     PRICE_COLLECTION.find_one_and_update({'ticker': ticker}, {'ticker': ticker, 'price': price})
 
 
-def main():
-    pass      
+def gather_active_tickers():
+    all_active_tickers = []
+    all_users = USER_COLLECTION.find({},{'positions': 1})
+    for user in all_users:
+        for pos in user['positions']:
+            if not pos['ticker'] in all_active_tickers:
+                all_active_tickers.append(pos['ticker'])
 
+    print(all_active_tickers)
+    return all_active_tickers
+
+def refine_prices_db(active_tickers):
+    all_prices = PRICE_COLLECTION.find({},{'positions': 1})
+    for price in all_prices:
+        if not price['ticker'] in active_tickers:
+            PRICE_COLLECTION.delete_one({'id': price['id']})
+
+def update_prices(active_tickers):
+    for ticker in active_tickers:
+        PRICE_COLLECTION.find_one_and_update({'ticker': ticker}, {'$set': {'price': yf.Ticker(ticker).info['regularMarketPrice']}})
+
+        #yf.Ticker(ticker).info['regularMarketPrice']
+
+def main():
+    
+    update_prices(gather_active_tickers())
+    # add_user('Brady')     
+    # add_positions('Brady', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
+    # add_user('Brendan')
+    # add_positions('Brendan', [{'ticker': 'F', 'qty': 10, 'avg_price': 256}, {'ticker': 'CRM', 'qty': 20, 'avg_price': 125}])
 
 if __name__ == '__main__': 
     main()
