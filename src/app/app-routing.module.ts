@@ -6,6 +6,12 @@ import { MainComponent } from './stocko-components/main/main.component';
 import { BiosComponent } from './wiki/bios/bios.component';
 import { AboutComponent } from './wiki/about/about.component';
 import { DeliverablesComponent } from './wiki/deliverables/deliverables.component';
+import { StocksComponent } from './stocko-components/stocks/stocks.component';
+import { PositionsComponent } from './stocko-components/positions/positions.component';
+import { EvaluationsComponent } from './stocko-components/evaluations/evaluations.component';
+import { StockForecasterComponent } from './stocko-components/stock-forecaster/stock-forecaster.component';
+import { NlpComponent } from './stocko-components/nlp/nlp.component';
+import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
 
 const routes: Routes = [
   { 
@@ -33,7 +39,33 @@ const routes: Routes = [
   },
   { 
     path: 'app', 
-    component: MainComponent 
+    component: MainComponent,
+    children: [
+      {
+        path: 'stocks',
+        component: StocksComponent,
+      },
+      {
+        path: 'positions',
+        component: PositionsComponent,
+      },
+      {
+        path: 'evaluations',
+        component: EvaluationsComponent,
+      },
+      {
+        path: 'stockForecaster',
+        component: StockForecasterComponent,
+      },
+      {
+        path: 'nlp',
+        component: NlpComponent,
+      },
+      {
+        path: 'backTesting',
+        component: BackTestingComponent,
+      },
+    ]
   },
   {
     path : '**',
