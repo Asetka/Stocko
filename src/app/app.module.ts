@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -15,6 +15,12 @@ import { DeliverablesComponent } from './wiki/deliverables/deliverables.componen
 import { BiosComponent } from './wiki/bios/bios.component';
 import { AboutComponent } from './wiki/about/about.component';
 import { ContactDevsComponent } from './contact-devs/contact-devs.component';
+import { PositionsComponent } from './stocko-components/positions/positions.component';
+import { EvaluationsComponent } from './stocko-components/evaluations/evaluations.component';
+import { StockForecasterComponent } from './stocko-components/stock-forecaster/stock-forecaster.component';
+import { NlpComponent } from './stocko-components/nlp/nlp.component';
+import { StocksComponent } from './stocko-components/stocks/stocks.component';
+import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
 
 
 @NgModule({
@@ -29,9 +35,16 @@ import { ContactDevsComponent } from './contact-devs/contact-devs.component';
     BiosComponent,
     AboutComponent,
     ContactDevsComponent,
+    PositionsComponent,
+    EvaluationsComponent,
+    StockForecasterComponent,
+    NlpComponent,
+    StocksComponent,
+    BackTestingComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     AuthModule.forRoot({
       domain: 'dev-919y6k1x.us.auth0.com',
