@@ -72,6 +72,7 @@ def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_sta
     pillars["current_assets_vs_liabilities"] = get_current_assets_vs_liabilities(balance_sheet_dict)
     pillars["total_assets_vs_liabilities"] = get_total_assets_vs_liabilities(balance_sheet_dict)
     # change in shares outstanding STOCKO-58 STOCKO-40
+    pillars["change_in_shares_ourstanding"] = "WORKING IN PROGRESS"
     # fcf growth STOCKO-60
     pillars["fcf_growth"] = get_fcf_growth(cash_flow_dict)
     # fcf evaluation STOCKO-61 STOCKO-39

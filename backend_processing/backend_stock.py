@@ -43,6 +43,9 @@ def evaluation_processing(ticker, api_urls):
     # print(income_statement_dict)
     cash_flow_dict = get_cash_flow_statement(ticker, api_urls)
     # print(cash_flow_dict)
+    # for item in cash_flow_dict:
+    #     print(item, "\t", cash_flow_dict[item])
+    # exit()
 
     # set and print stock price
     stock_price = get_stock_price(ticker, api_urls)

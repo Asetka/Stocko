@@ -101,4 +101,8 @@ def get_cash_flow_statement(ticker, api_urls):
     cash_flow_dict["changeInExchangeRate"] = changeInExchangeRate
     cash_flow_dict["netIncome"] = netIncome
 
+    # STOCKO-111
+    for i in range(len(cash_flow_dict["capitalExpenditures"])):
+        if cash_flow_dict["capitalExpenditures"][i] == "None":
+            cash_flow_dict["capitalExpenditures"][i] = 0
     return cash_flow_dict
