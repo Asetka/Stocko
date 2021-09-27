@@ -22,6 +22,7 @@
 * To run the the angular application you will need to clone or download our repository from https://github.com/Asetka/Stocko 
 * Once you have it downloaded to your machine open your terminal and navigate to the directory.  
 * Once in the the directory all you have to do is run ```ng serve```
+    * If it does not run on the first try use ```npm update``` 
 * After this if everything workes you should be able to open up your ```localhost:4200``` in your browser,  which is the default listening port for Angular, and you should see the interface.  
 
 
