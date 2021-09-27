@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvaluationsComponent implements OnInit {
 
+  ticker = ''
+  
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSearch(){
+    console.log(this.ticker)
   }
 
 }
