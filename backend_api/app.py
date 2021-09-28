@@ -76,8 +76,7 @@ def create_user(username):
 
 @app.route('/stock-price/<ticker>', methods=['GET'])
 def get_stock_price(ticker):
-    print("GET")
-    response = {'req': "you want a stock price, req should be from backend"}
+    response = {'price': db.get_price(ticker)}
     return response
 
 @app.route('/time')

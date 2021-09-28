@@ -78,13 +78,22 @@ def refine_prices_db(active_tickers):
 
 def update_prices(active_tickers):
     for ticker in active_tickers:
-        PRICE_COLLECTION.find_one_and_update({'ticker': ticker}, {'$set': {'price': yf.Ticker(ticker).info['regularMarketPrice']}})
+        price = yf.Ticker(ticker).info['regularMarketPrice']
+        if not PRICE_COLLECTION.find_one_and_update({'ticker': ticker}, {'$set': {'price': price}}):
+            PRICE_COLLECTION.insert_one({'ticker': ticker, 'price': price})
 
         #yf.Ticker(ticker).info['regularMarketPrice']
 
+def get_price(ticker):
+    return yf.Ticker(ticker).info['regularMarketPrice']
+
 def main():
-    
-    update_prices(gather_active_tickers())
+    add_user('cadavis21')
+    add_user('brendanlucich')
+    add_positions('brendanlucich', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
+    # update_prices(gather_active_tickers())
+    # get_price('TEAM')
+    # update_prices(gather_active_tickers())
     # add_user('Brady')     
     # add_positions('Brady', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
     # add_user('Brendan')
@@ -92,4 +101,3 @@ def main():
 
 if __name__ == '__main__': 
     main()
-
