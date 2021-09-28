@@ -6,7 +6,6 @@
                     Evaluations
                 </h3>
                 <p>{{waitText}}</p>
-
                 <div class="card-body">
                     <div class="">
                         <label class="form-label">Ticker:</label>
@@ -14,21 +13,22 @@
                             <input  [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
                             <button (click)="onSearch()" class="btn btn-primary">Search</button>
                         </div>
-                        <div class="row">
+                        <div class="row" hidden>
+                          <div class="col">
+                              <fieldset>
+                                <label class="form-label " for="readOnlyInput">Ticker:</label>
+                                <input class="form-control" id="readOnlyInput" type="text" placeholder="Awaiting Search" readonly="" data-np-checked="1">
+                              </fieldset>
+                            </div>
                             <div class="col">
-                                <fieldset>
-                                  <label class="form-label " for="readOnlyInput">Ticker:</label>
-                                  <input class="form-control" id="readOnlyInput" type="text" placeholder="Awaiting Search" readonly="" data-np-checked="1">
-                                </fieldset>
-                              </div>
-                              <div class="col">
-                                <fieldset>
-                                  <label class="form-label " for="readOnlyInput">Price:</label>
-                                  <input class="form-control" id="readOnlyInput" type="text" placeholder="Awaiting search" readonly="" data-np-checked="1">
-                                </fieldset>
-                              </div>
-                        </div>
-                        <div class="row mt-3">
+                              <fieldset>
+                                <label class="form-label " for="readOnlyInput">Price:</label>
+                                <input class="form-control" id="readOnlyInput" type="text" placeholder="Awaiting search" readonly="" data-np-checked="1">
+                              </fieldset>
+                            </div>
+                      </div>
+                        <div *ngIf="historyError == false">
+                          <div class="row mt-3">
                             <div class="col">
                                 <div class="card border-primary ">
                                     <div class="card-header">Pillar 1 : PE Ratio</div>
@@ -148,8 +148,15 @@
                                   </div>
                             </div>
                         </div>
+                      
+                      
+                      </div>
+                      <div *ngIf="historyError == true">
+                          <p>Our platoform does not support stocks without 5 years of history. </p>
+                          <p>If you believe this is a mistake please contact a developer. </p>
+                      </div>
                     </div>
                 </div>
-            </div>
+          </div>
     </div>
 </div>

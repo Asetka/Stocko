@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth: AuthService) { }
+
+  name : any | undefined;
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(data => {
+      this.name = data?.nickname
+    })
   }
 
 }

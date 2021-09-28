@@ -22,6 +22,9 @@
                 <a class="nav-link" routerLink="./backTesting">Back Testing</a>
             </li>
         </ul>
+        <form class="d-flex" data-np-checked="1">
+            <button *ngIf="auth.isAuthenticated$" class="btn btn-secondary my-2 my-sm-0" type="submit">{{name}}</button>
+          </form>
         </div>
     </div>
 </nav>

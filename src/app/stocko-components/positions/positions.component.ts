@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-positions',
   templateUrl: './positions.component.html',
@@ -7,13 +11,44 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class PositionsComponent implements OnInit {
 
+  d : any;
+  userName : string | undefined;
+  myArr : Position[] = []
 
-  constructor(public auth: AuthService) { }
+
+  emptyPositions: boolean = false;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  constructor(public auth: AuthService, private http: HttpClient,) { }
+
+  endpoint = 'http://127.0.0.1:5000/personal-portfolio/'
 
   ngOnInit(): void {
     this.auth.user$.subscribe(data => {
-      console.log(data?.nickname)
-      
+      this.getPositions(data?.nickname).subscribe(data => this.d = data)
     })
   }
+
+  getPositions(uid: string | undefined): Observable<any[]> {
+    const base = `http://127.0.0.1:5000/personal-portfolio`
+    const url = `${base}/${uid}`;
+
+    return this.http.get<any[]>(url)
+      .pipe(tap(x => {
+        this.d = x;
+        this.myArr = this.d.response;
+        if(this.myArr.length == 0){
+          this.emptyPositions = true;
+        }
+      }))
+  }
+}
+
+export interface Position {
+  avg_price : number;
+  qty : number;
+  ticker : string;
 }

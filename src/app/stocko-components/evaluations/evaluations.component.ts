@@ -21,7 +21,7 @@ export class EvaluationsComponent implements OnInit {
   freeCashFlowDesiredMarketCap = null;  //  Float
   evEbitdaRatio = null;                 //  Float
   priceToBookRatio = null;              //  Float
-  historyError = false;
+  historyError = null;
 
   waitText = '';
   
@@ -44,7 +44,6 @@ export class EvaluationsComponent implements OnInit {
     this.curTicker = this.ticker;
     this.http.get<any>(this.endpoint+this.ticker)
       .subscribe(data => { 
-        console.log(data)
         this.peRatio = data.pe_ratio;
         this.profitMargin = data.profit_margin;
         this.profitGrowth = data.profit_growth;
