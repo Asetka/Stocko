@@ -67,7 +67,7 @@ def get_personal_portfolio(username):
 
     return ''
 
-@app.route('/user/<username>', methods=['GET'])
+@app.route('/user/<username>', methods=['POST'])
 def create_user(username):
     if db.add_user(username) == 1:
         return 'Added ' + username
@@ -76,7 +76,11 @@ def create_user(username):
 
 @app.route('/stock-price/<ticker>', methods=['GET'])
 def get_stock_price(ticker):
-    response = {'price': db.get_price(ticker)}
+    price = db.get_price(ticker)
+    if not price:
+        return 'Price could not be retrieved'
+    else:
+        response = {'price': price}
     return response
 
 @app.route('/time')
