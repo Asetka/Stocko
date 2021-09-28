@@ -29,7 +29,7 @@ def get_personal_portfolio(username):
         print('GET')
         try:
             user_response = db.get_positions(username)
-            response = {username: user_response}
+            response = {"response" : user_response}
             return response
         except:
             return 'Could not perform GET function\nEnsure the username entered is valid'

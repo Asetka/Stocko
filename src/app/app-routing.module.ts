@@ -12,6 +12,7 @@ import { EvaluationsComponent } from './stocko-components/evaluations/evaluation
 import { StockForecasterComponent } from './stocko-components/stock-forecaster/stock-forecaster.component';
 import { NlpComponent } from './stocko-components/nlp/nlp.component';
 import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   { 
@@ -40,6 +41,7 @@ const routes: Routes = [
   { 
     path: 'app', 
     component: MainComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'stocks',
