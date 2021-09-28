@@ -29,3 +29,5 @@
 # Installing and running the backend
 
 * Will add at a later date. 
+* Backend dependencies - yfinance, pymongo
+* Can be installed using 'pip install yfinance' and 'pip install pymongo'

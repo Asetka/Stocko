@@ -88,9 +88,10 @@ def get_price(ticker):
     return yf.Ticker(ticker).info['regularMarketPrice']
 
 def main():
-    add_user('cadavis21')
-    add_user('brendanlucich')
-    add_positions('brendanlucich', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
+    pass
+    # add_user('cadavis21')
+    # add_user('brendanlucich')
+    # add_positions('brendanlucich', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
     # update_prices(gather_active_tickers())
     # get_price('TEAM')
     # update_prices(gather_active_tickers())

@@ -67,7 +67,7 @@ def get_personal_portfolio(username):
 
     return ''
 
-@app.route('/user/<username>', methods=['GET'])
+@app.route('/user/<username>', methods=['POST'])
 def create_user(username):
     if db.add_user(username) == 1:
         return 'Added ' + username
