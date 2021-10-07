@@ -16,14 +16,14 @@ CORS(app)
 def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
-    response = my_main(ticker)
+    response = my_main(ticker, "PILLARS")
     return response
 
 @app.route('/stock-page/<ticker>')
 def get_stock_page(ticker):
     print("GET STOCK PAGE")
     print(ticker)
-    response = stock_page()
+    response = my_main(ticker, "STOCK PAGE")
     return response
 
 @app.route('/personal-portfolio/<username>', methods=['GET', 'PUT', 'DELETE', 'POST'])
