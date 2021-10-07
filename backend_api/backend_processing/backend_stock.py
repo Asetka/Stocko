@@ -91,8 +91,6 @@ def create_stock_page(ticker, api_urls):
 
     return stock_page_dict
 
-
-
 def my_main(ticker, process):
     # start
     print("\nBackend Stock Processing\n")
@@ -122,33 +120,5 @@ def my_main(ticker, process):
     
     return
 
-
-# if __name__ == "__main__":
-#     # start
-#     print("\nBackend Stock Processing\n")
-
-#     # get ticker from user
-#     # this will need error checking, this will need to be passed from database or from front end ???
-#     ticker = input("Please enter a stock ticker: ")
-#     ticker = str(ticker)
-#     ticker = ticker.upper()
-
-#     # set api urls 
-#     api_urls = {}
-#     key = open('./key.txt').read()
-#     set_api_urls(api_urls, ticker, key)
-#     # print(api_urls)
-
-#     # call evaluations, this would be from angular front end. implemented with flask api
-#     evaluation_processing(ticker, api_urls)
-
-#     # call db process, this would be from the positions db, place holder
-#     print()
-#     db_postions_processing()
-
-#     # end
-#     print("\nBackend Stock Processed\n")
-
-#     exit(1)
 
 
