@@ -28,7 +28,7 @@ def get_revenue_growth(income_statement_dict):
     return str(revenue_growth)
 
 # returns STRING of current assets vs liabilities
-def get_current_assets_vs_liabilities(balance_sheet_dict):
+def get_current_assets_vs_liabilities(balance_sheet_dict):   
     total_current_assets_vs_liabilities = int(balance_sheet_dict["totalCurrentAssets"][0]) - int(balance_sheet_dict["totalCurrentLiabilities"][0])
     return str(total_current_assets_vs_liabilities)
 

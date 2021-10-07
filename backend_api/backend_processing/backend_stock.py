@@ -62,12 +62,6 @@ def evaluation_processing(ticker, api_urls):
         print(pillar, '\t', pillars[pillar])
     return pillars
 
-# used to interface with the postions db
-def db_postions_processing():
-    print("DB Positions Processing To Be Developed With Brady")
-    # print(get_stock_price(ticker))
-    # exit()
-
 def my_main(ticker):
     # start
     print("\nBackend Stock Processing\n")
@@ -87,10 +81,6 @@ def my_main(ticker):
 
     # call evaluations, this would be from angular front end. implemented with flask api
     pillars = evaluation_processing(ticker, api_urls)
-
-    # call db process, this would be from the positions db, place holder
-    print()
-    db_postions_processing()
 
     # end
     print("\nBackend Stock Processed\n")
