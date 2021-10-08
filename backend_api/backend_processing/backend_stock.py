@@ -9,6 +9,7 @@ from .cash_flow_statement import get_cash_flow_statement
 from .stock_price import get_stock_price
 from .pillar_evaluations import get_pillar_evaluations
 from .shares import get_shares_outstanding
+from .shares import get_share_change
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
 def set_api_urls_pillars(api_urls, ticker, key):
@@ -31,17 +32,6 @@ def set_api_urls_stockpage(api_urls, ticker, key):
 ###########################################
 ###########################################
 
-# returns STRING of the 5 year change in shares outstanding
-# def get_five_year_share_change(balance_sheet_dict):
-#     change_in_shares_outstanding = int(balance_sheet_dict["shares_outstanding"][0]) - int(balance_sheet_dict["shares_outstanding"][4])
-#     print()
-#     print(balance_sheet_dict["shares_outstanding"][0])
-#     print(balance_sheet_dict["shares_outstanding"][4])
-#     print("CHANGE" + str(change_in_shares_outstanding))
-#     print()
-#     return str(change_in_shares_outstanding)
-
-
 # processing of a ticker request from the front end for pillar evaluations
 def evaluation_processing(ticker, api_urls):
     # make the necessary data dictionaries to make a stock recommendation
@@ -53,6 +43,9 @@ def evaluation_processing(ticker, api_urls):
     # print(income_statement_dict)
     cash_flow_dict = get_cash_flow_statement(ticker, api_urls)
     # print(cash_flow_dict)
+
+    get_share_change(balance_sheet_dict, company_overview_dict)
+    exit()
 
     # set and print stock price
     stock_price = get_stock_price(ticker, api_urls)
