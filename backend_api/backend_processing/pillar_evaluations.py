@@ -1,6 +1,7 @@
 # pillar evaluations
 
 from .fcf_evaluation import get_fcf_evaluation
+from .shares import get_share_change
 
 # returns STRING of the companies PE Ratio
 def get_pe(company_overview_dict):
@@ -71,11 +72,8 @@ def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_sta
     pillars["revenue_growth"] = get_revenue_growth(income_statement_dict)
     pillars["current_assets_vs_liabilities"] = get_current_assets_vs_liabilities(balance_sheet_dict)
     pillars["total_assets_vs_liabilities"] = get_total_assets_vs_liabilities(balance_sheet_dict)
-    # change in shares outstanding STOCKO-58 STOCKO-40
-    pillars["change_in_shares_ourstanding"] = "WORKING IN PROGRESS"
-    # fcf growth STOCKO-60
+    pillars["change_in_shares_ourstanding"] = get_share_change(balance_sheet_dict, company_overview_dict)
     pillars["fcf_growth"] = get_fcf_growth(cash_flow_dict)
-    # fcf evaluation STOCKO-61 STOCKO-39
     desired_price, desired_marketcap = get_fcf_evaluation(cash_flow_dict, company_overview_dict)
     pillars["fcf_desired_price"] = desired_price
     pillars["fcf_desired_marketcap"] = desired_marketcap
