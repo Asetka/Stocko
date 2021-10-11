@@ -2,7 +2,7 @@ import pymongo
 import yfinance as yf
 from pymongo import collection
 
-CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/StockoPositions?retryWrites=true&w=majority")
 DB = CLIENT.test
 USER_COLLECTION = DB.get_collection('dev-users')
 PRICE_COLLECTION = DB.get_collection('dev-prices')
@@ -88,6 +88,7 @@ def get_price(ticker):
     return yf.Ticker(ticker).info['regularMarketPrice']
 
 def main():
+    print(get_positions('brendanlucich'))
     pass
     # add_user('cadavis21')
     # add_user('brendanlucich')
