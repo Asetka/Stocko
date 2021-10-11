@@ -44,9 +44,6 @@ def evaluation_processing(ticker, api_urls):
     cash_flow_dict = get_cash_flow_statement(ticker, api_urls)
     # print(cash_flow_dict)
 
-    get_share_change(balance_sheet_dict, company_overview_dict)
-    exit()
-
     # set and print stock price
     stock_price = get_stock_price(ticker, api_urls)
     print("Stock Price: " + stock_price, end = '\n\n')
