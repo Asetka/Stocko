@@ -1,12 +1,12 @@
-from backend_processing.db_wrapper import edit_positions
+from backend_api.backend_processing.db_wrapper import edit_positions
 from flask import Flask
 from flask.wrappers import Request
 from werkzeug.wrappers import request
 from flask import request as rq
 from flask_cors import CORS
 import time
-from backend_processing.backend_stock import my_main
-import backend_processing.db_wrapper as db
+from backend_api.backend_processing.backend_stock import my_main
+import backend_api.backend_processing.db_wrapper as db
 
 
 app = Flask(__name__)
