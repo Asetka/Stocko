@@ -27,7 +27,7 @@ export class EvaluationsComponent implements OnInit {
   
   ticker = ''
   curTicker = "Awaiting search";
-  endpoint = 'http://127.0.0.1:5000/stock-evaluation/'
+  endpoint = 'https://stocko-flask-api-dev.herokuapp.com/stock-evaluation/'
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

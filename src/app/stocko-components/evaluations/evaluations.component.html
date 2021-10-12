@@ -10,7 +10,7 @@
                     <div class="">
                         <label class="form-label">Ticker:</label>
                         <div class="input-group ">
-                            <input  [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
+                            <input  (keydown.enter)="onSearch()" [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
                             <button (click)="onSearch()" class="btn btn-primary">Search</button>
                         </div>
                         <div class="row" hidden>
@@ -152,7 +152,7 @@
                       
                       </div>
                       <div *ngIf="historyError == true">
-                          <p>Our platoform does not support stocks without 5 years of history. </p>
+                          <p>Our platform does not support stocks without 5 years of history. </p>
                           <p>If you believe this is a mistake please contact a developer. </p>
                       </div>
                     </div>
