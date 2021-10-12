@@ -16,12 +16,14 @@ CORS(app)
 def index():
     return '<h1>Home<h1>'
 
+@app.route('/stock-evaluation/<ticker>')
 def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
     response = my_main(ticker, "PILLARS")
     return response
 
+@app.route('/stock-page/<ticker>')
 def get_stock_page(ticker):	
     print("GET STOCK PAGE")		
     print(ticker)		
