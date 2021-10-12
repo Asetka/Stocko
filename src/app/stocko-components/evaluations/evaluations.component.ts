@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-evaluations',
   templateUrl: './evaluations.component.html',
   styleUrls: ['./evaluations.component.sass']
 })
+
 export class EvaluationsComponent implements OnInit {
+
+  good = "bg-success";
+  medium = "bg-warning";
+  bad = "bg-danger";
+  error = "bg-info";
+
+
 
   peRatio = null;                       //  Float
   profitMargin = null;                  //  Percent
@@ -32,11 +39,10 @@ export class EvaluationsComponent implements OnInit {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  json: any;
-
   constructor(
     private http: HttpClient,
   ) { }
+
   ngOnInit(): void {
   }
 
