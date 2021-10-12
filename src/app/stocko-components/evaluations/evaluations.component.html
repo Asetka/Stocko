@@ -10,7 +10,7 @@
                     <div class="">
                         <label class="form-label">Ticker:</label>
                         <div class="input-group ">
-                            <input  [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
+                            <input  (keyup.enter)="onSearch()" [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
                             <button (click)="onSearch()" class="btn btn-primary">Search</button>
                         </div>
                         <div class="row" hidden>
@@ -30,8 +30,9 @@
                         <div *ngIf="historyError == false">
                           <div class="row mt-3">
                             <div class="col">
-                                <div class="card border-primary ">
-                                    <div class="card-header">Pillar 1 : PE Ratio</div>
+                                <div 
+                                  class="card border-primary ">
+                                    <div class="card-header" style="background-color: green;">Pillar 1 : PE Ratio</div>
                                     <div class="card-body">
                                       <h4 class="card-title">{{peRatio}}</h4>
                                       <p class="card-text">Looking for a PE less than 20</p>
