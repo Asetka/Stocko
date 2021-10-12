@@ -1,0 +1,43 @@
+<div class="container" style="padding-top: 2rem;">
+    <div class="">
+        <div class="">
+            <div *ngIf="auth.user$ | async as user" class="card mb-3">
+                <h3 class="card-header">
+                  Positions : other values coming in sprint 2
+                </h3>
+                <p *ngIf = "emptyPositions" style="padding-left: 2rem;"> You have no current positions.</p>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                <th scope="col">Ticker</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Average Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let arr of myArr">
+                                    <th scope="col">{{arr.ticker}}</th>
+                                    <th scope="col">{{arr.qty}}</th>
+                                    <th scope="col">{{arr.avg_price}}</th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <button type="button" class="btn btn-dark"disabled>Add</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-dark"disabled>Edit</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" class="btn btn-dark"disabled>Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
