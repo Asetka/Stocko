@@ -1,16 +1,20 @@
-from backend_processing.db_wrapper import edit_positions
+from backend_api.backend_processing.db_wrapper import edit_positions
 from flask import Flask
 from flask.wrappers import Request
 from werkzeug.wrappers import request
 from flask import request as rq
 from flask_cors import CORS
 import time
-from backend_processing.backend_stock import my_main
-import backend_processing.db_wrapper as db
+from backend_api.backend_processing.backend_stock import my_main
+import backend_api.backend_processing.db_wrapper as db
 
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/')
+def index():
+    return '<h1>Home<h1>'
 
 @app.route('/stock-evaluation/<ticker>')
 def get_stock_evaluation(ticker):
@@ -20,9 +24,9 @@ def get_stock_evaluation(ticker):
     return response
 
 @app.route('/stock-page/<ticker>')
-def get_stock_page(ticker):
-    print("GET STOCK PAGE")
-    print(ticker)
+def get_stock_page(ticker):	
+    print("GET STOCK PAGE")		
+    print(ticker)		
     response = my_main(ticker, "STOCK PAGE")
     return response
 
@@ -86,4 +90,9 @@ def get_stock_price(ticker):
         response = {'price': price}
     return response
 
+@app.route('/time')
+def get_time():
+    print("GET")
+    response = {'time': time.time()}
+    return response
 
