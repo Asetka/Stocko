@@ -91,3 +91,6 @@ def get_time():
     print("GET")
     response = {'time': time.time()}
     return response
+
+
+app.run(port=5000)
