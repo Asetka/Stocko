@@ -19,12 +19,13 @@ def index():
 def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
-    response = my_main(ticker)
-    # response = {
-    #     'ticker': ticker,
-    #     'req': "you want a stock evaluation, req should be from frontend"
-    # }
+    response = my_main(ticker, "PILLARS")
     return response
+
+def get_stock_page(ticker):	
+    print("GET STOCK PAGE")		
+    print(ticker)		
+    response = my_main(ticker, "STOCK PAGE")
 
 @app.route('/personal-portfolio/<username>', methods=['GET', 'PUT', 'DELETE', 'POST'])
 def get_personal_portfolio(username):
@@ -91,3 +92,4 @@ def get_time():
     print("GET")
     response = {'time': time.time()}
     return response
+
