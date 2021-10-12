@@ -22,6 +22,10 @@ def get_stock_evaluation(ticker):
     # }
     return response
 
+@app.route('/')
+def home():
+    return 'Home'
+
 @app.route('/personal-portfolio/<username>', methods=['GET', 'PUT', 'DELETE', 'POST'])
 def get_personal_portfolio(username):
     if rq.method == 'GET':
