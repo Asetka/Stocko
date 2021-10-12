@@ -53,6 +53,7 @@ def evaluation_processing(ticker, api_urls):
     print("Shares Outstanding: " + shares_outstanding, end = '\n\n') 
 
     pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
+    pillars["stock_price"] = stock_price
     # print(pillars, end = '\n\n')
     for pillar in pillars:
         print(pillar, '\t', pillars[pillar])
