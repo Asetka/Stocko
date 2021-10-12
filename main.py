@@ -12,6 +12,10 @@ import backend_api.backend_processing.db_wrapper as db
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def index():
+    return '<h1>Home<h1>'
+
 def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
@@ -21,10 +25,6 @@ def get_stock_evaluation(ticker):
     #     'req': "you want a stock evaluation, req should be from frontend"
     # }
     return response
-
-@app.route('/')
-def home():
-    return 'Home'
 
 @app.route('/personal-portfolio/<username>', methods=['GET', 'PUT', 'DELETE', 'POST'])
 def get_personal_portfolio(username):
