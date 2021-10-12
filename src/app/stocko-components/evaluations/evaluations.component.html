@@ -10,7 +10,7 @@
                     <div class="">
                         <label class="form-label">Ticker:</label>
                         <div class="input-group ">
-                            <input  [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
+                            <input  (keydown.enter)="onSearch()" [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
                             <button (click)="onSearch()" class="btn btn-primary">Search</button>
                         </div>
                         <div class="row" hidden>
