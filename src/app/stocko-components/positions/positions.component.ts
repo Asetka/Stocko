@@ -23,9 +23,6 @@ export class PositionsComponent implements OnInit {
   };
 
   constructor(public auth: AuthService, private http: HttpClient,) { }
-
-  endpoint = 'http://127.0.0.1:5000/personal-portfolio/'
-
   ngOnInit(): void {
     this.auth.user$.subscribe(data => {
       this.getPositions(data?.nickname).subscribe(data => this.d = data)
@@ -33,7 +30,7 @@ export class PositionsComponent implements OnInit {
   }
 
   getPositions(uid: string | undefined): Observable<any[]> {
-    const base = `http://127.0.0.1:5000/personal-portfolio`
+    const base = `https://stocko-flask-api-dev.herokuapp.com/personal-portfolio`
     const url = `${base}/${uid}`;
 
     return this.http.get<any[]>(url)

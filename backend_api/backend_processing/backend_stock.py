@@ -53,6 +53,7 @@ def evaluation_processing(ticker, api_urls):
     print("Shares Outstanding: " + shares_outstanding, end = '\n\n') 
 
     pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
+    pillars["stock_price"] = stock_price
     # print(pillars, end = '\n\n')
     for pillar in pillars:
         print(pillar, '\t', pillars[pillar])
@@ -88,7 +89,7 @@ def my_main(ticker, process):
     if (process == "PILLARS"):
         # set api urls 
         api_urls = {}
-        key = open(os.getcwd() + '/backend_processing/key.txt').read()
+        key = open(os.getcwd() + '/backend_api/backend_processing/key.txt').read()
         set_api_urls_pillars(api_urls, ticker, key)
         # call evaluations, this would be from angular front end. implemented with flask api
         pillars = evaluation_processing(ticker, api_urls)
@@ -100,7 +101,7 @@ def my_main(ticker, process):
     if (process == "STOCK PAGE"):
         # set api urls
         api_urls = {}
-        key = open(os.getcwd() + '/backend_processing/key.txt').read()
+        key = open(os.getcwd() + '/backend_api/backend_processing/key.txt').read()
         set_api_urls_stockpage(api_urls, ticker, key)
         # create data dictionary for the stock page
         stock_page = create_stock_page(ticker, api_urls)
