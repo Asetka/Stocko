@@ -54,6 +54,7 @@ def evaluation_processing(ticker, api_urls):
 
     pillars = get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
     pillars["stock_price"] = stock_price
+    pillars["market_cap"] = company_overview_dict["market_cap"]
     # print(pillars, end = '\n\n')
     for pillar in pillars:
         print(pillar, '\t', pillars[pillar])
