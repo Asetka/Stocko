@@ -2,10 +2,7 @@
     <div class="row justify-content-center">
         <div class="col">
             <div class="card ">
-                <h3 class="card-header">
-                    Evaluations
-                </h3>
-                <p>{{waitText}}</p>
+                <h3 class="card-header">Evaluations</h3>
                 <div class="card-body">
                     <div class="">
                         <label class="form-label">Ticker:</label>
@@ -148,10 +145,8 @@
                                   </div>
                             </div>
                         </div>
-                      
-                      
                       </div>
-                      <div *ngIf="historyError == true">
+                      <div class="mt-3" *ngIf="historyError == true">
                           <p>Our platform does not support stocks without 5 years of history. </p>
                           <p>If you believe this is a mistake please contact a developer. </p>
                       </div>
