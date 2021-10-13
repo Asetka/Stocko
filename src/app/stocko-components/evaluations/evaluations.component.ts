@@ -14,20 +14,33 @@ export class EvaluationsComponent implements OnInit {
   bad = "bg-danger";
   error = "bg-info";
 
+  peRatio = null;                       
+  profitMargin = null;                  
+  profitGrowth = null;                  
+  revenueGrowth = null;                 
+  currentAssetsVsLiabilities = null;    
+  totalAssetsVsLiabilities= null;       
+  changeInSharesOutstanding= null;      
+  freeCashFlowGrowth= null;             
+  freeCashFlowDesiredSharePrice= null;  
+  freeCashFlowDesiredMarketCap = null;  
+  evEbitdaRatio = null;                 
+  priceToBookRatio = null;   
+  stockPrice = null; 
 
+  peRatioS = "";                       
+  profitMarginS = "";                  
+  profitGrowthS = "";                  
+  revenueGrowthS = "";                 
+  currentAssetsVsLiabilitiesS = "";    
+  totalAssetsVsLiabilitiesS= "";       
+  changeInSharesOutstandingS= "";      
+  freeCashFlowGrowthS= "";             
+  freeCashFlowDesiredSharePriceS= "";  
+  freeCashFlowDesiredMarketCapS = "";  
+  evEbitdaRatioS = "";                 
+  priceToBookRatioS = "";    
 
-  peRatio = null;                       //  Float
-  profitMargin = null;                  //  Percent
-  profitGrowth = null;                  //  Percent
-  revenueGrowth = null;                 //  Percent
-  currentAssetsVsLiabilities = null;    //  INt
-  totalAssetsVsLiabilities= null;       //  Int
-  changeInSharesOutstanding= null;      //  Percent
-  freeCashFlowGrowth= null;             //  Percent
-  freeCashFlowDesiredSharePrice= null;  //  Float
-  freeCashFlowDesiredMarketCap = null;  //  Float
-  evEbitdaRatio = null;                 //  Float
-  priceToBookRatio = null;              //  Float
   historyError = null;
 
   waitText = '';
@@ -50,19 +63,80 @@ export class EvaluationsComponent implements OnInit {
     this.curTicker = this.ticker;
     this.http.get<any>(this.endpoint+this.ticker)
       .subscribe(data => { 
-        this.peRatio = data.pe_ratio;
-        this.profitMargin = data.profit_margin;
-        this.profitGrowth = data.profit_growth;
-        this.revenueGrowth = data.revenue_growth;
-        this.currentAssetsVsLiabilities = data.current_assets_vs_liabilities;
-        this.totalAssetsVsLiabilities = data.total_assets_vs_liabilities;
-        this.changeInSharesOutstanding = data.change_in_shares_ourstanding;
-        this.freeCashFlowGrowth = data.fcf_growth;
-        this.freeCashFlowDesiredSharePrice = data.fcf_desired_price;
-        this.freeCashFlowDesiredMarketCap = data.fcf_desired_marketcap;
-        this.evEbitdaRatio = data.ev_ebitda_ratio;
-        this.priceToBookRatio = data.price_to_book_ratio;
+        console.log(data)
+        this.stockPrice = data.stock_price;
         this.historyError = data.years_of_history_error;
+
+        this.peRatio = data.pe_ratio;
+        this.peRatioS = this.checkOneReverse(data.pe_ratio, 20)
+
+        this.profitMargin = data.profit_margin;
+        this.profitMarginS = this.checkOne(data.profit_margin, 10)
+
+        this.profitGrowth = data.profit_growth;
+        this.profitGrowthS = this.checkOne(data.profit_growth, 0)
+
+        this.revenueGrowth = data.revenue_growth;
+        this.revenueGrowthS = this.checkOne(data.revenue_growth, 0)
+
+        this.currentAssetsVsLiabilities = data.current_assets_vs_liabilities;
+        this.currentAssetsVsLiabilitiesS = this.checkOne(data.current_assets_vs_liabilities, 0)
+
+        this.totalAssetsVsLiabilities = data.total_assets_vs_liabilities;
+        this.totalAssetsVsLiabilitiesS = this.checkOne(data.total_assets_vs_liabilities, 0)
+
+        this.changeInSharesOutstanding = data.change_in_shares_ourstanding;
+        this.changeInSharesOutstandingS = this.checkOne(data.change_in_shares_ourstanding, 0)
+
+        this.freeCashFlowGrowth = data.fcf_growth;
+        this.freeCashFlowGrowthS = this.checkOne(data.fcf_growth, 0)
+
+        this.freeCashFlowDesiredSharePrice = data.fcf_desired_price;
+        this.freeCashFlowDesiredSharePriceS = this.checkOne(data.fcf_desired_price, data.stock_price)
+
+        this.freeCashFlowDesiredMarketCap = data.fcf_desired_marketcap;
+        this.freeCashFlowDesiredMarketCapS = this.checkOne(data.fcf_desired_marketcap, 20)
+
+        this.evEbitdaRatio = data.ev_ebitda_ratio;
+        this.evEbitdaRatioS = this.checkOneReverse(data.ev_ebitda_ratio, 10)
+
+        this.priceToBookRatio = data.price_to_book_ratio;
+        this.priceToBookRatioS = this.checkOne(data.price_to_book_ratio, 20)
+
+
       })
   }
+
+
+
+  checkProfitMargin(v: number, check: number){
+    if(v >= check)
+      return this.good;
+    else if(v < check)
+      return this.bad;
+    else
+      return this.error;
+  }
+  checkOne(v: number, check: number){
+    if(v == check)
+      return this.medium;
+    else if(v > check)
+      return this.good;
+    else if(v < check)
+      return this.bad;
+    else
+      return this.error;
+  }
+
+  checkOneReverse(v: number, check: number){
+    if(v == check)
+      return this.medium;
+    else if(v < check)
+      return this.good;
+    else if(v > check)
+      return this.bad;
+    else
+      return this.error;
+  }
+  
 }
