@@ -11,21 +11,24 @@ def get_pe(company_overview_dict):
 # returns STRING of the profit margin
 def get_profit_margin(company_overview_dict):
     profit_margin = company_overview_dict["profit_margin"]
-    profit_margin = float(profit_margin) * 100.0
+    profit_margin = float(profit_margin)
+    profit_margin = "{:.2%}".format(profit_margin)
     return str(profit_margin)
 
 # returns STRING of the profit growth as a PERCENTAGE over the last 5 years
 def get_profit_growth(income_statement_dict):
     current_profit = int(income_statement_dict["grossProfit"][0])
     previous_profit = int(income_statement_dict["grossProfit"][4])
-    profit_growth = 100 * (current_profit - previous_profit) / previous_profit
+    profit_growth = (current_profit - previous_profit) / previous_profit
+    profit_growth = "{:.2%}".format(profit_growth)
     return str(profit_growth)
 
 # returns STRING of the revenue growth as a PERCENTAGE over the last 5 years
 def get_revenue_growth(income_statement_dict):
     current_revenue = int(income_statement_dict["totalRevenue"][0])
     previous_revenue = int(income_statement_dict["totalRevenue"][4])
-    revenue_growth = 100 * (current_revenue - previous_revenue) / previous_revenue
+    revenue_growth = (current_revenue - previous_revenue) / previous_revenue
+    revenue_growth = "{:.2%}".format(revenue_growth)
     return str(revenue_growth)
 
 # returns STRING of current assets vs liabilities
@@ -42,7 +45,8 @@ def get_total_assets_vs_liabilities(balance_sheet_dict):
 def get_fcf_growth(cash_flow_dict):
     current_fcf = int(cash_flow_dict["operatingCashflow"][0]) - int(cash_flow_dict["capitalExpenditures"][0])
     previous_fcf = int(cash_flow_dict["operatingCashflow"][4]) - int(cash_flow_dict["capitalExpenditures"][4])
-    fcf_growth = 100 * (current_fcf - previous_fcf) / previous_fcf
+    fcf_growth = (current_fcf - previous_fcf) / previous_fcf
+    fcf_growth = "{:.2%}".format(fcf_growth)
     return str(fcf_growth)
 
 # returns STRING of the ev to ebitda ratio 
