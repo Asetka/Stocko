@@ -30,6 +30,14 @@ def get_stock_page(ticker):
     response = my_main(ticker, "STOCK PAGE")
     return response
 
+@app.route('/forecast-page/<ticker>')
+def get_forecast_page(ticker):	
+    print("GET FORECAST PAGE")		
+    print(ticker)		
+    response = my_main(ticker, "FORECAST PAGE")
+    return response
+
+
 @app.route('/personal-portfolio/<username>', methods=['GET', 'PUT', 'DELETE', 'POST'])
 def get_personal_portfolio(username):
     if rq.method == 'GET':
