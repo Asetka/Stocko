@@ -9,7 +9,7 @@ from .cash_flow_statement import get_cash_flow_statement
 from .stock_price import get_stock_price
 from .pillar_evaluations import get_pillar_evaluations
 from .shares import get_shares_outstanding
-from .shares import get_share_change
+from .forecast_page import get_forecast_table
 
 # returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
 def set_api_urls_pillars(api_urls, ticker, key):
@@ -43,13 +43,9 @@ def set_api_urls_forecastpage(api_urls, ticker, key):
 def evaluation_processing(ticker, api_urls):
     # make the necessary data dictionaries to make a stock recommendation
     company_overview_dict = get_company_overview(ticker, api_urls)
-    # print(company_overview_dict)
     balance_sheet_dict = get_balance_sheet(ticker, api_urls)
-    # print(balance_sheet_dict)
     income_statement_dict = get_income_statement(ticker, api_urls)
-    # print(income_statement_dict)
     cash_flow_dict = get_cash_flow_statement(ticker, api_urls)
-    # print(cash_flow_dict)
 
     # set and print stock price
     stock_price = get_stock_price(ticker, api_urls)
@@ -101,7 +97,12 @@ def create_forecast_page(ticker, api_urls):
     # get stock price
     stock_price = get_stock_price(ticker, api_urls)
 
-    
+    forecast_page_dict = get_forecast_table(ticker, company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
+    forecast_page_dict["stock_price"] = stock_price
+    return forecast_page_dict
+
+###########################################
+###########################################
 
 def my_main(ticker, process):
     # start
