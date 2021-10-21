@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
 
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
@@ -48,6 +49,7 @@ import { BackTestingComponent } from './stocko-components/back-testing/back-test
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     AuthModule.forRoot({
       domain: 'dev-919y6k1x.us.auth0.com',
       clientId: 'XcZirvnmcn3RDRti4CnGvaUmlELKeXHl'
