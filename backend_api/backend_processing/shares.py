@@ -51,4 +51,5 @@ def get_share_change(balance_sheet_dict, company_overview_dict):
     # current_shares = int(balance_sheet_dict["commonStockSharesOutstanding"][0]) / 1000000000
     # five_years_ago_shares = (factor * int(balance_sheet_dict["commonStockSharesOutstanding"][4])) / 1000000000
     change_in_shares_outstanding = 100 * (current_shares - five_years_ago_shares) / five_years_ago_shares
+    change_in_shares_outstanding = "{:.2f}".format(change_in_shares_outstanding)
     return str(change_in_shares_outstanding)
