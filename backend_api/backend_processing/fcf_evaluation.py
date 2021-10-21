@@ -25,6 +25,7 @@ def get_fcf_evaluation(cash_flow_dict, company_overview_dict):
 
     shares_outstanding = get_shares_outstanding(company_overview_dict)
     desired_marketcap = avg_fcf * int(desired_pe)
+    desired_marketcap = "{:,.0f}".format(desired_marketcap)
     desired_price = int(desired_marketcap) / int(shares_outstanding)
-
+    desired_price = "{:,.2f}".format(desired_price)
     return str(desired_price), str(desired_marketcap)
