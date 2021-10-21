@@ -34,13 +34,13 @@ def get_revenue_growth(income_statement_dict):
 # returns STRING of current assets vs liabilities
 def get_current_assets_vs_liabilities(balance_sheet_dict):   
     total_current_assets_vs_liabilities = int(balance_sheet_dict["totalCurrentAssets"][0]) - int(balance_sheet_dict["totalCurrentLiabilities"][0])
-    total_current_assets_vs_liabilities = "{:,.0f}".format(total_current_assets_vs_liabilities)
+    total_current_assets_vs_liabilities = "{:.0f}".format(total_current_assets_vs_liabilities)
     return str(total_current_assets_vs_liabilities)
 
 # returns STRING of total assets vs liabilities
 def get_total_assets_vs_liabilities(balance_sheet_dict):
     total_assets_vs_liabilities = int(balance_sheet_dict["totalAssets"][0]) - int(balance_sheet_dict["totalLiabilities"][0])
-    total_assets_vs_liabilities = "{:,.0f}".format(total_assets_vs_liabilities)
+    total_assets_vs_liabilities = "{:.0f}".format(total_assets_vs_liabilities)
     return str(total_assets_vs_liabilities)
 
 # returns STRING of the fcf growth as a PERCENTAGE over the last 5 years
