@@ -39,7 +39,7 @@ def get_price_to_fcf(company_overview_dict, cash_flow_dict):
 def get_forecast_table(ticker, company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict):
     forecast_dict = {}
     forecast_dict["revenue_growth_avg"] = get_revenue_growth_avg(income_statement_dict)
-    forecast_dict["change_in_shares_ourstanding_avgs"] = get_share_change(balance_sheet_dict, company_overview_dict)
+    forecast_dict["change_in_shares_ourstanding_avg"] = get_share_change(balance_sheet_dict, company_overview_dict)
     forecast_dict["profit_growth_avg"] = get_profit_growth_avg(income_statement_dict)
     forecast_dict["fcf_growth_avg"] = get_fcf_growth_avg(cash_flow_dict)
     forecast_dict["pe_ratio"] = company_overview_dict["pe_ratio"]
