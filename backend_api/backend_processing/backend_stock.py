@@ -99,6 +99,9 @@ def create_forecast_page(ticker, api_urls):
 
     forecast_page_dict = get_forecast_table(ticker, company_overview_dict, balance_sheet_dict, income_statement_dict, cash_flow_dict)
     forecast_page_dict["stock_price"] = stock_price
+    
+    for item in forecast_page_dict:
+        print(item, '\t', forecast_page_dict[item])
     return forecast_page_dict
 
 ###########################################

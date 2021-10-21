@@ -21,6 +21,7 @@ def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
     response = my_main(ticker, "PILLARS")
+    my_main(ticker, "FORECAST PAGE")
     return response
 
 @app.route('/stock-page/<ticker>')
