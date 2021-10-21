@@ -25,6 +25,7 @@ def add_positions(username, positions): # positions format [{'ticker': 'ticker',
 
 
 def add_position(username, ticker, avg_price, qty):
+    add_user(username)
     positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
     print(positions)
     if ticker not in positions:
@@ -35,9 +36,11 @@ def add_position(username, ticker, avg_price, qty):
         return 0
 
 def get_positions(username):
+    add_user(username)
     return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
 
 def edit_positions(username, ticker, avg_price, qty):
+    add_user(username)
     positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
     for pos in range(0, len(positions)):
         if positions[pos]['ticker'] == ticker:
@@ -87,8 +90,8 @@ def update_prices(active_tickers):
 def get_price(ticker):
     return yf.Ticker(ticker).info['regularMarketPrice']
 
-def main():
-    print(get_positions('brendanlucich'))
+
+def main(): 
     pass
     # add_user('cadavis21')
     # add_user('brendanlucich')

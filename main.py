@@ -42,7 +42,7 @@ def get_personal_portfolio(username):
             return 'Could not perform GET function\nEnsure the username entered is valid'
     if rq.method == 'PUT':
         try:
-            ticker = rq.form['ticker']
+            ticker = rq.form['ticker'].upper()
             avg_price = rq.form['avg_price']
             qty = rq.form['qty']
             if db.edit_positions(username, ticker, avg_price, qty) == 1:
@@ -54,7 +54,7 @@ def get_personal_portfolio(username):
     if rq.method == 'POST':
         print('POST')
         try:
-            ticker = rq.form['ticker']
+            ticker = rq.form['ticker'].upper()
             avg_price = rq.form['avg_price']
             qty = rq.form['qty']
             db.add_position(username, ticker, avg_price, qty)
@@ -64,7 +64,7 @@ def get_personal_portfolio(username):
 
     if rq.method == 'DELETE':
         try:
-            ticker = rq.form['ticker']
+            ticker = rq.form['ticker'].upper()
             if db.edit_positions(username, ticker, 0, 0) == 1:
                 return ticker +  ' Deleted!'
             else:
