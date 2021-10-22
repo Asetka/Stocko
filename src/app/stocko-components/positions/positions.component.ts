@@ -1,9 +1,8 @@
-import { APP_INITIALIZER, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, findIndex, map, tap } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-positions',
@@ -11,21 +10,19 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./positions.component.sass']
 })
 export class PositionsComponent implements OnInit {
-
+  base = `https://stocko-flask-api-dev.herokuapp.com`
+  priceHelper : any;
   d : any;
   userName : string | undefined;
-  myArr : Position[] = []
+  myArr : Position[] = [];
+
   newTicker : string = "";
   newAvgCost : number = 0;
   newQty : number = 0;
 
 
   addOpen: boolean =  false;
-  editOpen: boolean = false;
   emptyPositions: boolean = false;
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   constructor(public auth: AuthService, private http: HttpClient,) { }
   
@@ -36,24 +33,28 @@ export class PositionsComponent implements OnInit {
     })
   }
 
-  getPositions(uid: string | undefined): Observable<any[]> {
-    const base = `https://stocko-flask-api-dev.herokuapp.com/personal-portfolio`
-    const url = `${base}/${uid}`;
+  getPositions(uid: string | undefined) {
+    const url = `${this.base}/personal-portfolio/${uid}`;
     return this.http.get<any[]>(url)
       .pipe(tap(x => {
         this.d = x;
         this.myArr = this.d.response;
-        if(this.myArr.length == 0){
-          this.emptyPositions = true;
-        }
+        console.log(this.myArr.forEach(element => element.currentPrice = this.getPrice(element.ticker)))
+        if(this.myArr.length == 0) this.emptyPositions = true;
+        
       }))
   }
 
+  getPrice(ticker: string){
+    const url = `${this.base}/stock-price/${ticker}`
+    this.http.get<any>(url).subscribe(data => {
+      console.log(data.price)
+      return data.price;
+    })
+  }
+
   addPosition(ticker: string, avgPrice: number, quantity: number){
-    const base = `https://stocko-flask-api-dev.herokuapp.com/personal-portfolio`
-    const url = `${base}/${this.userName}`;
-    console.log(this.userName);
-    console.log(url)
+    const url = `${this.base}/personal-portfolio/${this.userName}`;
     const formData = new FormData()
     formData.set("ticker", ticker.toUpperCase())
     formData.set("avg_price", avgPrice.toString());
@@ -63,8 +64,7 @@ export class PositionsComponent implements OnInit {
   }
 
   editPosition(val: Position){
-    const base = `https://stocko-flask-api-dev.herokuapp.com/personal-portfolio`
-    const url = `${base}/${this.userName}`;
+    const url = `${this.base}/personal-portfolio/${this.userName}`;
     console.log(this.userName);
     console.log(url)
     const formData = new FormData()
@@ -73,8 +73,7 @@ export class PositionsComponent implements OnInit {
   }
 
   deletePosition(val: Position){
-    const base = `https://stocko-flask-api-dev.herokuapp.com/personal-portfolio`
-    const url = `${base}/${this.userName}`;
+    const url = `${this.base}/personal-portfolio/${this.userName}`;
     console.log(this.userName);
     console.log(url)
     const formData = new FormData()
@@ -88,4 +87,6 @@ export interface Position {
   avg_price : number;
   qty : number;
   ticker : string;
+  currentPrice: any;
+  percentGain: number;
 }

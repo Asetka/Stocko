@@ -8,14 +8,16 @@
           </div>
         <div class="card-body pl-2">
             <div class="row justify-content-center">
-                <label>Add Position</label>
                 <div class="col form-group">
+                    <label>Ticker</label>
                     <input [(ngModel)]="newTicker" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Ticker" id="inputSmall" data-np-checked="1">
                 </div>
                 <div class="col">
+                    <label>Average Cost</label>
                     <input [(ngModel)]="newAvgCost" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Average Cost" id="inputSmall" data-np-checked="1">
                 </div>
                 <div class="col">
+                    <label>Quantity</label>
                     <input [(ngModel)]="newQty" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Quantity" id="inputSmall" data-np-checked="1">
                 </div>
                 <div class="col">
@@ -29,15 +31,21 @@
                             <th scope="col">Ticker</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Average Cost</th>
+                            <th scope="col">Current Price</th>
+                            <th scope="col">Percent Gain</th>
+                            <th scope="col">Price Gain</th>
                             <th scope="col">Edit</th>
                             <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="table-active" *ngFor="let arr of myArr">
-                            <th scope="col">{{arr.ticker}}</th>
-                            <th scope="col">{{arr.qty}}</th>
-                            <th scope="col">{{arr.avg_price}} </th>
+                        <tr *ngFor="let arr of myArr">
+                            <td scope="row">{{arr.ticker}}</td>
+                            <td >{{arr.qty}}</td>
+                            <td>{{arr.avg_price}}</td>
+                            <td>{{arr.currentPrice}}</td>
+                            <td>{{arr.avg_price}}</td>
+                            <td >{{arr.avg_price}}</td>
                             <td><button (click)="editPosition(arr)" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
