@@ -21,6 +21,7 @@ def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
     response = my_main(ticker, "PILLARS")
+    #TAKE THIS CALL BELOW OUT WHEN THERE IS A FORECAST PAGE BUTTON I CAN TEST
     my_main(ticker, "FORECAST PAGE")
     return response
 
