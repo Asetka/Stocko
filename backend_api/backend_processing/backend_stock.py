@@ -12,7 +12,7 @@ from .shares import get_shares_outstanding
 from .forecast_page import get_forecast_table
 from .chart_data import get_chart_data
 
-# returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
+# returns DICTIONARY of urls for pillars, sets api urls based on passed ticker and key
 def set_api_urls_pillars(api_urls, ticker, key):
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
@@ -20,7 +20,7 @@ def set_api_urls_pillars(api_urls, ticker, key):
     api_urls["income_statement_url"] = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=' + ticker + '&apikey=' + key
     api_urls["cash_flow_url"] = 'https://www.alphavantage.co/query?function=CASH_FLOW&symbol=' + ticker + '&apikey=' + key
 
-# returns DICTIONARY of urls, sets api urls based on passed ticker and key, 
+# returns DICTIONARY of urls for stock page, sets api urls based on passed ticker and key
 def set_api_urls_stockpage(api_urls, ticker, key):
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
@@ -29,13 +29,13 @@ def set_api_urls_stockpage(api_urls, ticker, key):
     api_urls["cash_flow_url"] = 'https://www.alphavantage.co/query?function=CASH_FLOW&symbol=' + ticker + '&apikey=' + key
     api_urls["chart_data"] = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=" + ticker + "&apikey=" + key
 
+# returns DICTIONARY of urls for forecast page, sets api urls based on passed ticker and key
 def set_api_urls_forecastpage(api_urls, ticker, key):
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     api_urls["balance_sheet_url"] = 'https://www.alphavantage.co/query?function=BALANCE_SHEET&symbol=' + ticker + '&apikey=' + key
     api_urls["income_statement_url"] = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=' + ticker + '&apikey=' + key
     api_urls["cash_flow_url"] = 'https://www.alphavantage.co/query?function=CASH_FLOW&symbol=' + ticker + '&apikey=' + key
     api_urls["company_overview_url"] = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + ticker + '&apikey=' + key
-
 
 ###########################################
 ###########################################
