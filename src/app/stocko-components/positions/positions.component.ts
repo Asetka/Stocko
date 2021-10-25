@@ -20,6 +20,9 @@ export class PositionsComponent implements OnInit {
   newAvgCost : number = 0;
   newQty : number = 0;
 
+  editTicker : string = "";
+  editAvgCost : number = 0;
+  editQty : number = 0;
 
   addOpen: boolean =  false;
   emptyPositions: boolean = false;
@@ -60,16 +63,17 @@ export class PositionsComponent implements OnInit {
     formData.set("avg_price", avgPrice.toString());
     formData.set("qty", quantity.toString());
     this.http.post<any>(url,formData).subscribe();
-    this.myArr.push()
+    location.reload();
   }
 
-  editPosition(val: Position){
+  editPosition(ticker: string, avgPrice: number, quantity: number){
     const url = `${this.base}/personal-portfolio/${this.userName}`;
-    console.log(this.userName);
-    console.log(url)
     const formData = new FormData()
-    formData.set("ticker", val.ticker)
-    this.http.post<any>(url,formData).subscribe();
+    formData.set("ticker", ticker.toUpperCase())
+    formData.set("avg_price", avgPrice.toString());
+    formData.set("qty", quantity.toString());
+    this.http.put<any>(url,formData).subscribe();
+    location.reload();
   }
 
   deletePosition(val: Position){
