@@ -46,6 +46,9 @@ export class PositionsComponent implements OnInit {
       .pipe(tap(x => {
         this.d = x;
         this.myArr = this.d.response;
+        if(this.myArr.length == 0){
+          this.emptyPositions = true;
+        }
         this.portfolioProfit = this.getPortfolioSum(this.myArr);
         this.portfolioGain = this.getTotalPercentChange(this.myArr);
 

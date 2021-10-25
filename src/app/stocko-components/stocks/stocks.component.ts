@@ -7,7 +7,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./stocks.component.sass']
 })
 export class StocksComponent implements OnInit {
-  test = "cim"
+  ticker: string = "";
+  stockObject: any;
+
   constructor(
     private http: HttpClient,
   ) { }
@@ -15,16 +17,12 @@ export class StocksComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  stockStringObject: any;
-  stockObject: any;
-  onSearch(ticker: string){
+  onSearch(){
     const base = `https://stocko-flask-api-dev.herokuapp.com/stock-page/`
-    const url = `${base}/${ticker}`;
+    const url = `${base}/${this.ticker}`;
     this.http.get<any>(url).subscribe(data => {
-      console.log(data)
-      this.stockStringObject = JSON.stringify(data)
-      this.stockObject = JSON.parse(this.stockStringObject)
-      console.log(this.stockObject.ticker)
+      this.stockObject = JSON.parse(JSON.stringify(data))
+      console.log(this.stockObject)
     })
 
   }
