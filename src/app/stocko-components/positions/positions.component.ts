@@ -42,9 +42,6 @@ export class PositionsComponent implements OnInit {
       .pipe(tap(x => {
         this.d = x;
         this.myArr = this.d.response;
-        console.log(this.myArr.forEach(element => element.currentPrice = this.getPrice(element.ticker)))
-        if(this.myArr.length == 0) this.emptyPositions = true;
-        
       }))
   }
 
@@ -89,8 +86,9 @@ export class PositionsComponent implements OnInit {
 
 export interface Position {
   avg_price : number;
+  pct_change: number;
+  price: number;
+  profit: number;
   qty : number;
   ticker : string;
-  currentPrice: any;
-  percentGain: number;
 }
