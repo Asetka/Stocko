@@ -1,6 +1,5 @@
-
-
-
+# returns a DICTIONARY of keys -> lists containing 
+# up to the last 20 years of closing weekly price of a stock api request
 
 import requests
 
@@ -14,14 +13,8 @@ def get_chart_data(ticker, api_urls):
     week_ending = []
     end_of_week_price = []
 
-    # print(weekly_reports)
-    # print(type(weekly_reports))
-
     for key in weekly_reports:
         week_ending.append(key)
-        # print(key)
-        # print(week_ending[key])
-        # print()
         end_of_week_price.append(weekly_reports[key]["4. close"])
 
     chart_data_dict["week_ending"] = week_ending
