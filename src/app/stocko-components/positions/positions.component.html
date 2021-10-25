@@ -1,12 +1,29 @@
 <div class="container" style="padding-top: 2rem;">
     <div *ngIf="auth.user$ | async as user" class="card mb-3">
         <h3 class="card-header">
-            Positions : other values coming in sprint 2
+            Portfolio
         </h3>
+        
         <div *ngIf = "emptyPositions" class="alert alert-dismissible alert-info">
             <strong>Heads up!</strong> You currently do not have any positions, but you can add them below.
         </div>
         <div class="card-body pl-2">
+            <div class="row">
+                <div class="col form-group">
+                    <fieldset>
+                      <h4 class="form-label mt-3">Total Profit</h4>
+                      <input class="form-control" id="readOnlyInput" type="text" placeholder="{{portfolioProfit}}" readonly="" data-np-checked="1">
+                    </fieldset>
+                  </div>
+                  <div class=" col form-group">
+                    <fieldset>
+                        <h4 class="form-label mt-3">Total Portfolio Growth</h4>
+
+                      <input class="form-control" placeholder="{{portfolioGain}}" readonly="" data-np-checked="1">
+                    </fieldset>
+                  </div>
+            </div>
+            <br>
             <div class="row justify-content-center">
                 <div class="col form-group">
                     <label>Ticker</label>
