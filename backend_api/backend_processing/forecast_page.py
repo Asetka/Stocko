@@ -5,13 +5,16 @@ def get_revenue_growth_avg(income_statement_dict):
     for x in range(4):
         print(x)
         current_revenue = int(income_statement_dict["totalRevenue"][x])
-        print("Current REV: ", current_revenue)
+        # print("Current REV: ", current_revenue)
         previous_revenue = int(income_statement_dict["totalRevenue"][x+1])
-        print("Previous REV: ", current_revenue)
+        # print("Previous REV: ", current_revenue)
         revenue_growth = 100 * (current_revenue - previous_revenue) / previous_revenue
         print(revenue_growth)
         sum += revenue_growth
+    print("SUM: ", sum)
     return_avg = sum / 4
+    print("REV AVG: ", return_avg)
+    print()
     return str(return_avg)
 
 def get_profit_growth_avg(income_statement_dict):
@@ -20,8 +23,12 @@ def get_profit_growth_avg(income_statement_dict):
         current_profit = int(income_statement_dict["grossProfit"][x])
         previous_profit = int(income_statement_dict["grossProfit"][x+1])
         profit_growth = 100 * (current_profit - previous_profit) / previous_profit
+        print(profit_growth)
         sum += profit_growth
+    print("SUM: ", sum)
     return_avg = sum / 4
+    print("PROF AVG: ", return_avg)
+    print()
     return str(return_avg)
 
 def get_fcf_growth_avg(cash_flow_dict):
