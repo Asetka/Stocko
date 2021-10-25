@@ -37,7 +37,18 @@ def add_position(username, ticker, avg_price, qty):
 
 def get_positions(username):
     add_user(username)
-    return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
+    positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
+    print(positions)
+    for position_index in range(len(positions)):
+        qty = positions[position_index]['qty']
+        avg_price = positions[position_index]['avg_price']
+        price = float(get_price(positions[position_index]['ticker']))
+        positions[position_index]['price'] = price
+        positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
+        positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
+    return positions
+
+    #return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
 
 def edit_positions(username, ticker, avg_price, qty):
     add_user(username)
@@ -92,7 +103,7 @@ def get_price(ticker):
 
 
 def main(): 
-    pass
+    get_positions('Brady')
     # add_user('cadavis21')
     # add_user('brendanlucich')
     # add_positions('brendanlucich', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
