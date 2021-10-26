@@ -12,7 +12,57 @@
                         <button (click)="onSearch()" class="btn btn-primary">Search</button>
                     </div>
                     <div *ngIf="!yearsOfHistoryError">
-                        Good
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Historical</th>
+                                <th scope="col">Assumption</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">FCF Margin Average</th>
+                                    <td>{{fcfMarginAvg}}</td>
+                                    <td><input [(ngModel)]="fcfMarginAvgAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">peRatio</th>
+                                    <td>{{peRatio}}</td>
+                                    <td><input [(ngModel)]="peRatioAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">priceToFcf</th>
+                                    <td>{{priceToFcf}}</td>
+                                    <td><input [(ngModel)]="priceToFcfAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">profitMarginAvg</th>
+                                    <td>{{profitMarginAvg}}</td>
+                                    <td><input [(ngModel)]="profitMarginAvgAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">stockPrice</th>
+                                    <td>{{stockPrice}}</td>
+                                    <td><input [(ngModel)]="stockPriceAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">shareChangeAvg</th>
+                                    <td>{{shareChangeAvg}}</td>
+                                    <td><input [(ngModel)]="shareChangeAvgAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ufcRevenueTtm</th>
+                                    <td>{{ufcRevenueTtm}}</td>
+                                    <td><input [(ngModel)]="ufcRevenueTtmAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ufcSharesTtm</th>
+                                    <td>{{ufcSharesTtm}}</td>
+                                    <td><input [(ngModel)]="ufcSharesTtmAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
               </div>

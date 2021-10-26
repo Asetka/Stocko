@@ -12,6 +12,8 @@ export class StockForecasterComponent implements OnInit {
   ticker = ""
   annualReturn: any;
   fcfMarginAvg: any;
+  fcfMarginAvgAssumption: any;
+
   peRatio: any;
   priceToFcf: any;
   profitMarginAvg: any;
@@ -19,7 +21,16 @@ export class StockForecasterComponent implements OnInit {
   shareChangeAvg: any;
   ufcRevenueTtm:any;
   ufcSharesTtm:any;
-  yearsOfHistoryError:boolean=false;
+  
+  peRatioAssumption: any;
+  priceToFcfAssumption: any;
+  profitMarginAvgAssumption: any;
+  stockPriceAssumption: any;
+  shareChangeAvgAssumption: any;
+  ufcRevenueTtmAssumption:any;
+  ufcSharesTtmAssumption:any;
+  yearsOfHistoryError:boolean=true;
+
   constructor(
     private http: HttpClient,
   ) { }
