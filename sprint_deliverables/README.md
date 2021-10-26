@@ -31,3 +31,9 @@
 * Will add at a later date. 
 * Backend dependencies - yfinance, pymongo
 * Can be installed using 'pip install yfinance' and 'pip install pymongo'
+
+### Page Descriptions
+* Stock Page - Provides the usercompany information, data, and price chart for stocks
+* Postions Page - Allows user to add, edit, and delete postions from their investment portfolio
+* Forecast Page - Allows the user to view previous performance metrics of a stock and enter assumptions to forecast a future stock price prediction
+* Evaluations Page - Allows the user to search a stock and evaluate the stock based on a number of predetermined pillars to gauge the intrinsic value of the stock vs its current trading price
