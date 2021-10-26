@@ -16,7 +16,7 @@
                     <div *ngIf="searched" id="company_overview" class="card mb-3 mt-3">
                         <h3 class="card-header">{{stockObject.company_overview.name}}; Ticker, {{stockObject.ticker}}</h3>
                         <div class="card-body">
-                            <h4 class="card-title">Current Share Price: {{stockObject.stock_price}}</h4>
+                            <h4 class="card-title">Current Share Price: ${{stockObject.stock_price}}</h4>
                             <h5 class="card-title">Company Description:</h5>
                             <h6 class="card-subtitle text-muted">{{stockObject.company_overview.description}}</h6>
                         </div>
@@ -35,19 +35,19 @@
                                 <ul class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         200 Day Moving Average
-                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.v200_day_moving_average}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         50 Day Moving Average
-                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.v50_day_moving_average}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         52 Week High
-                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.v52_week_high}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         52 Week Low
-                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.v52_week_low}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Analyst Target Price
