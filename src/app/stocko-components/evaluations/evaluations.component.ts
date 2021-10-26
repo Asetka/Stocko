@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-evaluations',
@@ -50,9 +50,6 @@ export class EvaluationsComponent implements OnInit {
   ticker = ''
   curTicker = "Awaiting search";
   endpoint = 'https://stocko-flask-api-dev.herokuapp.com/stock-evaluation/'
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   constructor(
     private http: HttpClient,

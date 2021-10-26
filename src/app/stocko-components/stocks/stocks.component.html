@@ -3,10 +3,270 @@
         <div class="col">
             <div class="card mb-3">
                 <h3 class="card-header">
-                    Stocks 
+                    Stock Information 
                 </h3>
                 <div class="card-body">
-                    <h2>Coming in a later sprint!</h2>
+                    <div class="mb-3" id="searchBox"> 
+                        <label class="form-label">Ticker Search:</label>
+                        <div class="input-group ">
+                            <input  (keydown.enter)="onSearch()" [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
+                        <button (click)="onSearch()" class="btn btn-primary">Search</button>
+                    </div>
+
+                    <div *ngIf="searched" id="company_overview" class="card mb-3 mt-3">
+                        <h3 class="card-header">{{stockObject.company_overview.name}}; Ticker, {{stockObject.ticker}}</h3>
+                        <div class="card-body">
+                            <h4 class="card-title">Current Share Price: {{stockObject.stock_price}}</h4>
+                            <h5 class="card-title">Company Description:</h5>
+                            <h6 class="card-subtitle text-muted">{{stockObject.company_overview.description}}</h6>
+                        </div>
+                        <highcharts-chart
+                            [Highcharts] = "highcharts" 
+                            [options] = "chartOptions">
+                        </highcharts-chart>
+                        <div class="card-body">
+                            <label>Sector:</label>
+                            <p class="card-text">{{stockObject.company_overview.sector}}</p>
+                            <label>Industry:</label>
+                            <p class="card-text">{{stockObject.company_overview.industry}}</p>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        200 Day Moving Average
+                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        50 Day Moving Average
+                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        52 Week High
+                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        52 Week Low
+                                        <span class="badge bg-primary rounded-pill">Waiting</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Analyst Target Price
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.analyst_target_price}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Asset Type
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.asset_type}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Beta
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.beta}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Book Value
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.book_value}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        CIK
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.cik}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Diluted Epsttm
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.diluted_epsttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Dividend Date
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.dividend_date}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Dividend Per Share
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.dividend_per_share}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Dividend Yield
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.dividend_yield}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Ebitda
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.ebitda}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Eps
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.eps}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Ev To Ebitda
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.ev_to_ebitda}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Ev To Revenue
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.ev_to_revenue}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Ex Dividend Date
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.ex_dividend_date}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Exchange
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.exchange}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Fiscal Year End
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.fiscal_year_end}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Foward Annual Dividend Rate
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.foward_annual_dividend_rate}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Foward Annual Dividend Yield
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.foward_annual_dividend_yield}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Foward Pe
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.foward_pe}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Fross Profit ttm
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.gross_profit_ttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Last Split Date
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.last_split_date}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Last Split Factor
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.last_split_factor}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Latest Quarter
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.latest_quarter}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Market Cap
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.market_cap}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Eperating Margin ttm
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.operating_margin_ttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Payout Ratio
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.payout_ratio}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        PE Ratio
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.pe_ratio}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        PEG Ratio
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.peg_ratio}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Percent Insiders
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.percent_insiders}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Percent Institutions
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.percent_institutions}}</span>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Price To Book Ratio
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.price_to_book_ratio}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Price to Sales Ratio ttm
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.price_to_sales_ratio_ttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Profit Margin
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.profit_margin}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Quarterly Earnings Growth yoy
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.quarterly_earnings_growth_yoy}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Quarterly Revenue Growth yoy
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.quarterly_revenue_growth_yoy}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Return on Assets TTM
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.return_on_assets_ttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Return on Equity TTM
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.return_on_equity_ttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Revenue per Share TTM
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.revenue_per_share_ttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Revenue TTM
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.revenue_ttm}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Shares Float
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.shares_float}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Shares Outstanding
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.shares_outstanding}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Shares Short
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.shares_short}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Shares Shot Prior Month
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.shares_shot_prior_month}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Short Percent Float
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.short_percent_float}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Short Precent Outstanding
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.short_precent_outstanding}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Short Ratio
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.short_ratio}}</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Trailing PE
+                                        <span class="badge bg-primary rounded-pill">{{stockObject.company_overview.trailing_pe}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <button (click)="openBalanceSheet()" class="card-link">Balance Sheet</button>
+                            <button (click)="openCashFlow()" class="card-link">Cash Flow</button>
+                            <button (click)="openIncomeStatement()" class="card-link">Income Statement</button>
+                            <div *ngIf="balanceSheetOpen" class="col">
+                                Balance Sheet coming in Sprint 3
+                            </div>
+                            <div *ngIf="cashFlowOpen" class="col">
+                                Cash Flow coming in Sprint 3
+                            </div>
+                            <div *ngIf="incomeStatementOpen" class="col">
+                                Income Statement coming in Sprint 3
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Address: {{stockObject.company_overview.address}}
+                        </div>
+                    </div>
                 </div>
               </div>
         </div>
