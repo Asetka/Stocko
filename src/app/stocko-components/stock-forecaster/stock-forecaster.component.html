@@ -6,7 +6,14 @@
                     Stock Forecaster 
                 </h3>
                 <div class="card-body">
-                    <h2>Coming in a later sprint!</h2>
+                    <label class="form-label">Ticker:</label>
+                    <div class="input-group ">
+                        <input  (keydown.enter)="onSearch()" [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
+                        <button (click)="onSearch()" class="btn btn-primary">Search</button>
+                    </div>
+                    <div *ngIf="!yearsOfHistoryError">
+                        Good
+                    </div>
                 </div>
               </div>
         </div>
