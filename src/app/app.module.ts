@@ -23,6 +23,8 @@ import { StockForecasterComponent } from './stocko-components/stock-forecaster/s
 import { NlpComponent } from './stocko-components/nlp/nlp.component';
 import { StocksComponent } from './stocko-components/stocks/stocks.component';
 import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
+import { StockChartComponentComponent } from './stock-chart-component/stock-chart-component.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
@@ -43,9 +45,11 @@ import { BackTestingComponent } from './stocko-components/back-testing/back-test
     NlpComponent,
     StocksComponent,
     BackTestingComponent,
+    StockChartComponentComponent,
   ],
   imports: [
     BrowserModule,
+    HighchartsChartModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

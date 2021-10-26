@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
+
 @Component({
-  selector: 'app-stocks',
-  templateUrl: './stocks.component.html',
-  styleUrls: ['./stocks.component.sass']
+  selector: 'app-stock-chart-component',
+  templateUrl: './stock-chart-component.component.html',
+  styleUrls: ['./stock-chart-component.component.sass']
 })
-export class StocksComponent implements OnInit {
+export class StockChartComponentComponent implements OnInit {
   highcharts = Highcharts;
   chartOptions: Highcharts.Options = {};
   constructor() { }
@@ -18,7 +19,7 @@ export class StocksComponent implements OnInit {
       },
       xAxis: {
         title: {
-          text: 'Date'
+          text: 'Month'
         },
         categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
