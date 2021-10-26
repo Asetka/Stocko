@@ -29,8 +29,16 @@
 # Installing and running the backend
 
 * Will add at a later date. 
-* Backend dependencies - yfinance, pymongo
-* Can be installed using 'pip install yfinance' and 'pip install pymongo'
+* Backend dependencies - 'pip install -r requirements.txt' in the root directory (Stocko)
+* Can be installed using
+* Dependencies:
+* Werkzeug==2.0.1
+* requests==2.25.1
+* yfinance==0.1.63
+* Flask==2.0.1
+* Flask_Cors==3.0.10
+* pymongo[srv]==3.12.0
+* gunicorn==20.1.0
 
 # Page Descriptions
 * Stock Page - Provides the usercompany information, data, and price chart for stocks
