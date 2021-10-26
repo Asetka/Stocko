@@ -40,6 +40,6 @@ def get_forecast_table(ticker, company_overview_dict, balance_sheet_dict, income
     forecast_dict["fcf_growth_avg"] = get_fcf_growth_avg(cash_flow_dict)
     forecast_dict["pe_ratio"] = company_overview_dict["pe_ratio"]
     forecast_dict["price_to_fcf"] = get_price_to_fcf(company_overview_dict, cash_flow_dict)
-    forecast_dict["Annual Return"] = "---"
+    forecast_dict["annual_return"] = "---"
 
     return forecast_dict
