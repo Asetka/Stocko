@@ -65,7 +65,6 @@ export class EvaluationsComponent implements OnInit {
     this.curTicker = this.ticker;
     this.http.get<any>(this.endpoint+this.ticker)
       .subscribe(data => { 
-        console.log(data)
         this.stockPrice = data.stock_price;
         this.marketCap = data.market_cap;
         this.historyError = data.years_of_history_error;
@@ -75,7 +74,7 @@ export class EvaluationsComponent implements OnInit {
         this.peRatioS = this.checkOneReverse(data.pe_ratio, 20);
 
         this.profitMargin = data.profit_margin;
-        this.profitMarginS = this.checkOne(data.profit_margin, 10);
+        this.profitMarginS = this.checkProfitMargin(data.profit_margin, 10);
 
         this.profitGrowth = data.profit_growth;
         this.profitGrowthS = this.checkOne(data.profit_growth, 0);
@@ -99,16 +98,13 @@ export class EvaluationsComponent implements OnInit {
         this.freeCashFlowDesiredSharePriceS = this.checkOneReverse(data.fcf_desired_price, data.stock_price);
 
         this.freeCashFlowDesiredMarketCap = data.fcf_desired_marketcap;
-        console.log(data.fcf_desired_marketcap)
-        console.log(data.market_cap)
-
         this.freeCashFlowDesiredMarketCapS = this.checkOne(data.fcf_desired_marketcap, data.market_cap);
 
         this.evEbitdaRatio = data.ev_ebitda_ratio;
         this.evEbitdaRatioS = this.checkOneReverse(data.ev_ebitda_ratio, 10)
 
         this.priceToBookRatio = data.price_to_book_ratio;
-        this.priceToBookRatioS = this.checkOneReverse(data.price_to_book_ratio, 20)
+        this.priceToBookRatioS = this.checkOneReverse(data.price_to_book_ratio, 3)
 
 
       })

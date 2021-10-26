@@ -21,8 +21,6 @@ def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
     response = my_main(ticker, "PILLARS")
-    #TAKE THIS CALL BELOW OUT WHEN THERE IS A FORECAST PAGE BUTTON I CAN TEST
-    my_main(ticker, "FORECAST PAGE")
     return response
 
 @app.route('/stock-page/<ticker>')
@@ -56,8 +54,10 @@ def get_personal_portfolio(username):
             avg_price = rq.form['avg_price']
             qty = rq.form['qty']
             if db.edit_positions(username, ticker, avg_price, qty) == 1:
+                print(ticker, 'Updated')
                 return ticker +  ' Updated'
             else:
+                print('Could not edit', ticker)
                 return 'Could not edit ' + ticker
         except:
             return 'Could not perform the PUT function\n Ensure the PUT body includes ticker, avg_price, and qty'
@@ -68,8 +68,10 @@ def get_personal_portfolio(username):
             avg_price = rq.form['avg_price']
             qty = rq.form['qty']
             db.add_position(username, ticker, avg_price, qty)
+            print('Added position', ticker)
             return 'Added position ' + ticker + ' successfully'
         except:
+            print('could not perform post function')
             return 'Could not perform the POST function\nEnsure your POST body is includes ticker, avg_price, and qty'
 
     if rq.method == 'DELETE':
