@@ -15,6 +15,7 @@ export class StockForecasterComponent implements OnInit {
 
   annualReturn: any;
 
+  revenueCagr: any;
   fcfMarginAvg: any;
   peRatio: any;
   priceToFcf: any;
@@ -24,6 +25,7 @@ export class StockForecasterComponent implements OnInit {
   ufcRevenueTtm:any;
   ufcSharesTtm:any;
 
+  revenueCagrAssumption: any;
   fcfMarginAvgAssumption: any;
   peRatioAssumption: any;
   priceToFcfAssumption: any;
@@ -32,6 +34,7 @@ export class StockForecasterComponent implements OnInit {
   shareChangeAvgAssumption: any;
   ufcRevenueTtmAssumption:any;
   ufcSharesTtmAssumption:any;
+
   yearsOfHistoryError:boolean=true;
 
   constructor(
@@ -45,6 +48,7 @@ export class StockForecasterComponent implements OnInit {
     console.log(this.ticker)
     this.http.get<any>(this.url+this.ticker).subscribe(data => {
       console.log(data);
+      this.revenueCagr = data.revenue_cagr
       this.fcfMarginAvg = data.fcf_margin_avg;
       this.peRatio = data.pe_ratio;
       this.priceToFcf = data.price_to_fcf;
