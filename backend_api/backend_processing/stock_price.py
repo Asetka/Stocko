@@ -9,5 +9,6 @@ def get_stock_price(ticker, api_urls):
     minute_data = response["Time Series (1min)"]
     latest_minute = next(iter(minute_data))
     latest_close_price = minute_data[latest_minute]["4. close"]
-    
-    return latest_close_price
+    latest_close_price = float(latest_close_price)
+    latest_close_price = "{:.2f}".format(latest_close_price)
+    return str(latest_close_price)

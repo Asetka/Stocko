@@ -1,8 +1,10 @@
 import pymongo
 import yfinance as yf
 from pymongo import collection
+from .stock_price import get_stock_price
+import os
 
-CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/StockoPositions?retryWrites=true&w=majority")
 DB = CLIENT.test
 USER_COLLECTION = DB.get_collection('dev-users')
 PRICE_COLLECTION = DB.get_collection('dev-prices')
@@ -25,6 +27,7 @@ def add_positions(username, positions): # positions format [{'ticker': 'ticker',
 
 
 def add_position(username, ticker, avg_price, qty):
+    add_user(username)
     positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
     print(positions)
     if ticker not in positions:
@@ -35,9 +38,22 @@ def add_position(username, ticker, avg_price, qty):
         return 0
 
 def get_positions(username):
-    return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
+    add_user(username)
+    positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
+    print(positions)
+    for position_index in range(len(positions)):
+        qty = positions[position_index]['qty']
+        avg_price = positions[position_index]['avg_price']
+        price = float(get_price(positions[position_index]['ticker']))
+        positions[position_index]['price'] = price
+        positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
+        positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
+    return positions
+
+    #return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
 
 def edit_positions(username, ticker, avg_price, qty):
+    add_user(username)
     positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
     for pos in range(0, len(positions)):
         if positions[pos]['ticker'] == ticker:
@@ -85,10 +101,16 @@ def update_prices(active_tickers):
         #yf.Ticker(ticker).info['regularMarketPrice']
 
 def get_price(ticker):
-    return yf.Ticker(ticker).info['regularMarketPrice']
+    key = open(os.getcwd() + '/backend_api/backend_processing/key.txt').read()
+    api_urls = {}
+    api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
+    stock_price = get_stock_price(ticker, api_urls)
+    # print("Stock Price: " + stock_price, end = '\n\n')
+    return stock_price
 
-def main():
-    pass
+
+def main(): 
+    get_positions('Brady')
     # add_user('cadavis21')
     # add_user('brendanlucich')
     # add_positions('brendanlucich', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
