@@ -9,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
 export class StocksComponent implements OnInit {
   ticker: string = "";
   stockObject: any;
-
   searched: boolean = false;
   constructor(
     private http: HttpClient,
@@ -22,6 +21,7 @@ export class StocksComponent implements OnInit {
     const base = `https://stocko-flask-api-dev.herokuapp.com/stock-page/`
     const url = `${base}/${this.ticker}`;
     this.http.get<any>(url).subscribe(data => {
+      console.log(data)
       this.stockObject = JSON.parse(JSON.stringify(data))
       if(this.stockObject != null){
         this.searched = true;
