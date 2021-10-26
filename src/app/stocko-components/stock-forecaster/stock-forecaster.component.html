@@ -3,10 +3,101 @@
         <div class="col">
             <div class="card mb-3">
                 <h3 class="card-header">
-                    Stock Forecaster 
+                    Stock Forecaster (Currently a 7 year Forecast)
                 </h3>
                 <div class="card-body">
-                    <h2>Coming in a later sprint!</h2>
+                    <label class="form-label">Ticker:</label>
+                    <div class="input-group ">
+                        <input  (keydown.enter)="onSearch()" [(ngModel)]="ticker" class="form-control" placeholder="Enter ticker here:"type="text">
+                        <button (click)="onSearch()" class="btn btn-primary">Search</button>
+                    </div>
+                    <div *ngIf="!yearsOfHistoryError">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <fieldset>
+                                        <label>Ticker</label>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ticker}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                  </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Share Price</label>
+                                    <fieldset>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{stockPrice}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Yearly Average Over Past 5 Years</th>
+                                <th scope="col">Your Assumptions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Revenue Growth</th>
+                                    <td>{{revenueCagr}} %</td>
+                                    <td><input [(ngModel)]="revenueCagrAssumption" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Share Change</th>
+                                    <td>{{shareChangeAvg}} %</td>
+                                    <td><input [(ngModel)]="shareChangeAvgAssumption" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Profit Margin</th>
+                                    <td>{{profitMarginAvg}} %</td>
+                                    <td><input [(ngModel)]="profitMarginAvgAssumption" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">FCF Margin</th>
+                                    <td>{{fcfMarginAvg}} %</td>
+                                    <td><input [(ngModel)]="fcfMarginAvgAssumption" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">pe Ratio Projected Price</th>
+                                    <td>{{peRatio}}</td>
+                                    <td><input [(ngModel)]="peRatioAssumption" class="form-control" placeholder="Enter Assumption"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Price To Fcf Ratio Projected Price</th>
+                                    <td>{{priceToFcf}}</td>
+                                    <td><input [(ngModel)]="priceToFcfAssumption" class="form-control" placeholder="Enter Assumption"type="text"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Desired Return</th>
+                                    <td>-----</td>
+                                    <td><input [(ngModel)]="annualReturn" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <fieldset>
+                                        <label>Price to FCF</label>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{pFcf}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                  </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>p/earning</label>
+                                    <fieldset>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{pEarning}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-primary" (click)="updateVariables()">Update Assumptions</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
               </div>
         </div>

@@ -20,12 +20,12 @@ export class PositionsComponent implements OnInit {
   myArr : Position[] = [];
 
   newTicker : string = "";
-  newAvgCost : number = 0;
-  newQty : number = 0;
+  newAvgCost : string = "";
+  newQty : string = "";
 
   editTicker : string = "";
-  editAvgCost : number = 0;
-  editQty : number = 0;
+  editAvgCost : string ="";
+  editQty : string = "";
 
   addOpen: boolean =  false;
   emptyPositions: boolean = false;
@@ -46,32 +46,28 @@ export class PositionsComponent implements OnInit {
       .pipe(tap(x => {
         this.d = x;
         this.myArr = this.d.response;
-        if(this.myArr.length == 0){
-          this.emptyPositions = true;
-        }
+        if(this.myArr.length == 0) this.emptyPositions = true;
         this.portfolioProfit = this.getPortfolioSum(this.myArr);
         this.portfolioGain = this.getTotalPercentChange(this.myArr);
 
       }))
   }
-  addPosition(ticker: string, avgPrice: number, quantity: number){
+  addPosition(ticker: string, avgPrice: string, quantity: string){
     const url = `${this.base}/${this.userName}`;
     const formData = new FormData()
     formData.set("ticker", ticker.toUpperCase())
     formData.set("avg_price", avgPrice.toString());
     formData.set("qty", quantity.toString());
-    this.http.post<any>(url,formData).subscribe();
-    location.reload();
+    this.http.post<any>(url, formData).subscribe();
   }
 
-  editPosition(ticker: string, avgPrice: number, quantity: number){
+  editPosition(ticker: string, avgPrice: string, quantity: string){
     const url = `${this.base}/${this.userName}`;
     const formData = new FormData()
     formData.set("ticker", ticker.toUpperCase())
-    formData.set("avg_price", avgPrice.toString());
-    formData.set("qty", quantity.toString());
-    this.http.put<any>(url,formData).subscribe();
-    location.reload();
+    formData.set("avg_price", avgPrice);
+    formData.set("qty", quantity);
+    this.http.put<Position>(url, formData).subscribe(data => console.log(data));
   }
 
   deletePosition(val: Position){
