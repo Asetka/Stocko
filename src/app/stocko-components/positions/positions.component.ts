@@ -88,10 +88,14 @@ export class PositionsComponent implements OnInit {
   }
 
   getTotalPercentChange(arr: Position[]): number{
-    arr.forEach(element => {
-      this.portfolioGain = this.portfolioGain + element.pct_change;
-    });
-    return this.portfolioGain;
+    var initalCosts: number = 0;
+    for(var x in arr){
+      initalCosts = Number(initalCosts) + Number(arr[x].avg_price)
+    }
+    console.log(initalCosts)
+    var portfolioGrowth = this.portfolioProfit/initalCosts;
+
+    return portfolioGrowth;
   }
 }
 
