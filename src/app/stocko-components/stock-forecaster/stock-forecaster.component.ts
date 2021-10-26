@@ -13,27 +13,24 @@ export class StockForecasterComponent implements OnInit {
   pFcf: number = 0;
   pEarning: number = 0;
 
-  annualReturn: any;
+  annualReturn: number = 0;
 
-  revenueCagr: any;
-  fcfMarginAvg: any;
-  peRatio: any;
-  priceToFcf: any;
-  profitMarginAvg: any;
-  stockPrice: any;
-  shareChangeAvg: any;
-  ufcRevenueTtm:any;
-  ufcSharesTtm:any;
+  revenueCagr: number = 0;
+  fcfMarginAvg: number = 0;
+  peRatio: number = 0;
+  priceToFcf: number = 0;
+  profitMarginAvg: number = 0;
+  stockPrice: number = 0;
+  shareChangeAvg: number = 0;
+  ufcRevenueTtm:number = 0;
+  ufcSharesTtm:number = 0;
 
-  revenueCagrAssumption: any;
-  fcfMarginAvgAssumption: any;
-  peRatioAssumption: any;
-  priceToFcfAssumption: any;
-  profitMarginAvgAssumption: any;
-  stockPriceAssumption: any;
-  shareChangeAvgAssumption: any;
-  ufcRevenueTtmAssumption:any;
-  ufcSharesTtmAssumption:any;
+  revenueCagrAssumption: number = 0;
+  shareChangeAvgAssumption: number = 0;
+  profitMarginAvgAssumption: number = 0;
+  fcfMarginAvgAssumption: number = 0;
+  peRatioAssumption: number = 0;
+  priceToFcfAssumption: number = 0;
 
   yearsOfHistoryError:boolean=true;
 
@@ -62,13 +59,19 @@ export class StockForecasterComponent implements OnInit {
   }
 
   updateVariables(){
-    const revenue_year_one = this.ufcRevenueTtm * Math.pow((1 + this.profitMarginAvgAssumption), 1);
-    const revenue_year_two = this.ufcRevenueTtm * Math.pow((1 + this.profitMarginAvgAssumption), 2);
-    const revenue_year_three = this.ufcRevenueTtm * Math.pow((1 + this.profitMarginAvgAssumption), 3);
-    const revenue_year_four = this.ufcRevenueTtm * Math.pow((1 + this.profitMarginAvgAssumption), 4);
-    const revenue_year_five = this.ufcRevenueTtm * Math.pow((1 + this.profitMarginAvgAssumption), 5);
-    const revenue_year_six = this.ufcRevenueTtm * Math.pow((1 + this.profitMarginAvgAssumption), 6);
-    const revenue_year_seven = this.ufcRevenueTtm * Math.pow((1 + this.profitMarginAvgAssumption), 7);
+    this.revenueCagrAssumption = this.revenueCagrAssumption / 100;
+    this.shareChangeAvgAssumption = this.shareChangeAvgAssumption / 100;
+    this.profitMarginAvgAssumption = this.profitMarginAvgAssumption / 100;
+    this.fcfMarginAvgAssumption = this.fcfMarginAvgAssumption / 100;
+    this.annualReturn = this.annualReturn / 100;
+
+    const revenue_year_one = this.ufcRevenueTtm * Math.pow((1 + this.revenueCagrAssumption), 1);
+    const revenue_year_two = this.ufcRevenueTtm * Math.pow((1 + this.revenueCagrAssumption), 2);
+    const revenue_year_three = this.ufcRevenueTtm * Math.pow((1 + this.revenueCagrAssumption), 3);
+    const revenue_year_four = this.ufcRevenueTtm * Math.pow((1 + this.revenueCagrAssumption), 4);
+    const revenue_year_five = this.ufcRevenueTtm * Math.pow((1 + this.revenueCagrAssumption), 5);
+    const revenue_year_six = this.ufcRevenueTtm * Math.pow((1 + this.revenueCagrAssumption), 6);
+    const revenue_year_seven = this.ufcRevenueTtm * Math.pow((1 + this.revenueCagrAssumption), 7);
 
     // multiple of earnings
     const margin_year_one = revenue_year_one * this.profitMarginAvgAssumption;
@@ -89,26 +92,37 @@ export class StockForecasterComponent implements OnInit {
     const dcf_year_seven = margin_year_seven / Math.pow((1 + this.annualReturn), 7);
     const dcf_terminal = dcf_year_seven * this.peRatioAssumption;
 
-    const shares_after_seven_years = this.ufcSharesTtm * Math.pow((1 + this.shareChangeAvgAssumption), 7)
+    const shares_after_seven_years = this.ufcSharesTtm * Math.pow((1 + this.shareChangeAvgAssumption), 7);
 
     const dcf_sum = dcf_year_one + dcf_year_two + dcf_year_three + dcf_year_four + dcf_year_five + dcf_year_six + dcf_year_seven + dcf_terminal;
     // THIS IS FIRST PRICE
-    const multiple_earnings_price = dcf_sum / shares_after_seven_years
+    const multiple_earnings_price = dcf_sum / shares_after_seven_years;
 
 
     // this is discounted free cash flow
-    const dcf_to_revenue_one = revenue_year_one
-    const dcf_to_revenue_two = revenue_year_two
-    const dcf_to_revenue_three = revenue_year_three
-    const dcf_to_revenue_four = revenue_year_four
-    const dcf_to_revenue_five = revenue_year_five
-    const dcf_to_revenue_six = revenue_year_six
-    const dcf_to_revenue_seven = revenue_year_seven
-    const dcf_to_revenue_terminal = dcf_to_revenue_seven
+    const fcf_to_revenue_one = revenue_year_one * this.fcfMarginAvgAssumption;
+    const fcf_to_revenue_two = revenue_year_two * this.fcfMarginAvgAssumption;
+    const fcf_to_revenue_three = revenue_year_three * this.fcfMarginAvgAssumption;
+    const fcf_to_revenue_four = revenue_year_four * this.fcfMarginAvgAssumption;
+    const fcf_to_revenue_five = revenue_year_five * this.fcfMarginAvgAssumption;
+    const fcf_to_revenue_six = revenue_year_six * this.fcfMarginAvgAssumption;
+    const fcf_to_revenue_seven = revenue_year_seven * this.fcfMarginAvgAssumption;
+    const fcf_to_revenue_terminal = fcf_to_revenue_seven * this.priceToFcfAssumption;
 
+    const dcf2_year_one = fcf_to_revenue_one / (Math.pow((1 + this.annualReturn), 1));
+    const dcf2_year_two = fcf_to_revenue_two / (Math.pow((1 + this.annualReturn), 2));
+    const dcf2_year_three = fcf_to_revenue_three / (Math.pow((1 + this.annualReturn), 3));
+    const dcf2_year_four = fcf_to_revenue_four / (Math.pow((1 + this.annualReturn), 4));
+    const dcf2_year_five = fcf_to_revenue_five / (Math.pow((1 + this.annualReturn), 5));
+    const dcf2_year_six = fcf_to_revenue_six / (Math.pow((1 + this.annualReturn), 6));
+    const dcf2_year_seven = fcf_to_revenue_seven / (Math.pow((1 + this.annualReturn), 7));
+    const dcf2_terminal = dcf_year_seven * this.priceToFcfAssumption;
+    const dcf2_sum = dcf2_year_one + dcf2_year_two + dcf2_year_three + dcf2_year_four + dcf2_year_five + dcf2_year_six + dcf2_year_seven + dcf2_terminal;
 
+    // THIS IS SECOND PRICE
+    const discounted_fcf_price = dcf2_sum / shares_after_seven_years;
 
-    this.pFcf = this.fcfMarginAvgAssumption;
-    this.pEarning = this.fcfMarginAvgAssumption;
+    this.pFcf = discounted_fcf_price;
+    this.pEarning = multiple_earnings_price;
   }
 }

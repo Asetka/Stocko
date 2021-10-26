@@ -42,7 +42,7 @@
                                 <tr>
                                     <th scope="row">Revenue Growth</th>
                                     <td>{{revenueCagr}} %</td>
-                                    <td><input [(ngModel)]="revenueCagrAssumption" class="form-control" placeholder="Enter assumption %"type="text"></td>
+                                    <td><input [(ngModel)]="revenueCagrAssumption" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Share Change</th>
@@ -60,42 +60,27 @@
                                     <td><input [(ngModel)]="fcfMarginAvgAssumption" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">peRatio</th>
+                                    <th scope="row">pe Ratio Projected Price</th>
                                     <td>{{peRatio}}</td>
                                     <td><input [(ngModel)]="peRatioAssumption" class="form-control" placeholder="Enter Assumption"type="text"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">priceToFcf</th>
+                                    <th scope="row">Price To Fcf Ratio Projected Price</th>
                                     <td>{{priceToFcf}}</td>
                                     <td><input [(ngModel)]="priceToFcfAssumption" class="form-control" placeholder="Enter Assumption"type="text"></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Desired Return</th>
                                     <td>-----</td>
-                                    <td><input [(ngModel)]="annualReturn" class="form-control" placeholder="Enter assumption:"type="text"></td>
+                                    <td><input [(ngModel)]="annualReturn" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
                                 </tr>
-                                <!-- <tr>
-                                    <th scope="row">stockPrice</th>
-                                    <td>{{stockPrice}}</td>
-                                    <td><input [(ngModel)]="stockPriceAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
-                                </tr> -->
-                                <!-- <tr>
-                                    <th scope="row">ufcRevenueTtm</th>
-                                    <td>{{ufcRevenueTtm}}</td>
-                                    <td><input [(ngModel)]="ufcRevenueTtmAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
-                                </tr> -->
-                                <!-- <tr>
-                                    <th scope="row">ufcSharesTtm</th>
-                                    <td>{{ufcSharesTtm}}</td>
-                                    <td><input [(ngModel)]="ufcSharesTtmAssumption" class="form-control" placeholder="Enter assumption:"type="text"></td>
-                                </tr> -->
                             </tbody>
                         </table>
                         <div class="row mt-3">
                             <div class="col">
                                 <div class="form-group">
                                     <fieldset>
-                                        <label>p/fcf</label>
+                                        <label>Price to FCF</label>
                                         <input class="form-control" id="readOnlyInput" type="text" placeholder="{{pFcf}}" readonly="" data-np-checked="1">
                                     </fieldset>
                                   </div>
