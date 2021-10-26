@@ -25,25 +25,15 @@ export class StocksComponent implements OnInit {
     const base = `https://stocko-flask-api-dev.herokuapp.com/stock-page/`
     const url = `${base}/${this.ticker}`;
     this.http.get<any>(url).subscribe(data => {
-      console.log(data)
       this.stockObject = JSON.parse(JSON.stringify(data))
       if(this.stockObject != null){
         this.searched = true;
       }
-      console.log(this.stockObject.chart_data.week_ending)
       const stockData = this.stockObject.chart_data.end_of_week_price;
-      const stockDates = this.stockObject.chart_data.week_ending;
-
-      console.log(stockData)
-
       var stockPrices = new Array;
-      var stockPrices = new Array;
-
       for(var i in stockData){
-        console.log(stockData[i]);
         stockPrices.push(Number(stockData[i]))
       }
-      console.log(stockPrices)
       this.highcharts = Highcharts;
       this.chartOptions = {
         title: {
@@ -53,7 +43,7 @@ export class StocksComponent implements OnInit {
           title: {
             text: 'Date'
           },
-          categories: this.stockObject.chart_data.week_ending
+          categories: this.stockObject.chart_data.week_ending.reverse()
         },
         yAxis: {
           title: {
@@ -61,12 +51,10 @@ export class StocksComponent implements OnInit {
           }
         },
         series: [{
-          data: stockPrices,
+          data: stockPrices.reverse(),
           type: 'spline'
         }]
       }
     })
-    console.log(this.searched)
-
   }
 }
