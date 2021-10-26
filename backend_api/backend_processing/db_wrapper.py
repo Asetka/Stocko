@@ -1,6 +1,8 @@
 import pymongo
 import yfinance as yf
 from pymongo import collection
+from .stock_price import get_stock_price
+import os
 
 CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/StockoPositions?retryWrites=true&w=majority")
 DB = CLIENT.test
@@ -99,7 +101,12 @@ def update_prices(active_tickers):
         #yf.Ticker(ticker).info['regularMarketPrice']
 
 def get_price(ticker):
-    return yf.Ticker(ticker).info['regularMarketPrice']
+    key = open(os.getcwd() + '/backend_api/backend_processing/key.txt').read()
+    api_urls = {}
+    api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
+    stock_price = get_stock_price(ticker, api_urls)
+    # print("Stock Price: " + stock_price, end = '\n\n')
+    return stock_price
 
 
 def main(): 
