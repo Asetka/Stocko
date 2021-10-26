@@ -60,12 +60,12 @@
                                     <td><input [(ngModel)]="fcfMarginAvgAssumption" class="form-control" placeholder="Enter Assumption (%)"type="text"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">pe Ratio Projected Price</th>
+                                    <th scope="row">pe Ratio</th>
                                     <td>{{peRatio}}</td>
                                     <td><input [(ngModel)]="peRatioAssumption" class="form-control" placeholder="Enter Assumption"type="text"></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Price To Fcf Ratio Projected Price</th>
+                                    <th scope="row">Price To Fcf Ratio </th>
                                     <td>{{priceToFcf}}</td>
                                     <td><input [(ngModel)]="priceToFcfAssumption" class="form-control" placeholder="Enter Assumption"type="text"></td>
                                 </tr>
@@ -80,16 +80,16 @@
                             <div class="col">
                                 <div class="form-group">
                                     <fieldset>
-                                        <label>Price to FCF</label>
-                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{pFcf}}" readonly="" data-np-checked="1">
+                                        <label>Price to FCF Projected Price</label>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="${{pFcf}}" readonly="" data-np-checked="1">
                                     </fieldset>
                                   </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label>p/earning</label>
+                                    <label>Price to Earning Projected Price</label>
                                     <fieldset>
-                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{pEarning}}" readonly="" data-np-checked="1">
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="${{pEarning}}" readonly="" data-np-checked="1">
                                     </fieldset>
                                 </div>
                             </div>
