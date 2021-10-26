@@ -1,4 +1,5 @@
 from .shares import get_share_change_avg
+from .shares import get_shares_outstanding
 
 def get_revenue_cagr(income_statement_dict):
     current_revenue = int(income_statement_dict["totalRevenue"][0])
@@ -53,5 +54,7 @@ def get_forecast_table(ticker, company_overview_dict, balance_sheet_dict, income
     forecast_dict["pe_ratio"] = company_overview_dict["pe_ratio"]
     forecast_dict["price_to_fcf"] = get_price_to_fcf(company_overview_dict, cash_flow_dict)
     forecast_dict["Annual Return"] = "---"
+    forecast_dict["ufc_revenue_ttm"] = company_overview_dict["revenue_ttm"]
+    forecast_dict["ufc_shares_ttm"] = get_shares_outstanding(company_overview_dict)
 
     return forecast_dict
