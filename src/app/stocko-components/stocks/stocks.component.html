@@ -250,10 +250,18 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <a href="#" class="card-link">Balance Sheet</a>
-                            <a href="#" class="card-link">Cash Flow</a>
-                            <a href="#" class="card-link">Income Statement</a>
-
+                            <button (click)="openBalanceSheet()" class="card-link">Balance Sheet</button>
+                            <button (click)="openCashFlow()" class="card-link">Cash Flow</button>
+                            <button (click)="openIncomeStatement()" class="card-link">Income Statement</button>
+                            <div *ngIf="balanceSheetOpen" class="col">
+                                Balance Sheet coming in Sprint 3
+                            </div>
+                            <div *ngIf="cashFlowOpen" class="col">
+                                Cash Flow coming in Sprint 3
+                            </div>
+                            <div *ngIf="incomeStatementOpen" class="col">
+                                Income Statement coming in Sprint 3
+                            </div>
                         </div>
                         <div class="card-footer text-muted">
                             Address: {{stockObject.company_overview.address}}

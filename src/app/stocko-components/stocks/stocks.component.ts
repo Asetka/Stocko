@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
+
 @Component({
   selector: 'app-stocks',
   templateUrl: './stocks.component.html',
@@ -14,6 +15,12 @@ export class StocksComponent implements OnInit {
   highcharts = Highcharts;
   chartOptions: Highcharts.Options = {};
 
+  balanceSheet: any = [];
+  balanceSheetOpen: boolean = false;
+  cashFlowOpen: boolean = false;
+  incomeStatementOpen: boolean = false;
+
+
   constructor(
     private http: HttpClient,
   ) { }
@@ -26,14 +33,20 @@ export class StocksComponent implements OnInit {
     const url = `${base}/${this.ticker}`;
     this.http.get<any>(url).subscribe(data => {
       this.stockObject = JSON.parse(JSON.stringify(data))
+
       if(this.stockObject != null){
         this.searched = true;
       }
+
       const stockData = this.stockObject.chart_data.end_of_week_price;
       var stockPrices = new Array;
+
+      this.balanceSheet = this.stockObject.balance_sheet_dict;
+
       for(var i in stockData){
         stockPrices.push(Number(stockData[i]))
       }
+
       this.highcharts = Highcharts;
       this.chartOptions = {
         title: {
@@ -52,9 +65,30 @@ export class StocksComponent implements OnInit {
         },
         series: [{
           data: stockPrices.reverse(),
+          name: 'Price (in USD)',
+          color: '#1EC443',
           type: 'spline'
         }]
       }
+
     })
   }
+
+
+  openBalanceSheet(){
+    this.balanceSheetOpen = true;
+    this.cashFlowOpen = false;
+    this.incomeStatementOpen = false;
+  }
+  openCashFlow(){
+    this.balanceSheetOpen = false;
+    this.cashFlowOpen = true;
+    this.incomeStatementOpen = false;
+  }
+  openIncomeStatement(){
+    this.balanceSheetOpen = false;
+    this.cashFlowOpen = false;
+    this.incomeStatementOpen = true;
+  }
+
 }
