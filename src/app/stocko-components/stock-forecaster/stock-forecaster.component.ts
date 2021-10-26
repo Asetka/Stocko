@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -7,13 +7,15 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './stock-forecaster.component.html',
   styleUrls: ['./stock-forecaster.component.sass']
 })
-export class StockForecasterComponent implements OnInit {
+export class StockForecasterComponent implements OnInit, OnChanges {
   url = 'https://stocko-flask-api-dev.herokuapp.com/forecast-page/'
   ticker = ""
-  annualReturn: any;
-  fcfMarginAvg: any;
-  fcfMarginAvgAssumption: any;
+  @Input() pFcf: number = 0;
+  @Input() pEarning: number = 0;
 
+  annualReturn: any;
+
+  fcfMarginAvg: any;
   peRatio: any;
   priceToFcf: any;
   profitMarginAvg: any;
@@ -21,7 +23,8 @@ export class StockForecasterComponent implements OnInit {
   shareChangeAvg: any;
   ufcRevenueTtm:any;
   ufcSharesTtm:any;
-  
+
+  fcfMarginAvgAssumption: any;
   peRatioAssumption: any;
   priceToFcfAssumption: any;
   profitMarginAvgAssumption: any;
@@ -37,6 +40,12 @@ export class StockForecasterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  ngOnChanges(changes: SimpleChanges){
+    changes.pFcf = (this.peRatioAssumption + this.fcfMarginAvgAssumption);
+    changes.pFcf = (this.peRatioAssumption + this.fcfMarginAvgAssumption);
+  }
+
   onSearch(){
     console.log(this.ticker)
     this.http.get<any>(this.url+this.ticker).subscribe(data => {

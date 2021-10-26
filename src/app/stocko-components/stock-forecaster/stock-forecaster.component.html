@@ -12,6 +12,24 @@
                         <button (click)="onSearch()" class="btn btn-primary">Search</button>
                     </div>
                     <div *ngIf="!yearsOfHistoryError">
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <fieldset>
+                                        <label>Ticker</label>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ticker}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                  </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Share Price</label>
+                                    <fieldset>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{stockPrice}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
                         <table class="table table-hover">
                             <thead>
                               <tr>
@@ -63,6 +81,24 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="form-group">
+                                    <fieldset>
+                                        <label>p/fcf</label>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{pFcf}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                  </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>p/earning</label>
+                                    <fieldset>
+                                        <input class="form-control" id="readOnlyInput" type="text" placeholder="{{pEarning}}" readonly="" data-np-checked="1">
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
               </div>
