@@ -45,7 +45,7 @@ def get_company_overview(ticker, api_urls):
         "price_to_book_ratio" : response["PriceToBookRatio"],
         "ev_to_revenue" : response["EVToRevenue"],
         "ev_to_ebitda" : response["EVToEBITDA"],
-        "beta" : response["Beta"],
+        # "beta" : response["Beta"],
         "v52_week_high" : response["52WeekHigh"],
         "v52_week_low" : response["52WeekLow"],
         "v50_day_moving_average" : response["50DayMovingAverage"],
