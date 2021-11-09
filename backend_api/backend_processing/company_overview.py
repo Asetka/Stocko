@@ -56,7 +56,7 @@ def get_company_overview(ticker, api_urls):
         "shares_shot_prior_month" : response["SharesShortPriorMonth"],
         "short_ratio" : response["ShortRatio"],
         "short_precent_outstanding" : response["ShortPercentOutstanding"],
-        "short_percent_float" : response["ShortPercentFloat"],
+        # "short_percent_float" : response["ShortPercentFloat"],
         "percent_insiders" : response["PercentInsiders"],
         "percent_institutions" : response["PercentInstitutions"],
         "foward_annual_dividend_rate" : response["ForwardAnnualDividendRate"],
