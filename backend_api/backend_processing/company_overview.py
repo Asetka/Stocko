@@ -54,18 +54,18 @@ def get_company_overview(ticker, api_urls):
         # "shares_float" : response["SharesFloat"],
         # "shares_short" : response["SharesShort"],
         # "shares_shot_prior_month" : response["SharesShortPriorMonth"],
-        "short_ratio" : response["ShortRatio"],
-        "short_precent_outstanding" : response["ShortPercentOutstanding"],
-        "short_percent_float" : response["ShortPercentFloat"],
-        "percent_insiders" : response["PercentInsiders"],
-        "percent_institutions" : response["PercentInstitutions"],
-        "foward_annual_dividend_rate" : response["ForwardAnnualDividendRate"],
-        "foward_annual_dividend_yield" : response["ForwardAnnualDividendYield"],
-        "payout_ratio" :  response["PayoutRatio"],
+        # "short_ratio" : response["ShortRatio"],
+        # "short_precent_outstanding" : response["ShortPercentOutstanding"],
+        # "short_percent_float" : response["ShortPercentFloat"],
+        # "percent_insiders" : response["PercentInsiders"],
+        # "percent_institutions" : response["PercentInstitutions"],
+        # "foward_annual_dividend_rate" : response["ForwardAnnualDividendRate"],
+        # "foward_annual_dividend_yield" : response["ForwardAnnualDividendYield"],
+        # "payout_ratio" :  response["PayoutRatio"],
         "dividend_date" : response["DividendDate"],
-        "ex_dividend_date" : response["ExDividendDate"],
-        "last_split_factor" : response["LastSplitFactor"],
-        "last_split_date" : response["LastSplitDate"]
+        "ex_dividend_date" : response["ExDividendDate"]#,
+        # "last_split_factor" : response["LastSplitFactor"],
+        # "last_split_date" : response["LastSplitDate"]
     }
 
     return overview_dict
