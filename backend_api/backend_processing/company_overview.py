@@ -52,7 +52,7 @@ def get_company_overview(ticker, api_urls):
         "v200_day_moving_average" : response["200DayMovingAverage"],
         "shares_outstanding" : response["SharesOutstanding"],
         # "shares_float" : response["SharesFloat"],
-        "shares_short" : response["SharesShort"],
+        # "shares_short" : response["SharesShort"],
         "shares_shot_prior_month" : response["SharesShortPriorMonth"],
         "short_ratio" : response["ShortRatio"],
         "short_precent_outstanding" : response["ShortPercentOutstanding"],
