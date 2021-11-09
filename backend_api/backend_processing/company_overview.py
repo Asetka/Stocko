@@ -53,7 +53,7 @@ def get_company_overview(ticker, api_urls):
         "shares_outstanding" : response["SharesOutstanding"],
         # "shares_float" : response["SharesFloat"],
         # "shares_short" : response["SharesShort"],
-        "shares_shot_prior_month" : response["SharesShortPriorMonth"],
+        # "shares_shot_prior_month" : response["SharesShortPriorMonth"],
         "short_ratio" : response["ShortRatio"],
         "short_precent_outstanding" : response["ShortPercentOutstanding"],
         "short_percent_float" : response["ShortPercentFloat"],
