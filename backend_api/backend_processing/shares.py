@@ -45,6 +45,8 @@ def get_split_reversal(balance_sheet_dict, company_overview_dict):
 
 # returns STRING of the 5 year change in shares outstanding
 def get_share_change(balance_sheet_dict, company_overview_dict):
+    print(balance_sheet_dict["commonStockSharesOutstanding"])
+    
     factor = get_split_reversal(balance_sheet_dict, company_overview_dict)
     current_shares = int(balance_sheet_dict["commonStockSharesOutstanding"][0])
     five_years_ago_shares = (factor * int(balance_sheet_dict["commonStockSharesOutstanding"][4]))
