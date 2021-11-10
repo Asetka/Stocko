@@ -48,7 +48,8 @@ def get_forecast_table(ticker, company_overview_dict, balance_sheet_dict, income
         forecast_dict["years_of_history_error"] = False
 
     forecast_dict["revenue_cagr"] = get_revenue_cagr(income_statement_dict)
-    forecast_dict["share_change_avg"] = get_share_change_avg(balance_sheet_dict, company_overview_dict)
+    # forecast_dict["share_change_avg"] = get_share_change_avg(balance_sheet_dict, company_overview_dict)
+    forecast_dict["share_change_avg"] = "API Data Schema Changed; New Logic Will Be Implemented Shortly"
     forecast_dict["profit_margin_avg"] = get_profit_margin_cagr(income_statement_dict)
     forecast_dict["fcf_margin_avg"] = get_fcf_growth_avg(cash_flow_dict, income_statement_dict)
     forecast_dict["pe_ratio"] = company_overview_dict["pe_ratio"]
