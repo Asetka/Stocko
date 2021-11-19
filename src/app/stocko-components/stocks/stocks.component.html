@@ -261,17 +261,13 @@
                                     <button class="nav-link" (click)="openIncomeStatement()"><h2>Income Statement</h2></button>
                                 </li>
                             </ul>
-                            <div *ngIf="balanceSheetOpen" class="mt-3 col">
+                            <div *ngIf="balanceSheetOpen" class="mt-3 col justify-content-center">
                                 <h2>Balance Sheet</h2>
                                 <table class="table table-hover">
                                     <thead>
                                       <tr>
                                         <th scope="col">Type</th>
-                                        <th scope="col">{{stockObject.balance_sheet_dict.fiscalDateEnding[4]}}</th>
-                                        <th scope="col">{{stockObject.balance_sheet_dict.fiscalDateEnding[3]}}</th>
-                                        <th scope="col">{{stockObject.balance_sheet_dict.fiscalDateEnding[2]}}</th>
-                                        <th scope="col">{{stockObject.balance_sheet_dict.fiscalDateEnding[1]}}</th>
-                                        <th scope="col">{{stockObject.balance_sheet_dict.fiscalDateEnding[0]}}</th>
+                                        <th *ngFor="let item of stockObject.balance_sheet_dict.fiscalDateEnding.reverse()" scope="col">{{item}}</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -426,11 +422,247 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div *ngIf="cashFlowOpen" class=" mt-3 col">
+                            <div *ngIf="cashFlowOpen" class="mt-3 row justify-content-center">
                                 <h2>Cash Flow</h2>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Type</th>
+                                            <th *ngFor="let item of stockObject.cash_flow_dict.fiscalDateEnding.reverse()" scope="col">{{item}}</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">capitalExpenditures</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.capitalExpenditures.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">cashflowFromFinancing</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.cashflowFromFinancing.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">cashflowFromInvestment</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.cashflowFromInvestment.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">changeInCashAndCashEquivalents</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.changeInCashAndCashEquivalents.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">changeInExchangeRate</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.changeInExchangeRate.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">changeInInventory</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.changeInInventory.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">changeInOperatingAssets</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.changeInOperatingAssets.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">changeInOperatingLiabilities</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.changeInOperatingLiabilities.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">changeInReceivables</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.changeInReceivables.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">depreciationDepletionAndAmortization</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.depreciationDepletionAndAmortization.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">dividendPayout</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.dividendPayout.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">dividendPayoutCommonStock</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.dividendPayoutCommonStock.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">dividendPayoutPreferredStock</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.dividendPayoutPreferredStock.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">fiscalDateEnding</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.fiscalDateEnding.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">netIncome</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.netIncome.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">operatingCashflow</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.operatingCashflow.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">paymentsForOperatingActivities</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.paymentsForOperatingActivities.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">paymentsForRepurchaseOfCommonStock</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.paymentsForRepurchaseOfCommonStock.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">paymentsForRepurchaseOfEquity</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.paymentsForRepurchaseOfEquity.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">paymentsForRepurchaseOfPreferredStock</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.paymentsForRepurchaseOfPreferredStock.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">proceedsFromIssuanceOfCommonStock</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.proceedsFromIssuanceOfCommonStock.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">proceedsFromIssuanceOfPreferredStock</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.proceedsFromIssuanceOfPreferredStock.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">proceedsFromOperatingActivities</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.proceedsFromOperatingActivities.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">proceedsFromRepaymentsOfShortTermDebt</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.proceedsFromRepaymentsOfShortTermDebt.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">proceedsFromRepurchaseOfEquity</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.proceedsFromRepurchaseOfEquity.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">proceedsFromSaleOfTreasuryStock</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.proceedsFromSaleOfTreasuryStock.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">profitLoss</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.profitLoss.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">reportedCurrency</th>
+                                            <td *ngFor="let item of stockObject.cash_flow_dict.reportedCurrency.reverse()">{{item}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div *ngIf="incomeStatementOpen" class="mt-3 col">
+                            <div *ngIf="incomeStatementOpen" class="mt-3 row justify-content-center">
                                 <h2>Income Statement</h2>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Type</th>
+                                            <th *ngFor="let item of stockObject.income_statement_dict.fiscalDateEnding.reverse()" scope="col">{{item}}</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">comprehensiveIncomeNetOfTax</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.comprehensiveIncomeNetOfTax.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">costOfRevenue</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.costOfRevenue.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">costofGoodsAndServicesSold</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.costofGoodsAndServicesSold.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">depreciation</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.depreciation.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">depreciationAndAmortization</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.depreciationAndAmortization.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">ebit</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.ebit.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">ebitda</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.ebitda.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">grossProfit</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.grossProfit.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">incomeBeforeTax</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.incomeBeforeTax.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">incomeTaxExpense</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.incomeTaxExpense.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">interestAndDebtExpense</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.interestAndDebtExpense.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">interestExpense</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.interestExpense.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">interestIncome</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.interestIncome.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">investmentIncomeNet</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.investmentIncomeNet.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">netIncome</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.netIncome.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">netIncomeFromContinuingOperations</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.netIncomeFromContinuingOperations.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">netInterestIncome</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.netInterestIncome.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">nonInterestIncome</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.nonInterestIncome.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">operatingExpenses</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.operatingExpenses.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">operatingIncome</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.operatingIncome.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">otherNonOperatingIncome</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.otherNonOperatingIncome.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">reportedCurrency</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.reportedCurrency.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">researchAndDevelopment</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.researchAndDevelopment.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">sellingGeneralAndAdministrative</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.sellingGeneralAndAdministrative.reverse()">{{item}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">totalRevenue</th>
+                                            <td *ngFor="let item of stockObject.income_statement_dict.totalRevenue.reverse()">{{item}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                         <div class="card-footer text-muted">
