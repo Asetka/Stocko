@@ -31,7 +31,7 @@ def get_chart_data(ticker, api_urls):
     chart_data_dict["high_of_week_price"] = high_of_week_price
     chart_data_dict["low_of_week_price"] = low_of_week_price
     chart_data_dict["end_of_week_price"] = end_of_week_price
-    chart_data_dict["volume_of_week"] = _of_week
+    chart_data_dict["volume_of_week"] = volume_of_week
 
     return chart_data_dict
     
