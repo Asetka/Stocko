@@ -34,3 +34,4 @@ def get_chart_data(ticker, api_urls):
     chart_data_dict["volume_of_week"] = _of_week
 
     return chart_data_dict
+    
