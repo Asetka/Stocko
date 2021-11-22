@@ -60,15 +60,15 @@ def get_positions(username):
             portfolio_cost += float(avg_price)
             portfolio_value += price
         except:
-            positions[position_index]['price'] = 'N/A'
-            positions[position_index]['profit'] = 'N/A'
-            positions[position_index]['pct_change'] = 'N/A'
+            positions[position_index]['price'] = '0'
+            positions[position_index]['profit'] = '0'
+            positions[position_index]['pct_change'] = '0'
     portfolio_pct_change = (portfolio_value-portfolio_cost)/portfolio_cost
     portfolio_profit = portfolio_value-portfolio_cost
 
     #positions['portfolio_stats'] = {'pct_change': portfolio_pct_change, 'profit': portfolio_profit}
         
-    return (positions, {'pct_change': portfolio_pct_change, 'profit': portfolio_profit})
+    return positions
 
     #return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
 
