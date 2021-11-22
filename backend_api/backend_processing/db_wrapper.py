@@ -1,7 +1,7 @@
 import pymongo
 import yfinance as yf
 from pymongo import collection
-from stock_price import get_stock_price
+from .stock_price import get_stock_price
 import os
 
 CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/StockoPositions?retryWrites=true&w=majority")
