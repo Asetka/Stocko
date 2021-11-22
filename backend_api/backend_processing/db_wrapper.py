@@ -63,8 +63,11 @@ def get_positions(username):
             positions[position_index]['price'] = 0
             positions[position_index]['profit'] = 0
             positions[position_index]['pct_change'] = 0
-    portfolio_pct_change = (portfolio_value-portfolio_cost)/portfolio_cost
-    portfolio_profit = portfolio_value-portfolio_cost
+    portfolio_pct_change = 0
+    portfolio_profit = 0
+    if portfolio_cost != 0:
+        portfolio_pct_change = (portfolio_value-portfolio_cost)/portfolio_cost
+        portfolio_profit = portfolio_value-portfolio_cost
 
     #positions['portfolio_stats'] = {'pct_change': portfolio_pct_change, 'profit': portfolio_profit}
         
