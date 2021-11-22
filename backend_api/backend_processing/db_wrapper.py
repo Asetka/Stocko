@@ -60,9 +60,9 @@ def get_positions(username):
             portfolio_cost += float(avg_price)
             portfolio_value += price
         except:
-            positions[position_index]['price'] = '0'
-            positions[position_index]['profit'] = '0'
-            positions[position_index]['pct_change'] = '0'
+            positions[position_index]['price'] = 0
+            positions[position_index]['profit'] = 0
+            positions[position_index]['pct_change'] = 0
     portfolio_pct_change = (portfolio_value-portfolio_cost)/portfolio_cost
     portfolio_profit = portfolio_value-portfolio_cost
 
