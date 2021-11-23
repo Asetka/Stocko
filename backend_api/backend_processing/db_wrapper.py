@@ -55,6 +55,7 @@ def get_positions(username):
         qty = positions[position_index]['qty']
         print('here1')
         avg_price = positions[position_index]['avg_price']
+        print('here2')
         price = float(get_price(positions[position_index]['ticker']))
         print('here 3')
         positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
