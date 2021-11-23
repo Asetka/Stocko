@@ -123,7 +123,7 @@ def update_prices(active_tickers):
         #yf.Ticker(ticker).info['regularMarketPrice']
 
 def get_price(ticker):
-    key = open(os.getcwd() + '/key.txt').read()
+    key = open(os.getcwd() + '/backend_api/backend_processing/key.txt').read()
     api_urls = {}
     api_urls["intraday_url"]=  'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + ticker + '&interval=1min&apikey=' + key
     stock_price = get_stock_price(ticker, api_urls)
