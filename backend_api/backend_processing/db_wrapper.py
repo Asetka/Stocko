@@ -54,14 +54,19 @@ def get_positions(username):
         avg_price = positions[position_index]['avg_price']
         try:
             #print(price)
-            print('price')
+            print('price0')
             price = float(get_price(positions[position_index]['ticker']))
+            print('price1')
             positions[position_index]['price'] = price
+            print('price2')
             positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
+            print('price3')
             positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
+            print('price4')
             portfolio_cost += float(avg_price)
+            print('price5')
             portfolio_value += price
-        except:
+        except KeyError:
             print('except')
             positions[position_index]['price'] = 0
             positions[position_index]['profit'] = 0
