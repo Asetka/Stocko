@@ -52,14 +52,21 @@ def get_positions(username):
     for position_index in range(len(positions)):
         qty = positions[position_index]['qty']
         avg_price = positions[position_index]['avg_price']
-        # try:
-            #print(price)
-        price = float(get_price(positions[position_index]['ticker']))
+        price = 0
+        try:
+            price = float(get_price(positions[position_index]['ticker']))
+        except:
+            price = 0 
+
         positions[position_index]['price'] = price
-        positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
-        positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
-        portfolio_cost += float(avg_price)
-        portfolio_value += price
+        if price != 0:
+            positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
+            positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
+            portfolio_cost += float(avg_price)
+            portfolio_value += price
+        else:
+            positions[position_index]['profit'] = 0
+            positions[position_index]['pct_change'] = 0
         # except:
         #     print('except')
         #     positions[position_index]['price'] = 0
