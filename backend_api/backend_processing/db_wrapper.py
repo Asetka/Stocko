@@ -58,6 +58,7 @@ def get_positions(username):
         print('here2')
         price = float(get_price(positions[position_index]['ticker']))
         print('here 3')
+        positions[position_index]['price'] = price
         positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
         positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
         portfolio_cost += float(avg_price)
