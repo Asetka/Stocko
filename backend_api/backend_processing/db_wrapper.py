@@ -71,7 +71,7 @@ def get_positions(username):
 
     #positions['portfolio_stats'] = {'pct_change': portfolio_pct_change, 'profit': portfolio_profit}
         
-    return positions
+    return (positions, {'portfolio_pct_chage': portfolio_pct_change, 'portfolio_profit': portfolio_profit})
 
     #return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
 
