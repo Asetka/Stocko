@@ -61,6 +61,7 @@ def get_positions(username):
             portfolio_cost += float(avg_price)
             portfolio_value += price
         except:
+            print('except')
             positions[position_index]['price'] = 0
             positions[position_index]['profit'] = 0
             positions[position_index]['pct_change'] = 0
