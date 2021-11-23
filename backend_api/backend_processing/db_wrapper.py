@@ -60,7 +60,7 @@ def get_positions(username):
             positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
             portfolio_cost += float(avg_price)
             portfolio_value += price
-        except KeyError:
+        except:
             print('except')
             positions[position_index]['price'] = 0
             positions[position_index]['profit'] = 0
