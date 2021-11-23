@@ -1,7 +1,7 @@
 import pymongo
 import yfinance as yf
 from pymongo import collection
-from .stock_price import get_stock_price
+from stock_price import get_stock_price
 import os
 
 CLIENT = pymongo.MongoClient("mongodb+srv://App:ZU5u0b56vYc7xY15@stockopositions.r5bip.mongodb.net/StockoPositions?retryWrites=true&w=majority")
@@ -52,20 +52,20 @@ def get_positions(username):
     for position_index in range(len(positions)):
         qty = positions[position_index]['qty']
         avg_price = positions[position_index]['avg_price']
-        try:
+        # try:
             #print(price)
-            price = float(get_price(positions[position_index]['ticker']))
-            positions[position_index]['price'] = price
-            positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
-            positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
-            portfolio_cost += float(avg_price)
-            portfolio_value += price
-        except:
-            print('except')
-            positions[position_index]['price'] = 0
-            positions[position_index]['profit'] = 0
-            positions[position_index]['pct_change'] = 0
-            continue
+        price = float(get_price(positions[position_index]['ticker']))
+        positions[position_index]['price'] = price
+        positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
+        positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
+        portfolio_cost += float(avg_price)
+        portfolio_value += price
+        # except:
+        #     print('except')
+        #     positions[position_index]['price'] = 0
+        #     positions[position_index]['profit'] = 0
+        #     positions[position_index]['pct_change'] = 0
+        #     continue
     portfolio_pct_change = 0
     portfolio_profit = 0
     if portfolio_cost != 0:
