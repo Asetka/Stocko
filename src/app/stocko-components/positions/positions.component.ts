@@ -47,8 +47,8 @@ export class PositionsComponent implements OnInit {
         this.d = x;
         this.myArr = this.d.response;
         if(this.myArr.length == 0) this.emptyPositions = true;
-        this.portfolioProfit = this.getPortfolioSum(this.myArr);
-        this.portfolioGain = this.getTotalPercentChange(this.myArr);
+        this.portfolioProfit = this.d.data.portfolio_profit;
+        this.portfolioGain = this.d.data.portfolio_pct_chage;
 
       }))
   }
