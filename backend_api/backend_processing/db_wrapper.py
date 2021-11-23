@@ -53,6 +53,7 @@ def get_positions(username):
         qty = positions[position_index]['qty']
         avg_price = positions[position_index]['avg_price']
         try:
+            print(price)
             price = float(get_price(positions[position_index]['ticker']))
             positions[position_index]['price'] = price
             positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
