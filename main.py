@@ -126,6 +126,8 @@ def index():
     return '<h1>Home<h1>'
 
 @app.route('/stock-evaluation/<ticker>')
+@cross_origin(headers=["Content-Type", "Authorization"])
+@requires_auth
 def get_stock_evaluation(ticker):
     print("GET EVALUTAIONS")
     print(ticker)
@@ -133,6 +135,8 @@ def get_stock_evaluation(ticker):
     return response
 
 @app.route('/stock-page/<ticker>')
+@cross_origin(headers=["Content-Type", "Authorization"])
+@requires_auth
 def get_stock_page(ticker):	
     print("GET STOCK PAGE")		
     print(ticker)		
@@ -140,6 +144,8 @@ def get_stock_page(ticker):
     return response
 
 @app.route('/forecast-page/<ticker>')
+@cross_origin(headers=["Content-Type", "Authorization"])
+@requires_auth
 def get_forecast_page(ticker):	
     print("GET FORECAST PAGE")		
     print(ticker)		
@@ -148,6 +154,8 @@ def get_forecast_page(ticker):
 
 
 @app.route('/personal-portfolio/<username>', methods=['GET', 'PUT', 'DELETE', 'POST'])
+@cross_origin(headers=["Content-Type", "Authorization"])
+@requires_auth
 def get_personal_portfolio(username):
     if rq.method == 'GET':
         print('GET')
@@ -196,6 +204,8 @@ def get_personal_portfolio(username):
     return ''
 
 @app.route('/user/<username>', methods=['POST'])
+@cross_origin(headers=["Content-Type", "Authorization"])
+@requires_auth
 def create_user(username):
     if db.add_user(username) == 1:
         return 'Added ' + username
@@ -203,6 +213,8 @@ def create_user(username):
         return 'Could not add user'
 
 @app.route('/stock-price/<ticker>', methods=['GET'])
+@cross_origin(headers=["Content-Type", "Authorization"])
+@requires_auth
 def get_stock_price(ticker):
     price = db.get_price(ticker)
     if not price:
