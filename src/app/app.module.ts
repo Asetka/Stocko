@@ -20,9 +20,7 @@ import { ContactDevsComponent } from './contact-devs/contact-devs.component';
 import { PositionsComponent } from './stocko-components/positions/positions.component';
 import { EvaluationsComponent } from './stocko-components/evaluations/evaluations.component';
 import { StockForecasterComponent } from './stocko-components/stock-forecaster/stock-forecaster.component';
-import { NlpComponent } from './stocko-components/nlp/nlp.component';
 import { StocksComponent } from './stocko-components/stocks/stocks.component';
-import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
 import { StockChartComponentComponent } from './stock-chart-component/stock-chart-component.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 
@@ -42,9 +40,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     PositionsComponent,
     EvaluationsComponent,
     StockForecasterComponent,
-    NlpComponent,
     StocksComponent,
-    BackTestingComponent,
     StockChartComponentComponent,
   ],
   imports: [

@@ -10,8 +10,6 @@ import { StocksComponent } from './stocko-components/stocks/stocks.component';
 import { PositionsComponent } from './stocko-components/positions/positions.component';
 import { EvaluationsComponent } from './stocko-components/evaluations/evaluations.component';
 import { StockForecasterComponent } from './stocko-components/stock-forecaster/stock-forecaster.component';
-import { NlpComponent } from './stocko-components/nlp/nlp.component';
-import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
 import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
@@ -58,14 +56,6 @@ const routes: Routes = [
       {
         path: 'stockForecaster',
         component: StockForecasterComponent,
-      },
-      {
-        path: 'nlp',
-        component: NlpComponent,
-      },
-      {
-        path: 'backTesting',
-        component: BackTestingComponent,
       },
     ]
   },
