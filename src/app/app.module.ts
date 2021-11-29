@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
 
 // Import the module from the SDK
 import { AuthModule } from '@auth0/auth0-angular';
@@ -22,6 +23,8 @@ import { StockForecasterComponent } from './stocko-components/stock-forecaster/s
 import { NlpComponent } from './stocko-components/nlp/nlp.component';
 import { StocksComponent } from './stocko-components/stocks/stocks.component';
 import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
+import { StockChartComponentComponent } from './stock-chart-component/stock-chart-component.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 @NgModule({
@@ -42,12 +45,15 @@ import { BackTestingComponent } from './stocko-components/back-testing/back-test
     NlpComponent,
     StocksComponent,
     BackTestingComponent,
+    StockChartComponentComponent,
   ],
   imports: [
     BrowserModule,
+    HighchartsChartModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     AuthModule.forRoot({
       domain: 'dev-919y6k1x.us.auth0.com',
       clientId: 'XcZirvnmcn3RDRti4CnGvaUmlELKeXHl'

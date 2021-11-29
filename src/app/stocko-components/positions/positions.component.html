@@ -1,43 +1,94 @@
 <div class="container" style="padding-top: 2rem;">
-    <div class="">
-        <div class="">
-            <div *ngIf="auth.user$ | async as user" class="card mb-3">
-                <h3 class="card-header">
-                  Positions : other values coming in sprint 2
-                </h3>
-                <p *ngIf = "emptyPositions" style="padding-left: 2rem;"> You have no current positions.</p>
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                <th scope="col">Ticker</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Average Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let arr of myArr">
-                                    <th scope="col">{{arr.ticker}}</th>
-                                    <th scope="col">{{arr.qty}}</th>
-                                    <th scope="col">{{arr.avg_price}}</th>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <button type="button" class="btn btn-dark"disabled>Add</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-dark"disabled>Edit</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-dark"disabled>Delete</button>
-                        </div>
-                    </div>
+    <div *ngIf="auth.user$ | async as user" class="card mb-3">
+        <h3 class="card-header">
+            Portfolio
+        </h3>
+        <div class="alert alert-dismissible alert-info">
+            <strong>Heads up!</strong> Please wait a second and then refresh the page after adding or editing positions. 
+        </div>
+        <div *ngIf = "emptyPositions" class="alert alert-dismissible alert-info">
+            <strong>Heads up!</strong> You currently do not have any positions, but you can add them below.
+        </div>
+        <div class="card-body pl-2">
+            <div class="row">
+                <div class="col form-group">
+                    <fieldset>
+                      <h4 class="form-label mt-3">Total Profit</h4>
+                      <input class="form-control" id="readOnlyInput" type="text" placeholder="${{portfolioProfit}}" readonly="" data-np-checked="1">
+                    </fieldset>
+                  </div>
+                  <div class=" col form-group">
+                    <fieldset>
+                        <h4 class="form-label mt-3">Total Portfolio Growth</h4>
+
+                      <input class="form-control" placeholder="{{portfolioGain*10}}%" readonly="" data-np-checked="1">
+                    </fieldset>
+                  </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col form-group">
+                    <label>Ticker</label>
+                    <input [(ngModel)]="newTicker" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Ticker" id="inputSmall" data-np-checked="1">
                 </div>
+                <div class="col">
+                    <label>Average Cost</label>
+                    <input [(ngModel)]="newAvgCost" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Average Cost" id="inputSmall" data-np-checked="1">
+                </div>
+                <div class="col">
+                    <label>Quantity</label>
+                    <input [(ngModel)]="newQty" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Quantity" id="inputSmall" data-np-checked="1">
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary btn-sm addButton" (click)="addPosition(newTicker, newAvgCost, newQty)">Add Position</button>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3" *ngIf="!emptyPositions">
+                <div class="col form-group">
+                    <label>Ticker</label>
+                    <input [(ngModel)]="editTicker" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Ticker" id="inputSmall" data-np-checked="1">
+                </div>
+                <div class="col">
+                    <label>Average Cost</label>
+                    <input [(ngModel)]="editAvgCost" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Average Cost" id="inputSmall" data-np-checked="1">
+                </div>
+                <div class="col">
+                    <label>Quantity</label>
+                    <input [(ngModel)]="editQty" style="border:black solid" class="form-control form-control-sm" type="text" placeholder="Quantity" id="inputSmall" data-np-checked="1">
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-primary btn-sm addButton" (click)="editPosition(editTicker, editAvgCost, editQty)">Edit Position</button>
+                </div>
+            </div>
+            <div *ngIf = "!emptyPositions" class="row justify-content-center">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ticker</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Average Cost</th>
+                            <th scope="col">Current Price</th>
+                            <th scope="col">Percent Gain</th>
+                            <th scope="col">Price Gain</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let arr of myArr">
+                            <td scope="row">{{arr.ticker}}</td>
+                            <td >{{arr.qty}}</td>
+                            <td>${{arr.avg_price}}</td>
+                            <td>${{arr.price}}</td>
+                            <td>{{arr.pct_change*100}}%</td>
+                            <td >${{arr.profit}}</td>
+                            <td><button (click)="deletePosition(arr)" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                              </svg></button></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-  </div>
+</div>

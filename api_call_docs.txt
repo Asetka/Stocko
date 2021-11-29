@@ -1,0 +1,13 @@
+/personal-portfolio/<username>
+
+GET - no body
+PUT - {
+    ticker: ticker
+    avg_price: avg_price
+    qty: qty
+}
+POST - {
+    ticker: ticker
+    avg_price: avg_price
+    qty: qty
+}
