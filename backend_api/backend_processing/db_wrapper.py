@@ -61,8 +61,8 @@ def get_positions(username):
         positions[position_index]['price'] = price
         positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
         positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
-        portfolio_cost += float(avg_price)
-        portfolio_value += price
+        portfolio_cost += float(avg_price)*float(qty)
+        portfolio_value += price*float(qty)
     portfolio_pct_change = 0
     portfolio_profit = 0
     if portfolio_cost != 0:
@@ -148,3 +148,6 @@ def main():
 
 if __name__ == '__main__': 
     main()
+
+
+
