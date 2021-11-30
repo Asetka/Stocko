@@ -10,9 +10,8 @@ import { StocksComponent } from './stocko-components/stocks/stocks.component';
 import { PositionsComponent } from './stocko-components/positions/positions.component';
 import { EvaluationsComponent } from './stocko-components/evaluations/evaluations.component';
 import { StockForecasterComponent } from './stocko-components/stock-forecaster/stock-forecaster.component';
-import { NlpComponent } from './stocko-components/nlp/nlp.component';
-import { BackTestingComponent } from './stocko-components/back-testing/back-testing.component';
 import { AuthGuard } from '@auth0/auth0-angular';
+import { EducationComponent } from './wiki/education/education.component';
 
 const routes: Routes = [
   { 
@@ -26,6 +25,10 @@ const routes: Routes = [
       {
         path: 'bios',
         component: BiosComponent,
+      },
+      {
+        path: 'education',
+        component: EducationComponent,
       },
       {
         path: 'about',
@@ -58,14 +61,6 @@ const routes: Routes = [
       {
         path: 'stockForecaster',
         component: StockForecasterComponent,
-      },
-      {
-        path: 'nlp',
-        component: NlpComponent,
-      },
-      {
-        path: 'backTesting',
-        component: BackTestingComponent,
       },
     ]
   },

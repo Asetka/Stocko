@@ -51,23 +51,19 @@ def get_positions(username):
     portfolio_cost = 0
     portfolio_value = 0
     for position_index in range(len(positions)):
-        print('here0')
         qty = positions[position_index]['qty']
-        print('here1')
         avg_price = positions[position_index]['avg_price']
-        print('here2')
         price = float(get_price(positions[position_index]['ticker']))
-        print('here 3')
         positions[position_index]['price'] = price
-        positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
-        positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
-        portfolio_cost += float(avg_price)
-        portfolio_value += price
+        positions[position_index]['profit'] = round((float(qty)*price)-float(avg_price)*float(qty), 2)
+        positions[position_index]['pct_change'] = round((price-float(avg_price))/float(avg_price), 2)
+        portfolio_cost += float(avg_price)*float(qty)
+        portfolio_value += price*float(qty)
     portfolio_pct_change = 0
     portfolio_profit = 0
     if portfolio_cost != 0:
-        portfolio_pct_change = (portfolio_value-portfolio_cost)/portfolio_cost
-        portfolio_profit = portfolio_value-portfolio_cost
+        portfolio_pct_change = round((portfolio_value-portfolio_cost)/portfolio_cost, 2)
+        portfolio_profit = round(portfolio_value-portfolio_cost, 2)
 
     #positions['portfolio_stats'] = {'pct_change': portfolio_pct_change, 'profit': portfolio_profit}
         
@@ -148,3 +144,6 @@ def main():
 
 if __name__ == '__main__': 
     main()
+
+
+

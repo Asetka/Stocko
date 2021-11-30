@@ -108,4 +108,3 @@ def get_time():
     print("GET")
     response = {'time': time.time()}
     return response
-
