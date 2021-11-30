@@ -23,6 +23,7 @@ import { StockForecasterComponent } from './stocko-components/stock-forecaster/s
 import { StocksComponent } from './stocko-components/stocks/stocks.component';
 import { StockChartComponentComponent } from './stock-chart-component/stock-chart-component.component';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { EducationComponent } from './wiki/education/education.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
     StockForecasterComponent,
     StocksComponent,
     StockChartComponentComponent,
+    EducationComponent,
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { PositionsComponent } from './stocko-components/positions/positions.comp
 import { EvaluationsComponent } from './stocko-components/evaluations/evaluations.component';
 import { StockForecasterComponent } from './stocko-components/stock-forecaster/stock-forecaster.component';
 import { AuthGuard } from '@auth0/auth0-angular';
+import { EducationComponent } from './wiki/education/education.component';
 
 const routes: Routes = [
   { 
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'bios',
         component: BiosComponent,
+      },
+      {
+        path: 'education',
+        component: EducationComponent,
       },
       {
         path: 'about',
