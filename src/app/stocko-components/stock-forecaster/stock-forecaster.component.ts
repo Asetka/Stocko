@@ -32,6 +32,7 @@ export class StockForecasterComponent implements OnInit {
   peRatioAssumption: number = 0;
   priceToFcfAssumption: number = 0;
 
+  searchSent:boolean = false;
   yearsOfHistoryError:boolean=true;
 
   constructor(
@@ -55,6 +56,7 @@ export class StockForecasterComponent implements OnInit {
       this.ufcRevenueTtm = data.ufc_revenue_ttm;
       this.ufcSharesTtm = data.ufc_shares_ttm;
       this.yearsOfHistoryError = data.years_of_history_error;
+      this.searchSent = true;
     });
   }
 

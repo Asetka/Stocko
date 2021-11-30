@@ -44,7 +44,8 @@ def get_personal_portfolio(username):
         print('GET')
         try:
             user_response = db.get_positions(username)
-            response = {"response" : user_response}
+            print(user_response)
+            response = {"response" : user_response[0], "data": user_response[1]}
             return response
         except:
             return 'Could not perform GET function\nEnsure the username entered is valid'
@@ -107,4 +108,3 @@ def get_time():
     print("GET")
     response = {'time': time.time()}
     return response
-

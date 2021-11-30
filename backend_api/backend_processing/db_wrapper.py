@@ -27,28 +27,47 @@ def add_positions(username, positions): # positions format [{'ticker': 'ticker',
 
 
 def add_position(username, ticker, avg_price, qty):
+    get_price(ticker)
     add_user(username)
     positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
     print(positions)
-    if ticker not in positions:
+    exists = False
+    for my_dict in positions:
+        if my_dict['ticker'] == ticker:
+            exists = True
+            break
+    if not exists:
         positions.append({'ticker': ticker, 'avg_price': avg_price, 'qty': qty})
         USER_COLLECTION.find_one_and_update({'username': username}, {'$set' : {'positions': positions}})
         return 1
     else:
+        print('Ticker already in portfolio')
         return 0
 
 def get_positions(username):
     add_user(username)
     positions = USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
     print(positions)
+    portfolio_cost = 0
+    portfolio_value = 0
     for position_index in range(len(positions)):
         qty = positions[position_index]['qty']
         avg_price = positions[position_index]['avg_price']
         price = float(get_price(positions[position_index]['ticker']))
         positions[position_index]['price'] = price
-        positions[position_index]['profit'] = (float(qty)*price)-float(avg_price)*float(qty)
-        positions[position_index]['pct_change'] = (price-float(avg_price))/float(avg_price)
-    return positions
+        positions[position_index]['profit'] = round((float(qty)*price)-float(avg_price)*float(qty), 2)
+        positions[position_index]['pct_change'] = round((price-float(avg_price))/float(avg_price), 2)
+        portfolio_cost += float(avg_price)*float(qty)
+        portfolio_value += price*float(qty)
+    portfolio_pct_change = 0
+    portfolio_profit = 0
+    if portfolio_cost != 0:
+        portfolio_pct_change = round((portfolio_value-portfolio_cost)/portfolio_cost, 2)
+        portfolio_profit = round(portfolio_value-portfolio_cost, 2)
+
+    #positions['portfolio_stats'] = {'pct_change': portfolio_pct_change, 'profit': portfolio_profit}
+        
+    return (positions, {'portfolio_pct_chage': portfolio_pct_change, 'portfolio_profit': portfolio_profit})
 
     #return USER_COLLECTION.find({'username': username}, {'positions': 1})[0]['positions']
 
@@ -110,7 +129,8 @@ def get_price(ticker):
 
 
 def main(): 
-    get_positions('Brady')
+    print(get_positions('obradymack'))
+    #dd_position('obradymack', 'CRM', '100', '5')
     # add_user('cadavis21')
     # add_user('brendanlucich')
     # add_positions('brendanlucich', [{'ticker': 'TEAM', 'qty': 10, 'avg_price': 256}, {'ticker': 'AAPL', 'qty': 20, 'avg_price': 125}])
@@ -124,3 +144,6 @@ def main():
 
 if __name__ == '__main__': 
     main()
+
+
+

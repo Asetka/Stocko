@@ -79,6 +79,7 @@ def get_pillar_evaluations(company_overview_dict, balance_sheet_dict, income_sta
     pillars["current_assets_vs_liabilities"] = get_current_assets_vs_liabilities(balance_sheet_dict)
     pillars["total_assets_vs_liabilities"] = get_total_assets_vs_liabilities(balance_sheet_dict)
     pillars["change_in_shares_ourstanding"] = get_share_change(balance_sheet_dict, company_overview_dict)
+    # pillars["change_in_shares_ourstanding"] = "API Data Schema Changed; New Logic Will Be Implemented Shortly"
     pillars["fcf_growth"] = get_fcf_growth(cash_flow_dict)
     desired_price, desired_marketcap = get_fcf_evaluation(cash_flow_dict, company_overview_dict)
     pillars["fcf_desired_price"] = desired_price

@@ -45,7 +45,10 @@ def get_split_reversal(balance_sheet_dict, company_overview_dict):
 
 # returns STRING of the 5 year change in shares outstanding
 def get_share_change(balance_sheet_dict, company_overview_dict):
-    factor = get_split_reversal(balance_sheet_dict, company_overview_dict)
+    print(balance_sheet_dict["commonStockSharesOutstanding"])
+    
+    # factor = get_split_reversal(balance_sheet_dict, company_overview_dict)
+    factor = 1
     current_shares = int(balance_sheet_dict["commonStockSharesOutstanding"][0])
     five_years_ago_shares = (factor * int(balance_sheet_dict["commonStockSharesOutstanding"][4]))
     change_in_shares_outstanding = 100 * (current_shares - five_years_ago_shares) / five_years_ago_shares
@@ -95,8 +98,9 @@ def get_split_reversal_logic(balance_sheet_dict, company_overview_dict, x):
 def get_share_change_avg(balance_sheet_dict, company_overview_dict):
     sum = 0
     for x in range(4):
-        factor = get_split_reversal_logic(balance_sheet_dict, company_overview_dict, x)
-        print("THIS IS THE CALC FACTOR: ", factor)
+        # factor = get_split_reversal_logic(balance_sheet_dict, company_overview_dict, x)
+        factor = 1
+        # print("THIS IS THE CALC FACTOR: ", factor)
         current_shares = int(balance_sheet_dict["commonStockSharesOutstanding"][x])
         previous_shares = (factor * int(balance_sheet_dict["commonStockSharesOutstanding"][x+1]))
         change = (current_shares - previous_shares) / previous_shares
