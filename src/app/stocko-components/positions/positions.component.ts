@@ -47,8 +47,8 @@ export class PositionsComponent implements OnInit {
         this.d = x;
         this.myArr = this.d.response;
         if(this.myArr.length == 0) this.emptyPositions = true;
-        this.portfolioProfit = this.getPortfolioSum(this.myArr);
-        this.portfolioGain = this.getTotalPercentChange(this.myArr);
+        this.portfolioProfit = this.d.data.portfolio_profit;
+        this.portfolioGain = this.d.data.portfolio_pct_chage;
 
       }))
   }
@@ -67,13 +67,11 @@ export class PositionsComponent implements OnInit {
     formData.set("ticker", ticker.toUpperCase())
     formData.set("avg_price", avgPrice);
     formData.set("qty", quantity);
-    this.http.put<Position>(url, formData).subscribe(data => console.log(data));
+    this.http.put<Position>(url, formData).subscribe();
   }
 
   deletePosition(val: Position){
     const url = `${this.base}/${this.userName}`;
-    console.log(this.userName);
-    console.log(url)
     const formData = new FormData()
     formData.set("ticker", val.ticker)
     this.http.delete<any>(url, {body: formData}).subscribe();
@@ -92,7 +90,6 @@ export class PositionsComponent implements OnInit {
     for(var x in arr){
       initalCosts = Number(initalCosts) + Number(arr[x].avg_price)
     }
-    console.log(initalCosts)
     var portfolioGrowth = this.portfolioProfit/initalCosts;
 
     return portfolioGrowth;
